@@ -1,0 +1,23 @@
+{
+  "name": "paw-kelompok14",
+  "version": "1.0.0",
+  "description": "Anggota:\r - Ipung Sonia Faradhisma\r - Fiorenza Celestyn\r - Irharsy Tara Prasetya\r - Ananta Pridya Yudha\r - Muhammad Azka Adhisetama",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anantapridya/PAW-Kelompok14.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anantapridya/PAW-Kelompok14/issues"
+  },
+  "homepage": "https://github.com/anantapridya/PAW-Kelompok14#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
