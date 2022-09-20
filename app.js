@@ -20,3 +20,15 @@ app.get('/', async (req, res) => {
 app.listen(PORT, () => {
     console.log('listening to port ' + PORT)
 })
+
+//tambah data obat ke database
+app.get('/add', async (req, res) => {
+    res.render('add')
+})
+app.post('/add', async (req, res) => {
+    req.body.log = [medicineLog(
+        req.body.stock, "Data obat ditambahkan ke database"
+    )]
+    await Medicine.insertMany(req.body)
+    res.redirect('/')
+})
