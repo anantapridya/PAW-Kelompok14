@@ -99,6 +99,21 @@ app.post('/transaction', async (req, res) => {
     }
 })
 
+// menampilkan deskripsi obat
+app.get('/info/:id', async (req, res) => {
+    const medicine = await Medicine.findOne({_id: ObjectId(req.params.id)})
+    if (medicine) {
+        res.render('description', {
+            medicine,
+            STOCK: logEnum.STOCK,
+            DESC: logEnum.DESC,
+            DATE: logEnum.DATE
+        })
+    } else {
+        res.status(404)
+        res.send('<h1>Error 404: Not Found</h1>')
+    }
+})
 
 app.listen(PORT, () => {
     console.log('listening to port ' + PORT)
