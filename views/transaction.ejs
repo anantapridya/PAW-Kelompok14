@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaksi Obat</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Apotek PAW</a>
+    </nav>
+    <h2>Tambah Data Transaksi <%= medicine.name %></h2>
+    <form action="/transaction" method="post" id="transaction">
+        <label for="stock">Stok masuk</label>
+        <input type="number" name="stock" id="stock" min="<%= -1*medicine.stock %>">
+        <br>
+        <label for="description">Keterangan</label>
+        <textarea name="description" id="description"
+        cols="30" rows="10" form="transaction"></textarea>
+        <br>
+        <input type="hidden" name="_id" value="<%= medicine._id %>">
+        <input type="submit" value="Buat Transaksi">
+    </form>
+</body>
+</html>
