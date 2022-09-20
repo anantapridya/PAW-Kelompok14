@@ -12,20 +12,19 @@
     </nav>
     <h1>Manajemen Data Obat Apotek</h1>
     <table>
+        <% for( let i = 0; i < medicines.length; i++ ) { %>
             <tr>
+                <td><%= i+1 %></td>
+                <td><%= medicines[i].name %></td>
                 <td>
-                    <a>Detail</a>
-                </td>
-                <td>
-                    <a>Transaksi</a>
-                </td>
-                <td>
-                    <a>Edit</a>
-                </td>
-                <td>
-                    <a>Hapus</a>
+                    <a href="/info/<%= medicines[i]._id %>">Detail</a>
+                    <a href="/transaction/<%= medicines[i]._id %>">Transaksi</a>
+                    <a href="/edit/<%= medicines[i]._id %>">Edit</a>
+                    <a href="/delete/<%= medicines[i]._id %>"
+                        onclick="return confirm('Hapus data obat?')">Hapus</a>
                 </td>
             </tr>
+        <% } %>
     </table>
     <hr>
     <a href="">Tambah Obat</a>

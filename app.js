@@ -6,12 +6,15 @@ app.use(express.urlencoded())
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
-require('./utils/db')
-require('mongodb')
+// koneksi dengan database
+const { Medicine, medicineLog, logEnum } = require('./utils/db')
+const { ObjectId } = require('mongodb')
 
 app.get('/', async (req, res) => {
-    
-    res.render('index')
+    const medicines = await Medicine.find() 
+    res.render('index', {
+        medicines
+    })
 })
 
 app.listen(PORT, () => {
