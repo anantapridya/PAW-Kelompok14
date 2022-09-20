@@ -5,7 +5,6 @@
 <p align="center">Rest API Manajemen Data Obat di Apotek</p><br>
 
 ### Anggota Kelompok
-
 |   Nama     |   NIM     |
 |------------|-----------|
 | Ipung Sonia Faradhisma    |   20/463603/TK/51595  |
@@ -18,5 +17,6 @@
 
 - [Download](https://nodejs.org/en/download/) and install **Node.js** version `16.15` or higher.
 - Clone this project
-- Install **Express JS**
+- Install **Express JS** , **Ejs**, **MongoDB** and **Mongoose** with **npm install**
 - Start the program with command **npm start**
+- Open **localhost:3000**
