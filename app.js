@@ -1,4 +1,5 @@
 const express = require('express')
+const connectDB = require('./utils/db')
 const app = express()
 const PORT = 3000
 
@@ -7,8 +8,9 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 // koneksi dengan database
-const { Medicine, medicineLog, logEnum } = require('./utils/db')
+const { Medicine, medLog, logEnum } = require('./model/Med')
 const { ObjectId } = require('mongodb')
+connectDB();
 
 // halaman index
 app.get('/', async (req, res) => {
@@ -26,7 +28,7 @@ app.post('/add', async (req, res) => {
     req.body.log = [medicineLog(
         req.body.stock, "Data obat ditambahkan ke database"
     )]
-    await Medicine.insertMany(req.body)
+    await Med.insertMany(req.body)
     res.redirect('/')
 })
 
@@ -82,7 +84,10 @@ app.post('/transaction', async (req, res) => {
     const medicine = await Medicine.findOne({_id: ObjectId(req.body._id)})
     if (medicine) {
         const newLog = medicine.log
-        newLog.push(medicineLog(
+        // newLog.push(medicineLog(
+        //     req.body.stock, req.body.description
+        // ))
+        newLog.push(medLog(
             req.body.stock, req.body.description
         ))
         const newStock = medicine.stock + parseInt(req.body.stock)
