@@ -15,15 +15,16 @@ connectDB();
 // halaman index
 app.get('/', async (req, res) => {
     const medicines = await Medicine.find() 
-    res.render('index', {
-        medicines
-    })
+    res.send(medicines)
+    // res.render('index', {
+    //     medicines
+    // })
 })
 
 //tambah data obat ke database
-app.get('/add', async (req, res) => {
-    res.render('add')
-})
+// app.get('/add', async (req, res) => {
+//     res.render('add')
+// })
 app.post('/add', async (req, res) => {
     req.body.log = [medicineLog(
         req.body.stock, "Data obat ditambahkan ke database"
@@ -33,7 +34,7 @@ app.post('/add', async (req, res) => {
 })
 
 // hapus data obat dari database
-app.get('/delete/:id', async (req, res) => {
+app.delete('/delete/:id', async (req, res) => {
     const medicine = await Medicine.findOne({_id: ObjectId(req.params.id)})
     if (medicine) {
         await Medicine.deleteOne({_id: ObjectId(req.params.id)})
@@ -55,20 +56,21 @@ app.get('/edit/:id', async (req, res) => {
     }
 })
 app.post('/edit', async (req, res) => {
-    const medicine = await Medicine.findOne({_id: ObjectId(req.body._id)})
-    if (medicine) {
-        await Medicine.updateOne(
-            {_id: ObjectId(req.body._id)},
-            {
-                $set: {
-                    name: req.body.name,
-                    manufacturer: req.body.manufacturer,
-                    description: req.body.description
-                }
-            }
-        )
-        res.redirect('/')
-    }
+    res.send(req.body)
+    // const medicine = await Medicine.findOne({_id: ObjectId(req.body._id)})
+    // if (medicine) {
+    //     await Medicine.updateOne(
+    //         {_id: ObjectId(req.body._id)},
+    //         {
+    //             $set: {
+    //                 name: req.body.name,
+    //                 manufacturer: req.body.manufacturer,
+    //                 description: req.body.description
+    //             }
+    //         }
+    //     )
+    //     // res.redirect('/')
+    // }
 })
 
 // edit data transaksi obat
