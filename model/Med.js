@@ -23,9 +23,9 @@ const MedSchema = mongoose.Schema(
     }
 )
 const logEnum = {STOCK:0, DESC:1, DATE:2} // enumerasi akses array log
-const medLog = (stock_io, description="", date=new Date().toLocaleString()) => {
+const medicineLog = (stock_io, description="", date=new Date().toLocaleString()) => {
     return [stock_io, description, date]
 }
 
 const Medicine = mongoose.model('Medicine', MedSchema)
-module.exports = {Medicine, medLog, logEnum}
+module.exports = {Medicine, medicineLog, logEnum}

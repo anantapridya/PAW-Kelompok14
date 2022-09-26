@@ -8,7 +8,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 // koneksi dengan database
-const { Medicine, medLog, logEnum } = require('./model/Med')
+const { Medicine, medicineLog, logEnum } = require('./model/Med')
 const { ObjectId } = require('mongodb')
 connectDB();
 
@@ -28,7 +28,7 @@ app.post('/add', async (req, res) => {
     req.body.log = [medicineLog(
         req.body.stock, "Data obat ditambahkan ke database"
     )]
-    await Med.insertMany(req.body)
+    await Medicine.insertMany(req.body)
     res.redirect('/')
 })
 
@@ -87,7 +87,7 @@ app.post('/transaction', async (req, res) => {
         // newLog.push(medicineLog(
         //     req.body.stock, req.body.description
         // ))
-        newLog.push(medLog(
+        newLog.push(medicineLog(
             req.body.stock, req.body.description
         ))
         const newStock = medicine.stock + parseInt(req.body.stock)
