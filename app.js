@@ -15,16 +15,15 @@ connectDB();
 // halaman index
 app.get('/', async (req, res) => {
     const medicines = await Medicine.find() 
-    res.send(medicines)
-    // res.render('index', {
-    //     medicines
-    // })
+    res.render('index', {
+        medicines
+    })
 })
 
 //tambah data obat ke database
-// app.get('/add', async (req, res) => {
-//     res.render('add')
-// })
+app.get('/add', async (req, res) => {
+    res.render('add')
+})
 app.post('/add', async (req, res) => {
     req.body.log = [medicineLog(
         req.body.stock, "Data obat ditambahkan ke database"
