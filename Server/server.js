@@ -7,12 +7,17 @@ var corsOptions = {
     origin: "http://localhost:5000"
 }
 
+// simple route
+app.get("/", (req, res) => {
+    res.json({ message: "Welcome to pharmaweb" });
+});
+
 // middlewares
 app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-require("./app/routes/medicine.routes")(app)
+require("./routes/medicine.routes")(app)
 // ^^ note: belum dibuat, tambah medicine.controller, diimport ke
 // medicine.routes, medicine.routes di import kesini
 
@@ -24,5 +29,6 @@ console.log(`Server is running on port ${PORT}.`)
 
 
 // database connection
-const db = require('./models')
-db.connectDB()
+// const db = require('./models')
+const connectDB = require('./config/db').connectDB
+connectDB()
