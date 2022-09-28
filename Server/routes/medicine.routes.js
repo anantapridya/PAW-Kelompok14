@@ -1,4 +1,4 @@
-module.exports = app => {
+    module.exports = app => {
     const medicine = require("../controllers/medicine.controller.js");
     
     const router = require("express").Router();
