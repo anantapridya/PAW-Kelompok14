@@ -4,7 +4,7 @@ const cors = require('cors')
 const app = express()
 
 var corsOptions = {
-    origin: "http://localhost:5000"
+    origin: "http://localhost:9000"
 }
 
 // middlewares
@@ -12,7 +12,7 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-require("./app/routes/medicine.routes")(app)
+require("./routes/medicine.routes")(app)
 // ^^ note: belum dibuat, tambah medicine.controller, diimport ke
 // medicine.routes, medicine.routes di import kesini
 
