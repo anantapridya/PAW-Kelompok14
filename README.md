@@ -18,6 +18,7 @@
 
 - [Download](https://nodejs.org/en/download/) and install **Node.js** version `16.15` or higher.
 - Clone this project
-- Install **Express JS** , **Ejs**, **MongoDB** and **Mongoose** with **npm install**
+- Install **Express JS** , **Ejs**, **MongoDB**, **Mongoose**, **Cors**, and **dotenv** with **npm install**
+- Create **.env** file on **Server** folder
 - Start the program with command **npm start**
 - Open **localhost:3000**
