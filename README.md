@@ -63,5 +63,3 @@
 1. routes
 
    Folder berisi router yang terkoneksi ke controller
-=======
->>>>>>> f29ff7fc2ff90a62ebf83b3070596322628a9050
