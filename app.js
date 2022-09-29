@@ -10,6 +10,7 @@ app.use(express.static('public'))
 // koneksi dengan database
 const { Medicine, medicineLog, logEnum } = require('./model/Med')
 const { ObjectId } = require('mongodb')
+const { Server } = require('tls')
 connectDB();
 
 // halaman index
