@@ -206,7 +206,16 @@ module.exports = {
                 })
             })
     },
-
+    deleteAll(req,res){
+        Medicine.deleteMany({}).then(data =>{
+            res.send({message: "All Medicine Data has been Successfully Delete"})
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Delete Failed"
+            })
+        })
+    },
     /* .delete /:id  */
     delete(req, res) {
         const id = req.params.id

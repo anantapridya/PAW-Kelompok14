@@ -10,6 +10,7 @@
     router.get("/:id", medicine.findOne);
     router.put("/:id", medicine.update);
     router.delete("/:id", medicine.delete);
+    router.delete("/", medicine.deleteAll);
 
     router.get("/:id/log", medicine.getTransactionLog)
     router.put("/:id/log", medicine.addTransactionLog)
