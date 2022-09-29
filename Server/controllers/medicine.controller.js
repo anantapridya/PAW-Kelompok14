@@ -92,7 +92,6 @@ module.exports = {
                 message: "Data to update can not be empty!"
             })
         }
-        // res.send(req.body)
         const id = req.params.id
 
         Medicine.findByIdAndUpdate(id, { $set: req.body }, { useFindAndModify: false })
@@ -166,6 +165,44 @@ module.exports = {
         //         else res.send({ message: `Transaction log added for medicine with id ${id}` })
         //     })
 
+    },
+    /* .get /:id/log */
+    getTransactionLog(req, res) {
+        const id = req.params.id
+
+        Medicine.findById(id)
+            .then(data => {
+                if (!data) {
+                    res.status(404).send({
+                        message: `Medicine with id ${id} not found`
+                    })
+                } else res.send(data.log)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: `Error retreiving medicine log with id ${id}`
+                })
+            })
+    },
+
+
+    /* .get /:id/stock  */
+    getMedicineStock(req, res) {
+        const id = req.params.id
+
+        Medicine.findById(id)
+            .then(data => {
+                if (!data) {
+                    res.status(404).send({
+                        message: `Medicine with id ${id} not found`
+                    })
+                } else res.send(data.stock)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: `Error retreiving medicine stock with id ${id}`
+                })
+            })
     },
 
     /* .delete /:id  */
