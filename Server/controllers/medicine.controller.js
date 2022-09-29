@@ -128,9 +128,14 @@ module.exports = {
 
             Medicine.findById(id).then(data => {
                 log = data.log
+                const updatedStock = data.stock + req.body.stock
+                if (updatedStock < 0) 
+                    return res.status(400).send({
+                        message: 'medicine stock cannot be less than zero.'
+                    })
                 log.push(newLog)
 
-                Medicine.findByIdAndUpdate(id, { $set: { log }})
+                Medicine.findByIdAndUpdate(id, { $set: { log, stock: updatedStock }})
                 .then(data => {
                     if (!data)
                         res.status(404).send({
