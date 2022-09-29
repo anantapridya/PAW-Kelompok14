@@ -115,7 +115,9 @@ module.exports = {
         const id = req.params.id
         let log, newLog
 
-        if ('stock' in req.body) {
+        if ('stock' in req.body
+            && typeof req.body.stock === 'number'
+            && isFinite(req.body.stock) ) {
 
             newLog = [
                 req.body.stock,
