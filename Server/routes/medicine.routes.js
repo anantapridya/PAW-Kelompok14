@@ -15,7 +15,7 @@
     router.get("/:id/log", medicine.getTransactionLog)
     router.put("/:id/log", medicine.addTransactionLog)
 
-    router.get("/:id/log", medicine.getMedicineStock)
+    router.get("/:id/stock", medicine.getMedicineStock)
   
     
     app.use('', router);

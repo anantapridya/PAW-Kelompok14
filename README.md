@@ -15,9 +15,10 @@
 
 ### Panduan
 - [Download](https://nodejs.org/en/download/) and install **Node.js** version `16.15` or higher.
-- Clone this project on your favorite code editor
-- Open terminal
-- Make **.env** file in folder Server
+<<<<<<< HEAD
+- Clone this project
+- Install **Express JS** , **Ejs**, **MongoDB**, **Mongoose**, **Cors**, and **dotenv** with **npm install**
+- Create **.env** file on **Server** folder
 - Install package.json with command
   ```bash
   npm i
@@ -62,3 +63,5 @@
 1. routes
 
    Folder berisi router yang terkoneksi ke controller
+=======
+>>>>>>> f29ff7fc2ff90a62ebf83b3070596322628a9050
