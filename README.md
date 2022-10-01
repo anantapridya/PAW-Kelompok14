@@ -73,6 +73,5 @@
 
 ## File Presentasi
 
-- [Video] (https://drive.google.com/file/d/17vyQgt2HOHzvrm9jg1BYD-GzIOg76ZlA/view?usp=sharing)
-- [Slide] (https://docs.google.com/presentation/d/1q35e15fPwEY_ylUdxHXPQ6sjlvyjy0xz6gYMM5_4X8g/edit#slide=id.g15f7bd1e668_3_0)
-  <a href=''>Slide</a>
+<a href='https://drive.google.com/file/d/17vyQgt2HOHzvrm9jg1BYD-GzIOg76ZlA/view?usp=sharing'>Video</a>
+<a href='https://docs.google.com/presentation/d/1q35e15fPwEY_ylUdxHXPQ6sjlvyjy0xz6gYMM5_4X8g/edit#slide=id.g15f7bd1e668_3_0'>Slide</a>
