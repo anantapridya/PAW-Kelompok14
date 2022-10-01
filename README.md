@@ -17,18 +17,15 @@
 ### Panduan
 
 - [Download](https://nodejs.org/en/download/) and install **Node.js** version `16.15` or higher.
-  <<<<<<< HEAD
 - Clone this project
 - Install the dependencies with command
   ```bash
   npm i
   ```
 - Enter Server folder with
-
-```bash
+  ```bash
   cd Server
-```
-
+  ```
 - Create **.env** file on **Server** folder
 - Run with command
   ```bash
@@ -74,4 +71,5 @@
 ## File Presentasi
 
 <a href='https://drive.google.com/file/d/17vyQgt2HOHzvrm9jg1BYD-GzIOg76ZlA/view?usp=sharing'>Video</a>
+
 <a href='https://docs.google.com/presentation/d/1q35e15fPwEY_ylUdxHXPQ6sjlvyjy0xz6gYMM5_4X8g/edit#slide=id.g15f7bd1e668_3_0'>Slide</a>
