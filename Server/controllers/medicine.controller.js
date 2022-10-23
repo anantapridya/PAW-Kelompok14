@@ -155,19 +155,8 @@ module.exports = {
             message: "cannot add empty transaction log"
         })
 
-        // log.push(newLog)
-        // res.send({log, newLog})
-
-        // Medicine.findByIdAndUpdate(id, { $set: { log }})
-        //     .then(data => {
-        //         if (!data)
-        //             res.status(404).send({
-        //                 message: `Medicine with id ${id} not found`
-        //             })
-        //         else res.send({ message: `Transaction log added for medicine with id ${id}` })
-        //     })
-
     },
+
     /* .get /:id/log */
     getTransactionLog(req, res) {
         const id = req.params.id
@@ -187,7 +176,6 @@ module.exports = {
             })
     },
 
-
     /* .get /:id/stock  */
     getMedicineStock(req, res) {
         const id = req.params.id
@@ -206,6 +194,7 @@ module.exports = {
                 })
             })
     },
+
     deleteAll(req,res){
         Medicine.deleteMany({}).then(data =>{
             res.send({message: "All Medicine Data has been Successfully Delete"})
@@ -216,6 +205,7 @@ module.exports = {
             })
         })
     },
+
     /* .delete /:id  */
     delete(req, res) {
         const id = req.params.id
@@ -238,6 +228,4 @@ module.exports = {
                 })
             })
     }
-    
-
 }

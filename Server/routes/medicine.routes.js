@@ -3,7 +3,7 @@
     
     const router = require("express").Router();
     
-    router.post("/add", medicine.create);
+    router.post("/add", medicine.create); 
   
     router.get("/", medicine.findAll);
   
