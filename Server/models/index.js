@@ -8,4 +8,5 @@ module.exports = {
 
     // models
     medicines: require('./medicine'),
+    user: require('./user')
 }
