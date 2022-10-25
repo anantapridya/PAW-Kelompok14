@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const AddMedicine = () => {
+const LoginAdmin = () => {
   return (
     <div>
-      <h1>Tambah Obat</h1>
+        <h1>Login</h1>
     </div>
   )
 };
  
-export default AddMedicine;
+export default LoginAdmin;

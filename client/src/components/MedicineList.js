@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 
 const MedicineList = () => {
   return (
-    <div>Daftar Obat</div>
+    <div>
+      <h1>Daftar Obat</h1>
+    </div>
   )
 };
  
