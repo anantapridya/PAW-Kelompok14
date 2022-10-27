@@ -1,5 +1,8 @@
 const express = require('express')
 const cors = require('cors')
+const cookieSession = require("cookie-session");
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express()
 
@@ -11,6 +14,14 @@ var corsOptions = {
 app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(
+    cookieSession({
+        name: "my_sess",
+        secret: process.env.COOKIE_SECRET,
+        httpOnly: true
+    })
+);
 
 require("./routes/medicine.routes")(app)
 require('./routes/auth.routes')(app);
