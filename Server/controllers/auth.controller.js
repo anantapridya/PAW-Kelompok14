@@ -6,6 +6,10 @@ const Role = db.role;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+const dotenv = require('dotenv');
+dotenv.config();
+const jwtsecret = process.env.JWT_SECRET;
+
 exports.signup = (req, res) => {
   const user = new User({
     username: req.body.username,
@@ -63,7 +67,7 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
-  Admin.findOne({
+  User.findOne({
     username: req.body.username,
   })
     .populate("roles", "-__v")
@@ -86,8 +90,8 @@ exports.signin = (req, res) => {
         return res.status(401).send({ message: "Invalid Password!" });
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: 86400, // 24 hours
+      var token = jwt.sign({ id: user.id }, jwtsecret, {
+        expiresIn: 86400
       });
 
       var authorities = [];
@@ -99,10 +103,13 @@ exports.signin = (req, res) => {
       req.session.token = token;
 
       res.status(200).send({
-        id: admin._id,
-        username: admin.username,
-        email: admin.email,
-        roles: authorities,
+        user: {
+          id: user._id,
+          username: user.username,
+          email: user.email,
+          roles: user.roles,
+        },
+        token
       });
     });
 };
