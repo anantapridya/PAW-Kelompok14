@@ -6,16 +6,15 @@ const User = db.user;
 const Role = db.role;
 
 dotenv.config();
-const jwtsecret = process.env.JWT_SECRET;
 
 verifyToken = (req, res, next) => {
-    let token = req.session.token;
+    const token = req.session.token;
   
     if (!token) {
       return res.status(403).send({ message: "No token provided!" });
     }
   
-    jwt.verify(token, jwtsecret, (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         return res.status(401).send({ message: "Unauthorized!" });
       }
