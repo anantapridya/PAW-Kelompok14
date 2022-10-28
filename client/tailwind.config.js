@@ -14,6 +14,9 @@ module.exports = {
         'biru-sedang': '#5FDFFF',
         'biru-muda': '#B2FCFF',
         'putih': '#ECFCFF'
+      },
+      boxShadow: {
+        '3xl': '0px 4px 4px rgba(0, 0, 0, 0.25)'
       }
     },
   },
