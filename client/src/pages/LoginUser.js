@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-
 const LoginUser = () => {
   return (
     <div>
-        <h1>Login</h1>
+        <h1>Login as User</h1>
     </div>
   )
 };

@@ -2,7 +2,6 @@ import backArrow from '../img/back-arrow.png'
 import Navbar from './Navbar.jsx'
 import '../css/MedicineDesc.css'
 
-
 export default function MedicineDesc() {
     
     // ini data dummy, nanti diganti dgn fetch() ke database

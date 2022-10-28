@@ -1,15 +1,14 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import WelcomePage from './components/WelcomePage';
-import MedicineList from './components/MedicineList';
-import AddMedicine from './components/AddMedicine';
-import LoginAdmin from './components/LoginAdmin';
-import SignUp from './components/SignUp';
-import LoginUser from './components/LoginUser';
-import MedicineDesc from './components/MedicineDesc';
-import EditMedicine from './components/EditMedicine';
-import AddTransaction from './components/AddTransaction';
-
+import WelcomePage from './pages/WelcomePage';
+import DescPage from './pages/DescPage';
+import SignUp from './pages/SignUp';
+import LoginUser from './pages/LoginUser';
+import LoginAdmin from './pages/LoginAdmin';
+import MedicineList from './pages/MedicineList';
+import AddMedicine from './pages/AddMedicine';
+import EditMedicine from './pages/EditMedicine';
+import AddTransaction from './pages/AddTransaction';
 
 function App() {
   return (
@@ -21,7 +20,7 @@ function App() {
         <Route path="/loginadmin" element={<LoginAdmin/>}/>
         <Route path="/list" element={<MedicineList/>}/>
         <Route path="/add" element={<AddMedicine/>}/>
-        <Route path="/desc" element={<MedicineDesc/>}/>
+        <Route path="/desc" element={<DescPage/>}/>
         <Route path="/edit" element={<EditMedicine/>}/>
         <Route path="/log" element={<AddTransaction/>}/>
       </Routes>

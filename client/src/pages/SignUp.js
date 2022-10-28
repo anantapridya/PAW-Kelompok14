@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-
 const SignUp = () => {
   return (
     <div>
-        <h1>Sign Up</h1>
+        <h1>Sign Up for User</h1>
     </div>
   )
 };

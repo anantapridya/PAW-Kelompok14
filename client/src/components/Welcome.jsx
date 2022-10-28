@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Pharmaweb1 from "../img/Pharmaweb1.png";
-const WelcomePage = () => {
+
+export default function Welcome() {
   return (
     <div className="bg-putih md:h-screen">
       <Navbar />
@@ -32,6 +32,4 @@ const WelcomePage = () => {
       </div>
     </div>
   );
-};
-
-export default WelcomePage;
+}
