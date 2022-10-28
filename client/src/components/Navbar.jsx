@@ -12,7 +12,7 @@ export default function Navbar() {
             </li>
             <li><a href="/">List</a></li>
             <li><a href="/add">Add</a></li>
-            <li><a href="#">Sign in/Sign out</a></li>
+            <li><a href="/loginuser">Sign in/Sign out</a></li>
         </ul>
     </nav>
     )
