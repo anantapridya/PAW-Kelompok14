@@ -1,7 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 
-export default function BtnBiru(props) {
+export default function DefaultBtn(props) {
   return (
     <div>
       <button
@@ -17,10 +17,10 @@ export default function BtnBiru(props) {
   );
 }
 
-BtnBiru.defaultProps = {
+DefaultBtn.defaultProps = {
   judulButton: "Button",
 };
 
-BtnBiru.propTypes = {
+DefaultBtn.propTypes = {
   judulButton: PropTypes.string.isRequired,
 };
