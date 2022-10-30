@@ -9,7 +9,7 @@ export default function SetDate() {
       <DatePicker
         onChange={onChange}
         value={value} 
-        className="font-body w-[150px] h-[50px] border-0"
+        className="font-body w-[200px] h-[50px] my-3"
       />
     </div>
   );

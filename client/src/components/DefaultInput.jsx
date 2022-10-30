@@ -5,7 +5,10 @@ export default function DefaultInput(props) {
     <div>
       <input
         type={props.type}
-        className="px-3 py-2 rounded-md sm:text-sm font-body border shadow-sm focus:outline-none focus:border-biru-sedang focus:ring-biru-sedang focus:ring-1"
+        className={
+          "my-3 px-3 py-2 rounded-md font-body border shadow-sm focus:outline-none focus:border-biru-sedang focus:ring-biru-sedang focus:ring-1 " + 
+          props.className
+        }  
         placeholder={props.placeholder}
       />
     </div>
@@ -13,5 +16,5 @@ export default function DefaultInput(props) {
 }
 
 DefaultInput.defaultProps = {
-    placeholder: "Placeholder Text",
+  placeholder: "Placeholder Text",
 }
