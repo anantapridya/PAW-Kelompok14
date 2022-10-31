@@ -9,16 +9,16 @@ export default function Register() {
       className="w-full h-screen bg-putih bg-repeat bg-auto flex"
       style={{ backgroundImage: `url(${Pattern})` }}
     >
-      <div className="w-[780px] h-[490px] bg-biru-muda/[.3] rounded-3xl backdrop-blur shadow-3xl m-auto">
+      <div className="w-[780px] h-[490px] bg-biru-muda/[.1] rounded-3xl backdrop-blur-sm shadow-3xl m-auto">
         <div className="flex flex-col items-center justify-center w-5/6 mx-auto my-[100px] gap-8">
-          <Link to="/signup">
+          <Link to="/loginuser">
             <DefaultBtn
               type="button"
               judulButton="Masuk"
               className="w-[474px] h-[84px] text-2xl py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
             />
           </Link>
-          <Link to="/loginuser">
+          <Link to="/signup">
             <DefaultBtn
               type="button"
               judulButton="Daftar"
