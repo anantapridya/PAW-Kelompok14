@@ -59,3 +59,22 @@ nav > ul > li:last-child {
     color: #000000;
     margin-left: 13px;
 }
+
+@media screen and (max-width: 1500px) {
+    nav {
+        height: 60px;
+    }
+    nav a, nav span {
+        font-size: 20px;
+    }
+    nav > ul > li {
+        margin: 0 30px;
+    }
+    .nav--logo > img {
+        height: 35px;
+    }
+    .nav--logo > span {
+        font-size: 23px;
+    }
+
+}
