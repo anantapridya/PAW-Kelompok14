@@ -1,5 +1,6 @@
 import DefaultBtn from "../components/DefaultBtn";
 import DefaultInput from "../components/DefaultInput";
+import DefaultTxtArea from "../components/DefaultTxtArea";
 import Navbar from "../components/Navbar";
 
 const AddMedicine = () => {
@@ -42,13 +43,12 @@ const AddMedicine = () => {
 
         {/* TODO: Buat jadi paragraf multiline */}
         <p>Deskripsi Obat :</p>
-        <DefaultInput
-          type="textarea"
+        <DefaultTxtArea
           placeholder="Tambahkan deskripsi mengenai obat"
-          className="w-full h-[200px]"
         />
 
         {/* TODO: Buat ke tengah */}
+        {/* Ket: Button "Batal" bisa dibuat pake "DefaultBtn", buat style kayak warna, outline bisa disesuaiin di className */}
         <button>Batal</button>
 
         <DefaultBtn
