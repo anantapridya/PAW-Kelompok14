@@ -10,7 +10,7 @@ export default function Navbar() {
                 <img src={logo} alt="app logo on navigation bar"></img>
                 <span>Pharma</span><span>Web</span>
             </li>
-            <li><a href="/">List</a></li>
+            <li><a href="/list">List</a></li>
             <li><a href="/add">Add</a></li>
             <li><a href="/welcome">Sign in/Sign out</a></li>
         </ul>
