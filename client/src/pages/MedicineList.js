@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Dropdown from "../components/Dropdown";
+import Modal from "../components/Modal";
 import Navbar from "../components/Navbar";
 
 const MedicineList = () => {
@@ -76,7 +77,7 @@ const MedicineConfig = ({items}) =>{
               </div>
               <div className="items-center fitur flex">
                 <a className="font-body text-[20px] px-[50px] py-[5px] bg-white rounded-[8px] mr-[15px] no-underline text-black" href="/edit">Edit</a>
-                <a className="font-body text-[20px] px-[50px] py-[5px] bg-[#FF0000] text-white rounded-[8px] mr-[15px] no-underline">Delete</a>
+                <Modal btn="Delete" desc="Apakah Anda Yakin Untuk Menghapus Obat" btnmodal="Delete" />
               </div>
             </div>
           </div>

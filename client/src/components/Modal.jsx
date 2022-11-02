@@ -51,7 +51,7 @@ export default function Modal({desc, btn, btnmodal}) {
               &#8203;
             </span>
             <Transition.Child
-              as={Fragment}
+              as={Fragment} 
               enter="ease-out duration-300"
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"
