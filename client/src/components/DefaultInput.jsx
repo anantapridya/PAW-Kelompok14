@@ -10,6 +10,7 @@ export default function DefaultInput(props) {
           props.className
         }
         placeholder={props.placeholder}
+        value={props.value}
       />
     </div>
   );
