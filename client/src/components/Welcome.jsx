@@ -8,10 +8,10 @@ export default function Welcome() {
 
       <div className="grid grid-cols-3 w-3/4 mx-auto md:gap-4 lg:gap-8 pt-24 2xl:pt-48 pb-12">
         <div className="col-span-3 md:col-span-2 flex flex-col items-center md:items-start gap-2">
-          <h1 className="text-biru-sedang font-heading font-bold text-xl md:text-3xl 2xl:text-5xl my-0.5 md:my-2">
+          <h1 className="text-biru-tua font-heading font-bold text-xl md:text-3xl 2xl:text-5xl my-0.5 md:my-2">
             Selamat Datang di
           </h1>
-          <h1 className="text-biru-sedang font-heading font-bold text-3xl md:text-5xl 2xl:text-7xl my-0.5 md:my-2">
+          <h1 className="text-biru-tua font-heading font-bold text-3xl md:text-5xl 2xl:text-7xl my-0.5 md:my-2">
             Pharma-Web
           </h1>
           <p className="font-body md:text-lg 2xl:text-2xl text-justify italic mt-4 sm:w-3/4 md:w-auto">
@@ -30,6 +30,11 @@ export default function Welcome() {
           />
         </div>
       </div>
+      <footer className="w-full h-16 flex absolute bottom-0">
+        <p className="font-body text-biru-tua text-[20px] mx-auto">
+          &copy; Kelompok 14 - Pengembangan Aplikasi Web
+        </p>
+      </footer>
     </div>
   );
 }
