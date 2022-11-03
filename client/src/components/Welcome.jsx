@@ -22,7 +22,7 @@ export default function Welcome() {
             mengenai obat.
           </p>
         </div>
-        <div className="col-span-3 md:col-span-1 flex items-center justify-center">
+        <div className="col-span-3 md:col-span-1 flex items-center justify-center mt-8 md:mt-0">
           <img
             src={Pharmaweb1}
             alt=""
