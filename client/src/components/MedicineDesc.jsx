@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import backArrow from '../img/back-arrow.png'
 import Navbar from './Navbar.jsx'
 import '../css/MedicineDesc.css'
@@ -13,9 +14,9 @@ export default function MedicineDesc() {
         <>
             <Navbar />
             <main>
-                <a className="back-arrow">
+                <Link to="/list" className="back-arrow">
                     <img src={backArrow} alt="back arrow" />
-                </a>
+                </Link>
                 <MedicineDescArticle isAuthorized={isAuthorized} medicineData={medicine} />
                 {isAuthorized && <MedicineDescAside medicineLog={medicine.log} />}
             </main>
@@ -43,8 +44,10 @@ function MedicineDescAside({ medicineLog }) {
             <div className="tsc--container">
                 {transactions}
             </div>
-            <div className="tsc--add">+</div>
-            <div className="tsc--add--text">Buat Catatan Transaksi</div>
+            <Link to="/log">
+                <div className="tsc--add">+</div>
+                <div className="tsc--add--text">Buat Catatan Transaksi</div>
+            </Link>
         </aside>
     )
 }

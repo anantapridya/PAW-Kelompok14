@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import Modal from "../components/Modal";
 import Navbar from "../components/Navbar";
@@ -71,10 +72,12 @@ const MedicineConfig = ({items}) =>{
         return(
           <div>
             <div key={id} className="flex justify-between py-[30px] px-[50px] bg-[#B2FCFF] mb-[20px] rounded-[16px] hover:drop-shadow-xl transition">
-              <div className="flex w-[500px] justify-between border-black border-b-2 border-solid items-end pb-1" >
-                <p className="font-body text-[25px]">{nama}</p>
-                <p className="font-body">Rp{harga}</p>
-              </div>
+              <Link to="/desc">
+                <div className="hover:font-bold transition-all flex w-[500px] justify-between border-black border-b-2 border-solid items-end pb-1" >
+                  <p className="font-body text-[25px]">{nama}</p>
+                  <p className="font-body">Rp{harga}</p>
+                </div>
+              </Link>
               <div className="items-center fitur flex">
                 <a className="font-body text-[20px] px-[50px] py-[5px] bg-white rounded-[8px] mr-[15px] no-underline text-black" href="/edit">Edit</a>
                 <Modal btn="Delete" desc="Apakah Anda Yakin Untuk Menghapus Obat" btnmodal="Delete" />
