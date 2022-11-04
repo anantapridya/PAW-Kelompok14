@@ -11,8 +11,8 @@ export default function DefaultInput(props) {
         }
         placeholder={props.placeholder}
         value={props.value}
-        name={props.name || ''}
-        onChange={props.onChange || ''}
+        name={props.name || function(){}}
+        onChange={props.onChange || function(){}}
       />
     </div>
   );

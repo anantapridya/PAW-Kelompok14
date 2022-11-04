@@ -6,13 +6,16 @@ import Navbar from "../components/Navbar";
 
 const MedicineList = () => {
   
-  const [medicineitems, setmedicineitems] = React.useState([])
+  const [medicineData, setMedicineData] = React.useState([])
 
-  React.useEffect(() => {
-    fetch("http:/localhost/9000") // temporary URL
-      .then(response => response.json)
-      .then(data => setmedicineitems(data))
-  }, [])
+  // React.useEffect(() => {
+  //   console.log(JSON.parse(sessionStorage.getItem('data')))
+  //   fetch("http://localhost:9000", {
+  //     method: "GET"
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => console.log(data))
+  // }, [])
   
   // Data Dummy
   const data = [
@@ -52,7 +55,8 @@ const MedicineList = () => {
       harga: 10000
     }
   ]
-  // const [medicineitems, setmedicineitem] = useState(data)
+
+  setMedicineData(data)
 
   return (
     <>
@@ -65,7 +69,7 @@ const MedicineList = () => {
           <input className="ml-[40px] rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black" type="text" placeholder="Search"></input>
         </div>
       </div>
-      <MedicineConfig items={medicineitems}/>
+      <MedicineConfig items={medicineData}/>
     </div>
     </>
   );
