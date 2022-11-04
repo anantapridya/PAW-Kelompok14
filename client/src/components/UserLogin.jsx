@@ -5,6 +5,7 @@ import DefaultBtn from "./DefaultBtn";
 import DefaultInput from "./DefaultInput";
 
 export default function UserLogin() {
+  const [formData, setFormData] = React.useState({})
   return (
     <div
       className="w-full h-screen bg-putih bg-repeat bg-auto flex"
@@ -15,10 +16,12 @@ export default function UserLogin() {
           <DefaultInput
             placeholder="Username"
             className="w-full text-sm md:text-xl"
+            name="username"
           />
           <DefaultInput
             placeholder="Password"
             className="w-full text-sm md:text-xl"
+            name="password"
           />
 
           <div className="flex flex-col-reverse sm:flex-row items-center sm:justify-between w-full mt-4 sm:mt-12 gap-2 sm:gap-0">

@@ -5,6 +5,15 @@ import Modal from "../components/Modal";
 import Navbar from "../components/Navbar";
 
 const MedicineList = () => {
+  
+  const [medicineitems, setmedicineitems] = React.useState([])
+
+  React.useEffect(() => {
+    fetch("http:/localhost/9000") // temporary URL
+      .then(response => response.json)
+      .then(data => setmedicineitems(data))
+  }, [])
+  
   // Data Dummy
   const data = [
     {
@@ -43,7 +52,7 @@ const MedicineList = () => {
       harga: 10000
     }
   ]
-  const [medicineitems, setmedicineitem] = useState(data)
+  // const [medicineitems, setmedicineitem] = useState(data)
 
   return (
     <>

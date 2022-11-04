@@ -5,6 +5,21 @@ import DefaultBtn from "./DefaultBtn";
 import DefaultInput from "./DefaultInput";
 
 export default function SignupPage() {
+
+  const [formData, setFormData] = React.useState({
+    username: '',
+    password: '',
+    email: '',
+  })
+
+  function handleChange(event) {
+    const { name, value } = event.target
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value
+    }))
+  }
+
   return (
     <div
       className="w-full h-screen bg-putih bg-repeat bg-auto flex"
@@ -15,14 +30,20 @@ export default function SignupPage() {
           <DefaultInput
             placeholder="Username"
             className="w-full text-sm md:text-xl"
+            name="username"
+            value={formData.username}
           />
           <DefaultInput
             placeholder="Email"
             className="w-full text-sm md:text-xl"
+            name="email"
+            value={formData.email}
           />
           <DefaultInput
             placeholder="Password"
             className="w-full text-sm md:text-xl"
+            name="password"
+            value={formData.password}
           />
 
           <div className="flex flex-col-reverse sm:flex-row items-center sm:justify-between w-full mt-4 sm:mt-12 gap-2 sm:gap-0">
