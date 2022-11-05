@@ -4,7 +4,7 @@ import DefaultTxtArea from "../components/DefaultTxtArea";
 import Navbar from "../components/Navbar";
 import SetDate from "../components/SetDate";
 import SetTime from "../components/SetTime";
-import Stock from "../components/Stock";
+import DefaultInput from "../components/DefaultInput";
 
 const AddTransaction = () => {
   // Data dummy
@@ -14,26 +14,42 @@ const AddTransaction = () => {
     <div className="bg-putih md:h-screen">
       <Navbar/>
       <div className="font-body mx-[150px] my-[30px] text-xl">
-        <h1 className="text-biru-sedang font-heading font-bold text-4xl pb-3">
-          Tambah Transaksi
-        </h1>
-        <p className="text-gray-400 italic text-2xl pb-10">
-          {medicine.name}
-        </p>
+        <div>
+          <h1 className="text-biru-sedang font-heading font-bold text-4xl pb-3">
+            Tambah Transaksi
+          </h1>
+          <p className="text-gray-400 italic text-2xl pb-10">
+            {medicine.name}
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-[300px_300px]">
+          <div>
+            <p>Tanggal Transaksi</p>
+            <SetDate/>
+          </div>
+          <div>
+            <p>Waktu Transaksi</p>
+            <SetTime/>
+          </div>
+        </div>
 
-        <p>Tanggal Transaksi</p>
-        <SetDate/>
-        <p>Waktu Transaksi</p>
-        <SetTime/>
-
-        <p>Stok</p>
-        <Stock/>
-
-        <p>Keterangan</p>
-        <DefaultTxtArea
-          placeholder="Tambahkan catatan keterangan transaksi"
-        />
-
+        <div>
+            <p>Stok</p>
+            <DefaultInput
+              type="number"
+              placeholder="-10"
+              className="w-[200px] h-[50px]"
+            />
+        </div>             
+        
+        <div>
+          <p>Keterangan</p>
+          <DefaultTxtArea
+            placeholder="Tambahkan catatan keterangan transaksi"
+          />
+        </div>
+        
         <div className="flex justify-between w-full grid grid-cols-[100px_218px]">
           <Link to="/desc">
             <DefaultBtn
