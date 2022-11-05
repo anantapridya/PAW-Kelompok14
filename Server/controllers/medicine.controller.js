@@ -94,13 +94,66 @@ module.exports = {
         }
         const id = req.params.id
 
+        // note: kode inefisien, refactor soon
+        // mengupdate "log" secara otomatis jika "stock" diupdate
+        if(req.body.stock) {
+            Medicine.findById(id)
+            .then(data => {
+                if (!data) {
+                    res.status(404).send({
+                        message: `Medicine with id ${id} not found`
+                    })
+                } else {
+                    const stockIncrement = req.body.stock - parseInt(data.stock)
+                    const newLog = [
+                        stockIncrement,
+                        "Stok telah di ubah secara manual",
+                        new Date().toLocaleString()
+                    ]
+                    const newTransLog = data.log
+                    newTransLog.push(newLog)
+                    req.body.log = newTransLog
+
+
+                    Medicine.findByIdAndUpdate(id, { $set: req.body }, { useFindAndModify: false })
+                    .then(data => {
+                        if (!data)
+                            res.status(404).send({
+                                message: `Medicine with id ${id} not found`
+                            })
+                        else {
+                            // updating transaction log if "stock" was also updated
+                            console.log(req.body)
+                            res.send({ message: "medicine was updated successfully" })
+                        }
+                    })
+                    .catch(err => {
+                        res.status(500).send({
+                            message:
+                                err.message || `Error updating medicine with id ${id}`
+                        })
+                    })
+                }
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || `Error updating medicine with id ${id}`
+                })
+            })
+        }
+        // fungsi awal untuk edit data obat
+        else
         Medicine.findByIdAndUpdate(id, { $set: req.body }, { useFindAndModify: false })
             .then(data => {
                 if (!data)
                     res.status(404).send({
                         message: `Medicine with id ${id} not found`
                     })
-                else res.send({ message: "medicine was updated successfully" })
+                else {
+                    // updating transaction log if "stock" was also updated
+                    console.log(req.body)
+                    res.send({ message: "medicine was updated successfully" })
+                }
             })
             .catch(err => {
                 res.status(500).send({
@@ -124,7 +177,9 @@ module.exports = {
                 req.body.description
                     ? req.body.description
                     : '',
-                new Date().toLocaleString()
+                req.body.date
+                    ? req.body.date // format HARUS "MM/DD/YYYY, hh:mm:ss"
+                    : new Date().toLocaleString()
             ]
 
             Medicine.findById(id).then(data => {
