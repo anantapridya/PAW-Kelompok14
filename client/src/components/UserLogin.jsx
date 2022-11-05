@@ -27,18 +27,26 @@ export default function UserLogin() {
       body: JSON.stringify(formData)
     }).then(response => response.json())
       .then(data => {
-        
-        // nanti diganti dgn komponen modal jika error/berhasil login
-        if (data.user) {
-          alert('login berhasil, selamat datang ' + data.user.username)
-          window.location.href = '/list'
-        }
-        else {
-          alert(data.message)
-        }
 
+        localStorage.setItem('user', JSON.stringify(data))
+        
+        /*
+        jika berhasil, 'data' akan berisi:
+        {
+          user: {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            roles: user.roles,
+          },
+          token
+        }
+        */
 
       })
+
+
+
     /* NOTE:
     data yg didapat dari fetch() dapat berisi:
     { message: "User Not found." } (404)
