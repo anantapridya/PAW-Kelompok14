@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import Modal from "../components/Modal";
 import Navbar from "../components/Navbar";
+import DefaultBtn from "../components/DefaultBtn";
 
 const MedicineList = () => {
   // Data Dummy
@@ -64,8 +65,18 @@ const MedicineList = () => {
 
 export default MedicineList;
 
-const MedicineConfig = ({items}) =>{
+const MedicineConfig = ({items}, props) =>{
+  const [isOpen, setIsOpen] = useState(false)
+  const closeModal = () =>{
+    setIsOpen(false);
+  }
+  const openModal = () =>{
+    setIsOpen(true);
+  }
   return(
+    <>
+    {/* Modal Config */}
+    <Modal show={isOpen} onClose={closeModal} onClick={closeModal} className="bg-[#FF0000]" desc="Apakah Anda Yakin Akan Menghapus Obat" title="Message Box" button="Delete" />
     <div className="flex flex-col">
       {items.map((data) => {
         const {id, nama, harga} = data;
@@ -79,13 +90,14 @@ const MedicineConfig = ({items}) =>{
                 </div>
               </Link>
               <div className="items-center fitur flex">
-                <a className="font-body text-[20px] px-[50px] py-[5px] bg-white rounded-[8px] mr-[15px] no-underline text-black" href="/edit">Edit</a>
-                <Modal btn="Delete" desc="Apakah Anda Yakin Untuk Menghapus Obat" btnmodal="Delete" />
+                <Link to="/edit"><DefaultBtn judulButton="Edit" className="border-biru-sedang bg-white text-black border-2 mr-[30px] px-[25px]" /></Link>
+                <DefaultBtn onClick={openModal} className="bg-[#FF0000] border-2 border-[#FF0000]" judulButton="Delete"/>
               </div>
             </div>
           </div>
         )
       })}
     </div>
+    </>
   )
 }
