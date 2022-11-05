@@ -48,10 +48,14 @@ const MedicineList = () => {
   ]
 
   React.useEffect(() => {
-    fetch("http://localhost:9000") // temporary URL
+    fetch("http://localhost:9000/")
       .then(response => response.json())
       .then(data => setMedicineData(data))
-    // setMedicineData(data)
+      /*
+        TO DO:
+        - autentikasi JWT token pada header saat fetch()
+        - data untuk harga obat tidak ada di database
+      */
 
   }, [])
 

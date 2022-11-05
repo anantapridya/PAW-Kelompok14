@@ -40,7 +40,7 @@ export default function MedicineDesc() {
                     <img src={backArrow} alt="back arrow" />
                 </Link>
                 <MedicineDescArticle isAuthorized={isAuthorized} medicineData={medicine} />
-                {isAuthorized && <MedicineDescAside medicineLog={medicine.log} />}
+                {isAuthorized && <MedicineDescAside medicineLog={medicine.log} medId={medicineId} />}
             </main>
         </>
     )
@@ -51,7 +51,7 @@ export default function MedicineDesc() {
 
 // sub components:
 
-function MedicineDescAside({ medicineLog }) {
+function MedicineDescAside({ medicineLog, medId }) {
     const transactions = medicineLog.map(log => (
         <MedicineDescLog 
             date={log[2].split(', ')[0]}
@@ -66,7 +66,10 @@ function MedicineDescAside({ medicineLog }) {
             <div className="tsc--container">
                 {transactions}
             </div>
-            <Link to="/log">
+            <Link to={{
+                pathname: '/log',
+                search: "?id=" + medId
+            }}>
                 <div className="tsc--add">+</div>
                 <div className="tsc--add--text">Buat Catatan Transaksi</div>
             </Link>

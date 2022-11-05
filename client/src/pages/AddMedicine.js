@@ -30,10 +30,14 @@ const AddMedicine = () => {
   }
 
   function submitHandler(event) {
+    const submittedForm = {
+      ...formData,
+      stock: parseInt(formData.stock)
+    }
     fetch('http://localhost:9000/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(submittedForm)
     },)
     .then(res => res.json())
     .then(data => {
