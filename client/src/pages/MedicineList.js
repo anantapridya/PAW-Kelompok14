@@ -7,45 +7,6 @@ import Navbar from "../components/Navbar";
 const MedicineList = () => {
   
   const [medicineData, setMedicineData] = React.useState([])
-  
-  // // Data Dummy
-  const data = [
-    {
-      id: 1,
-      name: "Panadol",
-      price: 25000,
-    },
-    {
-      id: 2,
-      name: "Promag",
-      price: 10000,
-    },
-    {
-      id: 3,
-      name: "Obat Pilek",
-      price: 30000,
-    },
-    {
-      id: 4,
-      name: "Obat Diare",
-      price: 50000,
-    },
-    {
-      id: 5,
-      name: "Antibiotik",
-      price: 15000
-    },
-    {
-      id: 6,
-      name: "Mylanta",
-      price: 10000
-    },
-    {
-      id: 7,
-      name: "Bodrex",
-      price: 10000
-    }
-  ]
 
   React.useEffect(() => {
     fetch("http://localhost:9000/")
