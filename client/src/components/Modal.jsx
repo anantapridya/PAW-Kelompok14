@@ -38,8 +38,8 @@ export default function Modal(props) {
                 >
                   {props.title}
                 </Dialog.Title>
-                <div className="my-[35px]">
-                  <p className="text-base text-black border-t pt-2 font-body font-bold text-center">
+                <div className="mt-2">
+                  <p className="text-base text-black border-t pt-7 pb-3 font-body font-bold text-center">
                     {props.desc}
                   </p>
                 </div>
