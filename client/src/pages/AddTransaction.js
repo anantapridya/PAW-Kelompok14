@@ -49,7 +49,8 @@ const AddTransaction = () => {
     // cek apakah stock menjadi negatif
     if (medicine.stock + parseInt(formData.stock) < 0) {
       // to do: tambahkan modal/fungsi yg akan dijalankan
-      // jika input tidak valid
+      // fungsi sementara:
+      alert('stok obat yang tersisa tidak boleh negatif')
       return
     } else {
       const transactionTime = ( date == null ? now.toLocaleDateString() : date.toLocaleDateString() ) + ', ' + time
@@ -78,7 +79,11 @@ const AddTransaction = () => {
           tampilkan komponen modal tergantung dgn response yg diterima
           dari API
           */
-          console.log(data)
+
+          // fungsi sementara, delete soon
+          alert(data.message)
+          if(data.message.startsWith("Transaction"))
+            window.location.href = '/desc?id=' + medicineId
         })
     }
       

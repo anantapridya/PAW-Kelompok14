@@ -11,6 +11,7 @@ export default function DefaultTxtArea(props) {
         placeholder={props.placeholder}
         name={props.name}
         onChange={props.onChange}
+        value={props.value || ''}
       />
     </div>
   );

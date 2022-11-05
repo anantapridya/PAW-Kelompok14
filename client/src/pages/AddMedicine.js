@@ -15,7 +15,7 @@ const AddMedicine = () => {
 
   console.log(formData)
 
-  function changeHandler(event) {
+  function handleChange(event) {
     const { type, name, value } = event.target
     if (type === "button" && !isNaN(parseInt(formData.stock))) {
       if (name === "stock--increment")
@@ -29,7 +29,7 @@ const AddMedicine = () => {
     }))
   }
 
-  function submitHandler(event) {
+  function handleSubmit(event) {
     const submittedForm = {
       ...formData,
       stock: parseInt(formData.stock)
@@ -52,7 +52,12 @@ const AddMedicine = () => {
         todo:
         buat agar elemen modal keluar tergantung output dari API
       */
-      console.log(data)
+
+      // fungsi sementara, delete soon vvv
+      if (data.message)
+        alert(data.message)
+      else alert('data berhasil ditambahkan')
+      window.location.href = '/list'
     })
   }
 
@@ -71,7 +76,7 @@ const AddMedicine = () => {
             placeholder="Paracetamol"
             className="w-[330px] h-[50px]"
             name="name"
-            onChange={changeHandler}
+            onChange={handleChange}
             value={formData.name}
           />
         </div>
@@ -83,7 +88,7 @@ const AddMedicine = () => {
             placeholder="PT Sindo Farma"
             className="w-[330px] h-[50px]"
             name="manufacturer"
-            onChange={changeHandler}
+            onChange={handleChange}
             value={formData.manufacturer}
           />
         </div>
@@ -95,11 +100,11 @@ const AddMedicine = () => {
             placeholder="1000"
             className="w-[330px] h-[50px]"
             name="stock"
-            onChange={changeHandler}
+            onChange={handleChange}
             value={formData.stock}
           />
-          <button type="button" name="stock--increment" onClick={changeHandler}>+</button>
-          <button type="button" name="stock--decrement" onClick={changeHandler}>-</button>
+          <button type="button" name="stock--increment" onClick={handleChange}>+</button>
+          <button type="button" name="stock--decrement" onClick={handleChange}>-</button>
         </div>
 
         {/* TODO: Buat jadi paragraf multiline */}
@@ -107,7 +112,7 @@ const AddMedicine = () => {
         <DefaultTxtArea
           placeholder="Tambahkan deskripsi mengenai obat"
           name="description"
-          onChange={changeHandler}
+          onChange={handleChange}
           value={formData.description}
         />
 
@@ -119,7 +124,7 @@ const AddMedicine = () => {
           type="button"
           judulButton="Tambah Obat"
           className=""
-          onClick={submitHandler}
+          onClick={handleSubmit}
         />
       </div>
     </div>

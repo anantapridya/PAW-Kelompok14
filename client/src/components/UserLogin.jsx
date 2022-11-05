@@ -21,6 +21,12 @@ export default function UserLogin() {
 
   function handleSubmit(event) {
     event.preventDefault()
+    /*
+    NOTE:
+      untuk sementara, fitur sign in tidak berfungsi karena
+      JWT token belum disimpan ke session & belum dikirimkan
+      ke API setiap fetch()
+    */
     fetch("http://localhost:9000/api/auth/signin", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
@@ -41,26 +47,14 @@ export default function UserLogin() {
           },
           token
         }
+        jika gagal, 'data' dapat berisi:
+        { message: "User Not found." } (404)
+        { message: "Invalid Password!" } (401)
+
+        NOTE:
+        to do: penyimpanan JWT token ke session/cookie
         */
-
       })
-
-
-
-    /* NOTE:
-    data yg didapat dari fetch() dapat berisi:
-    { message: "User Not found." } (404)
-    { message: "Invalid Password!" } (401)
-    {
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        roles: user.roles,
-      },
-      token
-    } (200) apabila proses signin berhasil
-    */
   }
 
   return (

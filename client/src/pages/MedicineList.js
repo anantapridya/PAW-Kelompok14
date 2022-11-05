@@ -97,7 +97,12 @@ const MedicineConfig = ({items}) =>{
                 </div>
               </Link>
               <div className="items-center fitur flex">
-                <a className="font-body text-[20px] px-[50px] py-[5px] bg-white rounded-[8px] mr-[15px] no-underline text-black" href="/edit">Edit</a>
+              <Link to={{
+                pathname: "/edit",
+                search: "?id=" + _id
+              }} >
+                <p className="font-body text-[20px] px-[50px] py-[5px] bg-white rounded-[8px] mr-[15px] no-underline text-black" href="/edit">Edit</p>
+              </Link>
                 <Modal btn="Delete" desc="Apakah Anda Yakin Untuk Menghapus Obat" btnmodal="Delete" />
               </div>
             </div>
