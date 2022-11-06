@@ -1,34 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-export default function Modal({desc, btn, btnmodal}) {
-  let [isOpen, setIsOpen] = useState(false);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
+export default function Modal(props) {
   return (
     <>
-      <div className="">
-        <button
-          type="button"
-          onClick={openModal}
-          className="font-body text-[20px] px-[50px] py-[5px] bg-[#FF0000] text-white rounded-[8px] mr-[15px] "
-        >
-          {btn}
-        </button>
-      </div>
-
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={props.show} as={Fragment}>
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={closeModal}
+          onClose={props.onClose}
         >
           <div className=" px-4 text-center">
             <Transition.Child
@@ -42,14 +22,6 @@ export default function Modal({desc, btn, btnmodal}) {
             >
               <Dialog.Overlay className="fixed inset-0" />
             </Transition.Child>
-
-            {/* This element is to trick the browser into centering the modal contents. */}
-            <span
-              className="inline-block"
-              aria-hidden="true"
-            >
-              &#8203;
-            </span>
             <Transition.Child
               as={Fragment} 
               enter="ease-out duration-300"
@@ -62,23 +34,23 @@ export default function Modal({desc, btn, btnmodal}) {
               <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
+                  className="text-lg font-medium leading-6 text-black font-body"
                 >
-                  Message Box
+                  {props.title}
                 </Dialog.Title>
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500 border-t pt-2">
-                    {desc}
+                  <p className="text-base text-black border-t pt-7 pb-3 font-body font-bold text-center">
+                    {props.desc}
                   </p>
                 </div>
 
                 <div className="mt-4 flex flex-row-reverse">
                   <button
                     type="button"
-                    className=" px-4 py-2 text-sm text-white bg-[#FF0000] border border-transparent rounded-md hover:bg-red-200 duration-300"
-                    onClick={closeModal}
+                    className={" px-4 py-2 text-sm text-white border border-transparent rounded-md duration-300 " + props.className}
+                    onClick={props.onClick}
                   >
-                    {btnmodal}
+                    {props.button}
                   </button>
                 </div>
               </div>
