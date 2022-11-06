@@ -11,6 +11,7 @@ export default function DefaultBtn(props) {
           props.className
         }
         onClick={props.onClick}
+        name={props.name || ''}
       >
         {props.judulButton}
       </button>

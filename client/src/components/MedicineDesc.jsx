@@ -1,24 +1,45 @@
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import backArrow from '../img/back-arrow.png'
 import Navbar from './Navbar.jsx'
-// import '../css/MedicineDesc.css'
+import '../css/MedicineDesc.css'
+import React from 'react'
 
 export default function MedicineDesc() {
+        
+    const [medicine, setMedicine] = React.useState({
+        _id: '',
+        name: '',
+        manufacturer: '',
+        description: '',
+        log: []
+    })
+    // set value awal isAuthorized menjadi false, lalu update berdasar token
+    const [isAuthorized, setIsAuthorized] = React.useState(true)
+
+    const [searchParams, setSearchParams] = useSearchParams()
+    const medicineId = searchParams.get('id') // id di pass dari URL
     
-    // ini data dummy, nanti diganti dgn fetch() ke database
-    // const medicine = fetch blablabla where id=blablabla
-    const medicine = {"_id":{"$oid":"633167d72a825657dc598ad2"},"name":"Sanmol Paracetamol","manufacturer":"PT Sanbe Farma","description":"Digunakan untuk meringankan rasa sakit pada kepala dan menurunkan demam, mengandung paracetamol 500 mg. Obat ini bekerja di pusat pengatur panas tubuh secara antipiretik dan analgesik. Dosis dewasa 3x1 tablet per hari, anak-anak <12 tahun 2x1 tablet per hari, sesudah ataupun sebelum makan. Efek samping dapat menyebabkan kantuk.","stock":10,"log":[["25","Data obat ditambahkan ke database","9/26/2022, 15:50:31"], ["-3","Obat terjual ke Bpk. Nurhadi","9/27/2022, 12:03:11"], ["-2","Obat terjual ke Ibu Nahida","9/29/2022, 19:13:52"], ["-16","Obat expired","9/30/2022, 23:59:59"], ["20","Stok bulanan dari pusat","10/2/2022, 09:15:32"], ["-4","Obat terjual ke Bpk. Joko","10/3/2022, 19:13:52"], ["-1","Obat terjual ke Bpk. Budi","10/3/2022, 20:47:39"], ["-5","Obat terjual ke Ibu Siti","10/5/2022, 10:28:19"]],"__v":{"$numberInt":"0"}}
-    const isAuthorized = true
+    // // DATA DUMMY:
+    // const med = {"_id":"633167d72a825657dc598ad2","name":"Sanmol Paracetamol","manufacturer":"PT Sanbe Farma","description":"Digunakan untuk meringankan rasa sakit pada kepala dan menurunkan demam, mengandung paracetamol 500 mg. Obat ini bekerja di pusat pengatur panas tubuh secara antipiretik dan analgesik. Dosis dewasa 3x1 tablet per hari, anak-anak <12 tahun 2x1 tablet per hari, sesudah ataupun sebelum makan. Efek samping dapat menyebabkan kantuk.","stock":10,"log":[["25","Data obat ditambahkan ke database","9/26/2022, 15:50:31"], ["-3","Obat terjual ke Bpk. Nurhadi","9/27/2022, 12:03:11"], ["-2","Obat terjual ke Ibu Nahida","9/29/2022, 19:13:52"], ["-16","Obat expired","9/30/2022, 23:59:59"], ["20","Stok bulanan dari pusat","10/2/2022, 09:15:32"], ["-4","Obat terjual ke Bpk. Joko","10/3/2022, 19:13:52"], ["-1","Obat terjual ke Bpk. Budi","10/3/2022, 20:47:39"], ["-5","Obat terjual ke Ibu Siti","10/5/2022, 10:28:19"]],"__v":{"$numberInt":"0"}}
+    
+    React.useEffect(() => {
+        fetch(`http://localhost:9000/${medicineId}`)
+            .then(res => res.json())
+            .then(data => setMedicine(data))
+            // to do: tambahkan JWT authorization
+    }, [])
+
+
 
     return (
         <>
             <Navbar />
             <main className='bg-putih relative w-full grid h-[calc(100vh_-_64px)] overflow-y-hidden grid-cols-desc-page grid-rows-desc-page'>
                 <Link to="/list" className="absolute h-[40px] top-[20px] left-[50px] z-[1] hover:-translate-y-1  transition-all">
-                    <img src={backArrow} alt="back arrow" className='h-[40px] drop-shadow-4xl'/>
+                    <img src={backArrow} alt="back arrow" className='h-[40px] drop-shadow-4xl' />
                 </Link>
                 <MedicineDescArticle isAuthorized={isAuthorized} medicineData={medicine} />
-                {isAuthorized && <MedicineDescAside medicineLog={medicine.log} />}
+                {isAuthorized && <MedicineDescAside medicineLog={medicine.log} medId={medicineId} />}
             </main>
         </>
     )
@@ -29,7 +50,7 @@ export default function MedicineDesc() {
 
 // sub components:
 
-function MedicineDescAside({ medicineLog }) {
+function MedicineDescAside({ medicineLog, medId }) {
     const transactions = medicineLog.map(log => (
         <MedicineDescLog 
             date={log[2].split(', ')[0]}
@@ -40,11 +61,14 @@ function MedicineDescAside({ medicineLog }) {
     ));
     return (
         <aside className='bg-[#FFFFFF] grid-cols-2 py-[40px] px-[50px] text-[18px] font-body relative rounded-tl-3xl rounded bl-3xl shadow-4xl'>
-            <h3 className='font-body text-[40px] font-bold text-center'>CATATAN TRANSAKSI</h3>
+            <h3 className='font-body text-[40px] font-bold text-center' >CATATAN TRANSAKSI</h3>
             <div className="px-[5px] rounded-[20px] absolute top-[100px] left-[50px] right-[50px] bottom-[50px] overflow-y-scroll scroll-smooth no-scrollbar mt-[20px] text-[20px]">
                 {transactions}
             </div>
-            <Link to="/log">
+            <Link to={{
+                pathname: '/log',
+                search: "?id=" + medId
+            }}>
                 <div className="absolute bg-biru-tua overflow-hidden shadow-5xl h-[100px] w-[100px] rounded-full text-white flex items-center justify-center bottom-[50px] right-[50px] font-body text-[100px] z-[1] transition ease-out duration-150 hover:-rotate-90 hover:scale-105 peer">+</div>
                 <div className="absolute bg-biru-tua text-white overflow-hidden shadow-5xl h-[60px] bottom-[70px] right-[80px] w-[60px] rounded-[30px] text-[20px] leading-[60px] indent-[20px] duration-200 ease-in-out delay-100 peer-hover:right-[120px] peer-hover:w-[290px] ">Buat Catatan Transaksi</div>
             </Link>
