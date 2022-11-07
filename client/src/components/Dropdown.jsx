@@ -1,7 +1,7 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
-export default function Dropdown() {
+export default function Dropdown({ Sort }) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -26,6 +26,7 @@ export default function Dropdown() {
                   className={`${
                     active ? "bg-[#3F65FF] text-white" : "text-gray-900"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  onClick={Sort.A_to_Z}
                 >
                   A-Z
                 </button>
@@ -37,6 +38,7 @@ export default function Dropdown() {
                   className={`${
                     active ? "bg-[#3F65FF] text-white" : "text-gray-900"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  onClick={Sort.Z_to_A}
                 >
                   Z-A
                 </button>

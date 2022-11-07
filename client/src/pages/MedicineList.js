@@ -8,9 +8,19 @@ import DefaultBtn from "../components/DefaultBtn";
 const MedicineList = () => {
   
   const [medicineData, setMedicineData] = React.useState([])
+  
+  const SortMedicine = {
+    A_to_Z() {
+      setMedicineData(prev => [...prev].sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)))
+    },
+    Z_to_A() {
+      setMedicineData(prev => [...prev].sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() < a.name.toLowerCase()) ? -1 : 0)))
+    }
+  }
 
-  function getMedicine() {
-    fetch("http://localhost:9000/")
+  function getMedicine(query='') {
+    if (query) query = '?name=' + query
+    fetch("http://localhost:9000/" + query)
     .then(response => response.json())
     .then(data => setMedicineData(data))
     /*
@@ -32,8 +42,14 @@ const MedicineList = () => {
       <div className="flex justify-between items-center mb-[50px]">
         <h2 className="text-[58px] font-body font-semibold">Daftar Obat</h2>
         <div className="flex">
-          <Dropdown />
-          <input className="ml-[40px] rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black" type="text" placeholder="Search"></input>
+          <Dropdown Sort={SortMedicine} />
+          <input
+            className="ml-[40px] rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black"
+            type="text"
+            placeholder="Search"
+            onChange={e => getMedicine(e.target.value)}
+          >
+          </input>
         </div>
       </div>
       <MedicineConfig items={medicineData} refreshMedicineData={getMedicine} />
@@ -70,7 +86,7 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
   })
   const closeModal = () => {
     setModalState(prev => ({...prev, isOpen: false}));
-    console.log(modalState.medicineId)
+    // console.log(modalState.medicineId)
   }
   const openModal = id => {
     setModalState({
