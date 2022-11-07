@@ -279,7 +279,7 @@ module.exports = {
             })
             .catch(err => {
                 res.status(500).send({
-                    message: `Could not delete medicine with id ${id}`
+                    message: `Cannot delete medicine with id ${id}`
                 })
             })
     }
