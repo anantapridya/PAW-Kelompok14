@@ -30,8 +30,8 @@ export default function Welcome() {
           />
         </div>
       </div>
-      <footer className="w-full h-16 flex absolute bottom-0">
-        <p className="font-body text-biru-tua text-[20px] mx-auto">
+      <footer className="w-full md:h-16 flex relative md:absolute bottom-0">
+        <p className="font-body text-biru-tua text-center text-xs md:text-[20px] mx-auto">
           &copy; Kelompok 14 - Pengembangan Aplikasi Web
         </p>
       </footer>
