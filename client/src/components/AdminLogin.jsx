@@ -19,6 +19,7 @@ export default function UserLogin() {
           <DefaultInput
             placeholder="Password"
             className="w-full text-sm md:text-xl"
+            type="password"
           />
 
           <div className="flex flex-col-reverse sm:flex-row items-center sm:justify-between w-full mt-4 sm:mt-12 gap-2 sm:gap-0">

@@ -5,34 +5,33 @@ import DefaultBtn from "./DefaultBtn";
 import DefaultInput from "./DefaultInput";
 
 export default function SignupPage() {
-
   const [formData, setFormData] = React.useState({
-    username: '',
-    password: '',
-    email: '',
-  })
+    username: "",
+    password: "",
+    email: "",
+  });
 
   function handleChange(event) {
-    const { name, value } = event.target
-    setFormData(prevData => ({
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
       ...prevData,
-      [name]: value
-    }))
+      [name]: value,
+    }));
   }
 
   function handleSubmit(event) {
     // event.preventDefault()
     fetch("http://localhost:9000/api/auth/signup", {
       method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    }).then(response => response.json())
-      .then(data => {
-        console.log(data)
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
         if (data.message === "User was registered successfully!") {
-
         }
-      })
+      });
     /* NOTE:
     data yg didapat dari fetch() adalah object dgn atribut "message".
     message dapat berisi: 
@@ -71,6 +70,7 @@ export default function SignupPage() {
             name="password"
             value={formData.password}
             onChange={handleChange}
+            type="password"
           />
 
           <div className="flex flex-col-reverse sm:flex-row items-center sm:justify-between w-full mt-4 sm:mt-12 gap-2 sm:gap-0">

@@ -5,22 +5,21 @@ import DefaultBtn from "./DefaultBtn";
 import DefaultInput from "./DefaultInput";
 
 export default function UserLogin() {
-
   const [formData, setFormData] = React.useState({
-    username: '',
-    password: '',
-  })
+    username: "",
+    password: "",
+  });
 
   function handleChange(event) {
-    const { name, value } = event.target
-    setFormData(prevData => ({
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
       ...prevData,
-      [name]: value
-    }))
+      [name]: value,
+    }));
   }
 
   function handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
     /*
     NOTE:
       untuk sementara, fitur sign in tidak berfungsi karena
@@ -29,13 +28,13 @@ export default function UserLogin() {
     */
     fetch("http://localhost:9000/api/auth/signin", {
       method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    }).then(response => response.json())
-      .then(data => {
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        localStorage.setItem("user", JSON.stringify(data));
 
-        localStorage.setItem('user', JSON.stringify(data))
-        
         /*
         jika berhasil, 'data' akan berisi:
         {
@@ -54,7 +53,7 @@ export default function UserLogin() {
         NOTE:
         to do: penyimpanan JWT token ke session/cookie
         */
-      })
+      });
   }
 
   return (
@@ -64,7 +63,7 @@ export default function UserLogin() {
     >
       <div className="w-[240px] sm:w-[500px] lg:w-[780px] bg-biru-muda/[.1] rounded-3xl backdrop-blur-sm shadow-3xl m-auto">
         <div className="flex flex-col items-center justify-center w-3/4 mx-auto my-[100px]">
-        <DefaultInput
+          <DefaultInput
             placeholder="Username"
             className="w-full text-sm md:text-xl"
             name="username"
@@ -77,6 +76,7 @@ export default function UserLogin() {
             name="password"
             value={formData.password}
             onChange={handleChange}
+            type="password"
           />
 
           <div className="flex flex-col-reverse sm:flex-row items-center sm:justify-between w-full mt-4 sm:mt-12 gap-2 sm:gap-0">
