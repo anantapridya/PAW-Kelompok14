@@ -7,7 +7,7 @@ import DefaultBtn from "../components/DefaultBtn";
 
 const MedicineList = () => {
   
-  const [medicineData, setMedicineData] = React.useState([])
+  const [medicineData, setMedicineData] = useState([])
   const dropdownValue = [
     {id:1, value:"A - Z"},{id:2, value:"Z - A"},{id:3, value:"Harga Terendah"},{id:4, value:"Harga Tertinggi"}
   ]
@@ -22,7 +22,13 @@ const MedicineList = () => {
 
   function getMedicine(query='') {
     if (query) query = '?name=' + query
-    fetch("http://localhost:9000/" + query)
+    fetch("http://localhost:9000/" + query, {
+      // headers: {
+      //   "content-type": "application/json",
+      //   'Authorization': "Bearer " + localStorage.getItem('token')
+      // }, // somehow kadang jwt nya ga langsung ke set di cookies
+      credentials: "include" 
+    })
     .then(response => response.json())
     .then(data => setMedicineData(data))
     /*
@@ -32,7 +38,7 @@ const MedicineList = () => {
     */
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     getMedicine()
   }, [])
 
@@ -68,7 +74,8 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
 
   function deleteMedicine(id) {
     fetch("http://localhost:9000/"+id, {
-      method: 'DELETE'
+      method: 'DELETE',
+      credentials: "include"
     })
       .then(response => response.json())
       .then(data => {
