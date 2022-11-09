@@ -89,9 +89,6 @@ const AddTransaction = () => {
       
   }
 
-  // Data dummy
-  // const medicine = {"_id":{"$oid":"633167d72a825657dc598ad2"},"name":"Sanmol Paracetamol","manufacturer":"PT Sanbe Farma","description":"Digunakan untuk meringankan rasa sakit pada kepala dan menurunkan demam, mengandung paracetamol 500 mg. Obat ini bekerja di pusat pengatur panas tubuh secara antipiretik dan analgesik. Dosis dewasa 3x1 tablet per hari, anak-anak <12 tahun 2x1 tablet per hari, sesudah ataupun sebelum makan. Efek samping dapat menyebabkan kantuk.","stock":10,"log":[["25","Data obat ditambahkan ke database","9/26/2022, 15:50:31"], ["-3","Obat terjual ke Bpk. Nurhadi","9/27/2022, 12:03:11"], ["-2","Obat terjual ke Ibu Nahida","9/29/2022, 19:13:52"], ["-16","Obat expired","9/30/2022, 23:59:59"], ["20","Stok bulanan dari pusat","10/2/2022, 09:15:32"], ["-4","Obat terjual ke Bpk. Joko","10/3/2022, 19:13:52"], ["-1","Obat terjual ke Bpk. Budi","10/3/2022, 20:47:39"], ["-5","Obat terjual ke Ibu Siti","10/5/2022, 10:28:19"]],"__v":{"$numberInt":"0"}}
-
   return (
     <div className="bg-putih md:h-screen">
       <Navbar/>
@@ -117,7 +114,8 @@ const AddTransaction = () => {
         </div>
 
         <div>
-            <p>Stok masuk (stok saat ini: {medicine.stock})</p>
+            <p>Transaksi Stok</p>
+            <p className="text-[15px] italic text-gray-400">Stok saat ini: {medicine.stock}</p>
             <DefaultInput
               type="number"
               placeholder="-10"
