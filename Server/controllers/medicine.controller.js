@@ -96,7 +96,7 @@ module.exports = {
 
         // note: kode inefisien, refactor soon
         // mengupdate "log" secara otomatis jika "stock" diupdate
-        if(req.body.stock) {
+        if(req.body.stock && req.body.stock != 0) {
             Medicine.findById(id)
             .then(data => {
                 if (!data) {
