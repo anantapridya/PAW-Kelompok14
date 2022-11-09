@@ -8,9 +8,6 @@ import DefaultBtn from "../components/DefaultBtn";
 const MedicineList = () => {
   
   const [medicineData, setMedicineData] = React.useState([])
-  const dropdownValue = [
-    {id:1, value:"A - Z"},{id:2, value:"Z - A"},{id:3, value:"Harga Terendah"},{id:4, value:"Harga Tertinggi"}
-  ]
   const SortMedicine = {
     A_to_Z() {
       setMedicineData(prev => [...prev].sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)))
@@ -19,6 +16,9 @@ const MedicineList = () => {
       setMedicineData(prev => [...prev].sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() < a.name.toLowerCase()) ? -1 : 0)))
     }
   }
+  const dropdownValue = [
+    {id:1, value:"A - Z", onClick: SortMedicine.A_to_Z},{id:2, value:"Z - A", onClick: SortMedicine.Z_to_A},{id:3, value:"Harga Terendah"},{id:4, value:"Harga Tertinggi"}
+  ]
 
   function getMedicine(query='') {
     if (query) query = '?name=' + query
@@ -44,7 +44,7 @@ const MedicineList = () => {
       <div className="flex justify-between items-center mb-[50px]">
         <h2 className="text-[58px] font-body font-semibold">Daftar Obat</h2>
         <div className="flex">
-          <Dropdown Sort={SortMedicine} items={dropdownValue} judul="Sort" className="border-2 border-biru-tua" />
+          <Dropdown items={dropdownValue} judul="Sort" className="border-2 border-biru-tua" />
           <input
             className="ml-[40px] rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black"
             type="text"
