@@ -1,8 +1,9 @@
+import { Link, useSearchParams } from "react-router-dom";
+import React from "react";
 import DefaultBtn from "../components/DefaultBtn";
 import DefaultInput from "../components/DefaultInput";
 import DefaultTxtArea from "../components/DefaultTxtArea";
 import Navbar from "../components/Navbar";
-import React from "react";
 
 const AddMedicine = () => {
 
@@ -70,7 +71,6 @@ const AddMedicine = () => {
         </h1>
 
         <p>Nama Obat :</p>
-        {/* TODO: Buat sejajar */}
         <div className="inline-block">
           <DefaultInput
             placeholder="Paracetamol"
@@ -82,7 +82,6 @@ const AddMedicine = () => {
         </div>
 
         <p>Manufacturer Obat :</p>
-        {/* TODO: Buat sejajar */}
         <div className="inline-block">
           <DefaultInput
             placeholder="PT Sindo Farma"
@@ -94,8 +93,7 @@ const AddMedicine = () => {
         </div>
 
         <p>Stok Obat :</p>
-        {/* TODO: Buat sejajar */}
-        <div className="inline-block">
+        <div className="grid grid-cols-[350px_60px_50px] flex flex-col items-center">
           <DefaultInput
             placeholder="1000"
             className="w-[330px] h-[50px]"
@@ -103,11 +101,24 @@ const AddMedicine = () => {
             onChange={handleChange}
             value={formData.stock}
           />
-          <button type="button" name="stock--increment" onClick={handleChange}>+</button>
-          <button type="button" name="stock--decrement" onClick={handleChange}>-</button>
+
+          <DefaultBtn
+            type="button"
+            judulButton="-"
+            className="w-[40px] h-[50px] text-2xl text-biru-tua bg-biru-muda rounded-lg outline outline-2"
+            name="stock--decrement"
+            onClick={handleChange}
+          />
+
+          <DefaultBtn
+            type="button"
+            judulButton="+"
+            className="w-[40px] h-[50px] text-2xl text-biru-tua bg-biru-muda rounded-lg outline outline-2"
+            name="stock--increment"
+            onClick={handleChange}
+          />
         </div>
 
-        {/* TODO: Buat jadi paragraf multiline */}
         <p>Deskripsi Obat :</p>
         <DefaultTxtArea
           placeholder="Tambahkan deskripsi mengenai obat"
@@ -116,16 +127,22 @@ const AddMedicine = () => {
           value={formData.description}
         />
 
-        {/* TODO: Buat ke tengah */}
-        {/* Ket: Button "Batal" bisa dibuat pake "DefaultBtn", buat style kayak warna, outline bisa disesuaiin di className */}
-        <button>Batal</button>
-
-        <DefaultBtn
-          type="button"
-          judulButton="Tambah Obat"
-          className=""
-          onClick={handleSubmit}
-        />
+        <div className="flex justify-between w-full grid grid-cols-[100px_218px]">
+          <Link to="/list">
+              <DefaultBtn
+                type="button"
+                judulButton="Batal"
+                className="bg-white text-gray-400 outline outline-2 outline-gray-300 hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+              />
+            </Link>
+          
+            <DefaultBtn
+              type="button"
+              judulButton="Tambah Obat"
+              className="hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+              onClick={handleSubmit}
+            />
+          </div>
       </div>
     </div>
   )
