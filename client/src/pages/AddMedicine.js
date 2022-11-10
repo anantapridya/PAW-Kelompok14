@@ -66,7 +66,7 @@ const AddMedicine = () => {
     <div className="bg-putih md:h-screen">
       <Navbar/>
       <div className="font-body mx-[150px] my-[30px] text-xl">
-        <h1 className="text-biru-sedang font-heading font-bold text-4xl">
+        <h1 className="text-biru-sedang font-heading font-bold text-4xl pb-10">
           Tambah Obat
         </h1>
 
@@ -93,32 +93,15 @@ const AddMedicine = () => {
         </div>
 
         <p>Stok Obat :</p>
-        <div className="grid grid-cols-[350px_60px_50px] flex flex-col items-center">
-          <DefaultInput
-            placeholder="1000"
-            className="w-[330px] h-[50px]"
-            name="stock"
-            onChange={handleChange}
-            value={formData.stock}
-          />
-
-          <DefaultBtn
-            type="button"
-            judulButton="-"
-            className="w-[40px] h-[50px] text-2xl text-biru-tua bg-biru-muda rounded-lg outline outline-2"
-            name="stock--decrement"
-            onClick={handleChange}
-          />
-
-          <DefaultBtn
-            type="button"
-            judulButton="+"
-            className="w-[40px] h-[50px] text-2xl text-biru-tua bg-biru-muda rounded-lg outline outline-2"
-            name="stock--increment"
-            onClick={handleChange}
-          />
-        </div>
-
+        <DefaultInput
+          type="number"
+          placeholder="1000"
+          className="w-[330px] h-[50px]"
+          name="stock"
+          onChange={handleChange}
+          value={formData.stock}
+        />
+        
         <p>Deskripsi Obat :</p>
         <DefaultTxtArea
           placeholder="Tambahkan deskripsi mengenai obat"
@@ -127,7 +110,7 @@ const AddMedicine = () => {
           value={formData.description}
         />
 
-        <div className="flex justify-between w-full grid grid-cols-[100px_218px]">
+        <div className="flex justify-between w-full grid grid-cols-[100px_173px]">
           <Link to="/list">
               <DefaultBtn
                 type="button"
