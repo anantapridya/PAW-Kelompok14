@@ -7,11 +7,13 @@ dotenv.config();
 const app = express()
 
 var corsOptions = {
-    origin: "http://localhost:9000"
+    origin: ["http://localhost:9000", "http://localhost:3000"],
+    credentials: true,
+    // exposedHeaders: ["set-cookie"]
 }
 
 // middlewares
-app.use(cors({origin:'http://localhost:3000', credentials : true}));
+app.use(cors(corsOptions));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
