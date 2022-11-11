@@ -4,6 +4,7 @@ import DefaultBtn from "../components/DefaultBtn";
 import DefaultInput from "../components/DefaultInput";
 import DefaultTxtArea from "../components/DefaultTxtArea";
 import Navbar from "../components/Navbar";
+import Modal from '../components/Modal';
 
 const AddMedicine = () => {
 
@@ -42,28 +43,61 @@ const AddMedicine = () => {
     },)
     .then(res => res.json())
     .then(data => {
+
       /*
-        NOTE:
         apabila berhasil, 'data' berisi object obat yg ditambahkan ke database,
         apabila gagal, 'data' dapat berisi:
         {message: "request's body must contain 'name', 'manufacturer', 'description', and 'stock' field"}
         {message: "Error creating medicine."}
         {message: errorException}
-      
-        todo:
-        buat agar elemen modal keluar tergantung output dari API
       */
-
-      // fungsi sementara, delete soon vvv
-      if (data.message)
-        alert(data.message)
-      else alert('data berhasil ditambahkan')
-      window.location.href = '/list'
+      if (data.message) {
+        let modalMessage = ''
+        switch (data.message) {
+          case "request's body must contain 'name', 'manufacturer', 'description', and 'stock' field":
+            modalMessage = "Data obat untuk ditambahkan belum lengkap."
+            break
+          default:
+            modalMessage = "Terjadi kesalahan saat menambah data obat"
+        }
+        setModalState(prev => ({
+          ...prev,
+          isOpen: true,
+          desc: modalMessage
+        }))
+      } else {
+        setModalState(prev => ({
+          ...prev,
+          isOpen: true,
+          desc: "Data obat berhasil ditambahkan!",
+          onClose() {
+            window.location.href = '../list'
+          }
+        }))
+      }
+      
     })
   }
 
+  const [modalState, setModalState] = React.useState({
+    isOpen: false,
+    desc: '',
+    onClose() {
+      setModalState(prev => ({...prev, isOpen:false}))
+    }
+  })
+
   return (
     <div className="bg-putih md:h-screen">
+      <Modal
+        show={modalState.isOpen}
+        onClose={modalState.onClose}
+        onClick={modalState.onClose}
+        className="bg-[#FF0000]"
+        desc={modalState.desc}
+        title="Message Box"
+        button="OK"
+      />
       <Navbar/>
       <div className="font-body mx-[150px] my-[30px] text-xl">
         <h1 className="text-biru-sedang font-heading font-bold text-4xl pb-10">
@@ -100,6 +134,7 @@ const AddMedicine = () => {
           name="stock"
           onChange={handleChange}
           value={formData.stock}
+          min="0"
         />
         
         <p>Deskripsi Obat :</p>
