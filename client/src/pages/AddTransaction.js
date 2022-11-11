@@ -15,8 +15,7 @@ const AddTransaction = () => {
 
   const [medicine, setMedicine] = React.useState({
     name: '',
-    stock: '',
-    // price: ''
+    stock: ''
   })
   React.useEffect(() => {
     fetch(`http://localhost:9000/${medicineId}`)
@@ -24,14 +23,12 @@ const AddTransaction = () => {
       .then(data => setMedicine({
         name: data.name,
         stock: data.stock
-        // price: data.price
       }))
   }, [])
 
   const [formData, setFormData] = React.useState({
     description: '',
-    stock: '',
-    // price:''
+    stock: ''
   })
   // state untuk time picker
   const now = new Date()
@@ -54,8 +51,7 @@ const AddTransaction = () => {
     console.log(JSON.stringify({
       description: formData.description,
       stock: parseInt(formData.stock),
-      date: transactionTime,
-      // price: parseInt(formData.price)
+      date: transactionTime
     }))
     fetch(`http://localhost:9000/${medicineId}/log`, {
       method: "PUT",
@@ -63,8 +59,7 @@ const AddTransaction = () => {
       body: JSON.stringify({
         description: formData.description,
         stock: parseInt(formData.stock),
-        date: transactionTime,
-        // price: parseInt(formData.price)
+        date: transactionTime
       })
     })
       .then(res => res.json())
@@ -130,44 +125,31 @@ const AddTransaction = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-[300px_300px]">
+        <div className="grid grid-cols-2">
           <div>
             <p>Tanggal Transaksi</p>
             <SetDate onChange={newDate => setDate(newDate)} value={date} />
           </div>
           <div>
+            <div className="flex gap-3">
+              <p>Transaksi Stok </p>
+              <p className="text-[15px] italic text-gray-400">(Stok saat ini: {medicine.stock})</p>
+            </div>
+            <DefaultInput
+              type="number"
+              placeholder="-10"
+              className="w-[200px] h-[50px]"
+              name="stock"
+              onChange={handleChange}
+              value={formData.stock}
+              min={"-"+medicine.stock}
+            />
+          </div>
+          <div>
             <p>Waktu Transaksi</p>
             <SetTime onChange={newTime => setTime(newTime)} value={time} />
           </div>
-        </div>
-
-        <div>
-          <p>Transaksi Stok</p>
-          <p className="text-[15px] italic text-gray-400">Stok saat ini: {medicine.stock}</p>
-          <DefaultInput
-            type="number"
-            placeholder="-10"
-            className="w-[200px] h-[50px]"
-            name="stock"
-            onChange={handleChange}
-            value={formData.stock}
-            min={"-"+medicine.stock}
-          />
-        </div>
-
-        <div>
-        <p>Harga Obat</p>
-          <p className="text-[15px] italic text-gray-400">Harga saat ini: {medicine.price}</p>
-          <DefaultInput
-            type="number"
-            placeholder="10000"
-            className="w-[200px] h-[50px]"
-            name="price"
-            onChange={handleChange}
-            value={formData.price}
-            min={"-"+medicine.price}
-          />
-        </div>             
+        </div>           
         
         <div>
           <p>Keterangan</p>
