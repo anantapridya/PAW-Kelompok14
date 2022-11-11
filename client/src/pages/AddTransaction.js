@@ -1,5 +1,7 @@
-import { Link, useSearchParams } from "react-router-dom";
 import React from "react";
+
+import { Link, useSearchParams } from "react-router-dom";
+
 import DefaultBtn from "../components/DefaultBtn";
 import DefaultTxtArea from "../components/DefaultTxtArea";
 import Navbar from "../components/Navbar";

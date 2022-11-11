@@ -1,5 +1,7 @@
-import { Link, useSearchParams } from "react-router-dom";
 import React from "react";
+
+import { Link, useSearchParams } from "react-router-dom";
+
 import DefaultBtn from "../components/DefaultBtn";
 import DefaultInput from "../components/DefaultInput";
 import DefaultTxtArea from "../components/DefaultTxtArea";
@@ -112,7 +114,7 @@ const AddMedicine = () => {
             <div className="inline-block">
               <DefaultInput
                 placeholder="Paracetamol"
-                className="w-[330px] h-[50px]"
+                className="w-[450px] h-[50px]"
                 name="name"
                 onChange={handleChange}
                 value={formData.name}
@@ -136,7 +138,7 @@ const AddMedicine = () => {
             <div className="inline-block">
               <DefaultInput
                 placeholder="PT Sindo Farma"
-                className="w-[330px] h-[50px]"
+                className="w-[450px] h-[50px]"
                 name="manufacturer"
                 onChange={handleChange}
                 value={formData.manufacturer}
