@@ -12,6 +12,7 @@ export default function MedicineDesc() {
         name: '',
         manufacturer: '',
         description: '',
+        price: 0,
         log: []
     })
     // set value awal isAuthorized menjadi false, lalu update berdasar token
@@ -85,6 +86,7 @@ function MedicineDescArticle({ medicineData, isAuthorized }) {
                 <h2 className='font-body text-4xl'>Produksi {medicineData.manufacturer}</h2>
                 <p className="leading-9 mt-[50px] font-body text-[27px] italic">{medicineData.description}</p>
                 <p className="font-body text-[35px] absolute bottom-[40px] left-[50px]">Stok: {medicineData.stock}</p>
+                <p className="font-body text-[27px] absolute bottom-[40px] right-[120px]">Harga: Rp{(medicineData.price).toLocaleString('id-ID')},00</p>
                 <Link to={{
                     pathname: '../edit',
                     search: '?id=' + medicineData._id + '&todesc=true'
