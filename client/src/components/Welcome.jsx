@@ -1,10 +1,11 @@
 import Navbar from "./Navbar";
 import Pharmaweb1 from "../img/Pharmaweb1.png";
+import { useState } from "react";
 
 export default function Welcome() {
   return (
     <div className="bg-putih md:h-screen">
-      <Navbar />
+      <Navbar isLogin={true}/>
 
       <div className="grid grid-cols-3 w-3/4 mx-auto md:gap-4 lg:gap-8 pt-24 2xl:pt-48 pb-12">
         <div className="col-span-3 md:col-span-2 flex flex-col items-center md:items-start gap-2">
