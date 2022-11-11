@@ -1,7 +1,7 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import backArrow from '../img/back-arrow.png'
 import Navbar from './Navbar.jsx'
-import '../css/MedicineDesc.css'
+// import '../css/MedicineDesc.css'
 import React from 'react'
 
 export default function MedicineDesc() {

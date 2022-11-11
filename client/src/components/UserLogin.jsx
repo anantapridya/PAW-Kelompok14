@@ -31,12 +31,14 @@ export default function UserLogin() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     })
-      .then((response) => {
-        response.json();
-        console.log(response.headersSent);
-      })
-      .then((data) => {
-        localStorage.setItem("user", JSON.stringify(data));
+      // .then((response) => {
+      //   return response.data;
+      // })
+      .then(async (response) => {
+        const data = await response.json();
+        // console.log(data);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", JSON.stringify(data.token));
         /*
         jika berhasil, 'data' akan berisi:
         {
@@ -64,7 +66,7 @@ export default function UserLogin() {
       style={{ backgroundImage: `url(${Pattern})` }}
     >
       <div className="w-[240px] sm:w-[500px] lg:w-[780px] bg-biru-muda/[.1] rounded-3xl backdrop-blur-sm shadow-3xl m-auto">
-        <form className="flex flex-col items-center justify-center w-3/4 mx-auto my-[100px">
+        <form className="flex flex-col items-center justify-center w-3/4 mx-auto my-[100px]">
           <DefaultInput
             placeholder="Username"
             className="w-full text-sm md:text-xl"

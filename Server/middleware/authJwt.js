@@ -8,7 +8,10 @@ const Role = db.role;
 dotenv.config();
 
 verifyToken = (req, res, next) => {
-    const token = req.session.token;
+    // const token = req.session.token;
+    const authHeader = req.headers.authorization
+    const token = authHeader.split(' ')[1]
+    // console.log(token)
   
     if (!token) {
       return res.status(403).send({ message: "No token provided!" });
