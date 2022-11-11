@@ -12,7 +12,8 @@ const AddMedicine = () => {
     name: '',
     manufacturer: '',
     stock: '',
-    description: ''
+    description: '',
+    price:''
   })
 
   console.log(formData)
@@ -34,7 +35,8 @@ const AddMedicine = () => {
   function handleSubmit(event) {
     const submittedForm = {
       ...formData,
-      stock: parseInt(formData.stock)
+      stock: parseInt(formData.stock),
+      // price: parseInt(formData.price)
     }
     fetch('http://localhost:9000/add', {
       method: 'POST',
@@ -54,7 +56,7 @@ const AddMedicine = () => {
       if (data.message) {
         let modalMessage = ''
         switch (data.message) {
-          case "request's body must contain 'name', 'manufacturer', 'description', and 'stock' field":
+          case "request's body must contain 'name', 'manufacturer', 'description', 'stock', and 'price' field":
             modalMessage = "Data obat untuk ditambahkan belum lengkap."
             break
           default:
@@ -104,63 +106,83 @@ const AddMedicine = () => {
           Tambah Obat
         </h1>
 
-        <p>Nama Obat :</p>
-        <div className="inline-block">
-          <DefaultInput
-            placeholder="Paracetamol"
-            className="w-[330px] h-[50px]"
-            name="name"
+        <div className="w-full grid grid-cols-2">
+          <div>
+            <p>Nama Obat :</p>
+            <div className="inline-block">
+              <DefaultInput
+                placeholder="Paracetamol"
+                className="w-[330px] h-[50px]"
+                name="name"
+                onChange={handleChange}
+                value={formData.name}
+              />
+            </div>
+          </div>
+          <div>
+            <p>Stok Obat :</p>
+            <DefaultInput
+              type="number"
+              placeholder="1000"
+              className="w-[200px] h-[50px]"
+              name="stock"
+              onChange={handleChange}
+              value={formData.stock}
+              min="0"
+            />
+          </div>
+          <div>
+            <p>Manufacturer Obat :</p>
+            <div className="inline-block">
+              <DefaultInput
+                placeholder="PT Sindo Farma"
+                className="w-[330px] h-[50px]"
+                name="manufacturer"
+                onChange={handleChange}
+                value={formData.manufacturer}
+              />
+            </div>
+          </div>        
+          <div>
+            <p>Harga Obat :</p>
+            <p className="text-[15px] italic text-gray-400"></p>
+            <DefaultInput
+              type="number"
+              placeholder="10000"
+              className="w-[200px] h-[50px]"
+              name="price"
+              onChange={handleChange}
+              value={formData.price}
+            />
+          </div>
+        </div>
+    
+        <div>
+          <p>Deskripsi Obat :</p>
+          <DefaultTxtArea
+            placeholder="Tambahkan deskripsi mengenai obat"
+            name="description"
             onChange={handleChange}
-            value={formData.name}
+            value={formData.description}
           />
         </div>
-
-        <p>Manufacturer Obat :</p>
-        <div className="inline-block">
-          <DefaultInput
-            placeholder="PT Sindo Farma"
-            className="w-[330px] h-[50px]"
-            name="manufacturer"
-            onChange={handleChange}
-            value={formData.manufacturer}
-          />
-        </div>
-
-        <p>Stok Obat :</p>
-        <DefaultInput
-          type="number"
-          placeholder="1000"
-          className="w-[330px] h-[50px]"
-          name="stock"
-          onChange={handleChange}
-          value={formData.stock}
-          min="0"
-        />
-        
-        <p>Deskripsi Obat :</p>
-        <DefaultTxtArea
-          placeholder="Tambahkan deskripsi mengenai obat"
-          name="description"
-          onChange={handleChange}
-          value={formData.description}
-        />
 
         <div className="flex justify-between w-full grid grid-cols-[100px_173px]">
           <Link to="/list">
-              <DefaultBtn
-                type="button"
-                judulButton="Batal"
-                className="bg-white text-gray-400 outline outline-2 outline-gray-300 hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
-              />
-            </Link>
-          
             <DefaultBtn
               type="button"
-              judulButton="Tambah Obat"
-              className="hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
-              onClick={handleSubmit}
+              judulButton="Batal"
+              className="bg-white text-gray-400 outline outline-2 outline-gray-300 hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
             />
-          </div>
+          </Link>
+          <DefaultBtn
+            type="button"
+            judulButton="Tambah Obat"
+            className="hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+            onClick={handleSubmit}
+          />
+        </div>
+
       </div>
     </div>
   )
