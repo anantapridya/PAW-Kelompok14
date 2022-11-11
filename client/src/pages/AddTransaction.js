@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import SetDate from "../components/SetDate";
 import SetTime from "../components/SetTime";
 import DefaultInput from "../components/DefaultInput";
+import Modal from "../components/Modal";
 
 const AddTransaction = () => {
 
@@ -46,51 +47,73 @@ const AddTransaction = () => {
   }
 
   function handleSubmit(event) {
-    // cek apakah stock menjadi negatif
-    if (medicine.stock + parseInt(formData.stock) < 0) {
-      // to do: tambahkan modal/fungsi yg akan dijalankan
-      // fungsi sementara:
-      alert('stok obat yang tersisa tidak boleh negatif')
-      return
-    } else {
-      const transactionTime = ( date == null ? now.toLocaleDateString() : date.toLocaleDateString() ) + ', ' + time
-      fetch(`http://localhost:9000/${medicineId}/log`, {
-        method: "PUT",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          description: formData.description,
-          stock: parseInt(formData.stock),
-          date: transactionTime
-        })
+    const transactionTime = ( date == null ? now.toLocaleDateString() : date.toLocaleDateString() ) + ', ' + time
+    console.log(JSON.stringify({
+      description: formData.description,
+      stock: parseInt(formData.stock),
+      date: transactionTime
+    }))
+    fetch(`http://localhost:9000/${medicineId}/log`, {
+      method: "PUT",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        description: formData.description,
+        stock: parseInt(formData.stock),
+        date: transactionTime
       })
-        .then(res => res.json())
-        .then(data => {
-          /*
-          NOTE:
-          'data' akan berisi object { message:  }
-          apabila sukses, 'message' akan berisi:
-            "Transaction log added for medicine with id ${id}"
-          apabila gagal, 'message' dapat berisi:
-            "Medicine stock cannot be less than zero." (400)
-            "Medicine with id ${id} not found" (404)
-            "Cannot add empty transaction log" (400)
-
-          TO DO:
-          tampilkan komponen modal tergantung dgn response yg diterima
-          dari API
-          */
-
-          // fungsi sementara, delete soon
-          alert(data.message)
-          if(data.message.startsWith("Transaction"))
-            window.location.href = '/desc?id=' + medicineId
-        })
-    }
-      
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message.startsWith("Transaction log added for medicine with id"))
+          setModalState({
+            isOpen: true,
+            desc: "Transaksi obat berhasil ditambahkan.",
+            onClose() {
+              window.location.href = "../desc/?id=" + medicineId
+            }
+          })
+        else
+          setModalState(prev => ({
+            ...prev,
+            isOpen: true,
+            desc: data.message
+          }))
+        /*
+        'data' akan berisi object { message:  }
+        apabila sukses, 'message' akan berisi:
+          "Transaction log added for medicine with id ${id}"
+        apabila gagal, 'message' dapat berisi:
+          "Medicine stock cannot be less than zero." (400)
+          "Medicine with id ${id} not found" (404)
+          "Cannot add empty transaction log" (400)
+        */
+      })
   }
+
+  console.log(formData)
+
+  const [modalState, setModalState] = React.useState({
+    isOpen: false,
+    desc: '',
+    onClose() {
+      setModalState(prev => ({
+        ...prev,
+        isOpen: false
+      }))
+    }
+  })
 
   return (
     <div className="bg-putih md:h-screen">
+      <Modal
+        show={modalState.isOpen}
+        onClose={modalState.onClose}
+        onClick={modalState.onClose}
+        className="bg-[#FF0000]"
+        desc={modalState.desc}
+        title="Message Box"
+        button="OK"
+      />
       <Navbar/>
       <div className="font-body mx-[150px] my-[30px] text-xl">
         <div>
@@ -123,6 +146,7 @@ const AddTransaction = () => {
               name="stock"
               onChange={handleChange}
               value={formData.stock}
+              min={"-"+medicine.stock}
             />
         </div>             
         

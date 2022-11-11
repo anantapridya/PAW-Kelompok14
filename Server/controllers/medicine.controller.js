@@ -173,7 +173,7 @@ module.exports = {
         if ('stock' in req.body
             && typeof req.body.stock === 'number'
             && isFinite(req.body.stock)
-            && req.body.stock == 0 ) {
+            && req.body.stock != 0 ) {
 
             newLog = [
                 req.body.stock,
