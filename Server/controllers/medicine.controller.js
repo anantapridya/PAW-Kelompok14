@@ -5,11 +5,13 @@ const medicineLog = db.medicines.medicineLog
 module.exports = {
 
     /* .post /add, JSON { name, manufacturer, description, stock } */
+    // stock & price harus sudah berupa int
     create(req, res) {
         if (!(req.body.name 
             && req.body.manufacturer
             && req.body.description
-            && req.body.stock)) {
+            && req.body.stock
+            && req.body.price)) {
             res.status(400).send({
                 message: "request's body must contain 'name', 'manufacturer', 'description', and 'stock' field"
             })
@@ -19,6 +21,7 @@ module.exports = {
             manufacturer: req.body.manufacturer,
             description: req.body.description,
             stock: req.body.stock,
+            price: req.body.price,
             log: [medicineLog(
                 req.body.stock,
                 'data obat ditambahkan'
