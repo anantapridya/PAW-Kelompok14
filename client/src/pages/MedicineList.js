@@ -14,10 +14,19 @@ const MedicineList = () => {
     },
     Z_to_A() {
       setMedicineData(prev => [...prev].sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() < a.name.toLowerCase()) ? -1 : 0)))
+    },
+    hargaTerendah() {
+      setMedicineData(prev => [...prev].sort((a, b) => a.price - b.price))
+    },
+    hargaTertinggi() {
+      setMedicineData(prev => [...prev].sort((b, a) => a.price - b.price))
     }
   }
   const dropdownValue = [
-    {id:1, value:"A - Z", onClick: SortMedicine.A_to_Z},{id:2, value:"Z - A", onClick: SortMedicine.Z_to_A},{id:3, value:"Harga Terendah"},{id:4, value:"Harga Tertinggi"}
+    {id:1, value:"A - Z", onClick: SortMedicine.A_to_Z},
+    {id:2, value:"Z - A", onClick: SortMedicine.Z_to_A},
+    {id:3, value:"Harga Terendah", onClick: SortMedicine.hargaTerendah},
+    {id:4, value:"Harga Tertinggi", onClick: SortMedicine.hargaTertinggi}
   ]
 
   function getMedicine(query='') {
