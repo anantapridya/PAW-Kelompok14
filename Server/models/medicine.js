@@ -18,6 +18,10 @@ const MedSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    price: {
+        type: Number,
+        required: true
+    },
     log: { type: Array, default: [] }
 })
 

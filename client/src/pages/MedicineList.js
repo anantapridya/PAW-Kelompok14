@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import Modal from "../components/Modal";
@@ -72,7 +72,7 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
     })
       .then(response => response.json())
       .then(data => {
-        alert(data.message)
+        // alert(data.message)
         /*
         data.message dapat berisi 
         "Cannot delete medicine with id=${id}"
@@ -82,7 +82,7 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
       })
   }
 
-  const [modalState, setModalState] = useState({
+  const [modalState, setModalState] = React.useState({
     isOpen: false,
     medicineId: "dummyMedicineID"
   })
