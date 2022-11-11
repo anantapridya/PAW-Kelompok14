@@ -15,7 +15,8 @@ const AddTransaction = () => {
 
   const [medicine, setMedicine] = React.useState({
     name: '',
-    stock: 0
+    stock: '',
+    // price: ''
   })
   React.useEffect(() => {
     fetch(`http://localhost:9000/${medicineId}`)
@@ -23,12 +24,14 @@ const AddTransaction = () => {
       .then(data => setMedicine({
         name: data.name,
         stock: data.stock
+        // price: data.price
       }))
   }, [])
 
   const [formData, setFormData] = React.useState({
     description: '',
-    stock: 0
+    stock: '',
+    // price:''
   })
   // state untuk time picker
   const now = new Date()
@@ -51,7 +54,8 @@ const AddTransaction = () => {
     console.log(JSON.stringify({
       description: formData.description,
       stock: parseInt(formData.stock),
-      date: transactionTime
+      date: transactionTime,
+      // price: parseInt(formData.price)
     }))
     fetch(`http://localhost:9000/${medicineId}/log`, {
       method: "PUT",
@@ -59,7 +63,8 @@ const AddTransaction = () => {
       body: JSON.stringify({
         description: formData.description,
         stock: parseInt(formData.stock),
-        date: transactionTime
+        date: transactionTime,
+        // price: parseInt(formData.price)
       })
     })
       .then(res => res.json())
@@ -137,17 +142,31 @@ const AddTransaction = () => {
         </div>
 
         <div>
-            <p>Transaksi Stok</p>
-            <p className="text-[15px] italic text-gray-400">Stok saat ini: {medicine.stock}</p>
-            <DefaultInput
-              type="number"
-              placeholder="-10"
-              className="w-[200px] h-[50px]"
-              name="stock"
-              onChange={handleChange}
-              value={formData.stock}
-              min={"-"+medicine.stock}
-            />
+          <p>Transaksi Stok</p>
+          <p className="text-[15px] italic text-gray-400">Stok saat ini: {medicine.stock}</p>
+          <DefaultInput
+            type="number"
+            placeholder="-10"
+            className="w-[200px] h-[50px]"
+            name="stock"
+            onChange={handleChange}
+            value={formData.stock}
+            min={"-"+medicine.stock}
+          />
+        </div>
+
+        <div>
+        <p>Harga Obat</p>
+          <p className="text-[15px] italic text-gray-400">Harga saat ini: {medicine.price}</p>
+          <DefaultInput
+            type="number"
+            placeholder="10000"
+            className="w-[200px] h-[50px]"
+            name="price"
+            onChange={handleChange}
+            value={formData.price}
+            min={"-"+medicine.price}
+          />
         </div>             
         
         <div>
