@@ -232,14 +232,14 @@ aside div div > div {
     border: 4px solid blue;
 }
 
-aside div div > div:first-child {
+/* aside div div > div:first-child {
     height: 33px;
     line-height: 33px;
-}
+} */
 
-article > div p:nth-child(3) {
+/* article > div p:nth-child(3) {
     line-height: 36px;
-}
+} */
 
 
 

@@ -1,5 +1,6 @@
 import Navbar from "./Navbar";
 import Pharmaweb1 from "../img/Pharmaweb1.png";
+import { useState } from "react";
 
 export default function Welcome() {
   return (

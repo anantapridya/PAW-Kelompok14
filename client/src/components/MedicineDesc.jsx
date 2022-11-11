@@ -1,5 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import backArrow from '../img/back-arrow.png'
+import editMedicine from '../img/edit-medicine.png'
 import Navbar from './Navbar.jsx'
 // import '../css/MedicineDesc.css'
 import React from 'react'
@@ -11,6 +12,7 @@ export default function MedicineDesc() {
         name: '',
         manufacturer: '',
         description: '',
+        price: 0,
         log: []
     })
     // set value awal isAuthorized menjadi false, lalu update berdasar token
@@ -82,8 +84,17 @@ function MedicineDescArticle({ medicineData, isAuthorized }) {
             <div className="relative box-border w-[80%] h-[80%] rounded-[30px] bg-[#FFFFFF] py-[40px] px-[50px] shadow-6xl ">
                 <h1 className='font-body font-bold text-7xl mb-3'>{medicineData.name}</h1>
                 <h2 className='font-body text-4xl'>Produksi {medicineData.manufacturer}</h2>
-                <p className="mt-[50px] font-body text-[27px] italic">{medicineData.description}</p>
+                <p className="leading-9 mt-[50px] font-body text-[27px] italic">{medicineData.description}</p>
                 <p className="font-body text-[35px] absolute bottom-[40px] left-[50px]">Stok: {medicineData.stock}</p>
+                <p className="font-body text-[27px] absolute bottom-[40px] right-[120px]">Harga: Rp{(medicineData.price).toLocaleString('id-ID')},00</p>
+                <Link to={{
+                    pathname: '../edit',
+                    search: '?id=' + medicineData._id + '&todesc=true'
+                }}>
+                    <div className="rounded-[20px] w-24 h-24 absolute flex items-center justify-center bg-biru-tua right-[-20px] bottom-[50px] shadow-5xl hover:scale-105 ease-out duration-100">
+                        <img className="h-[60%]" lt='edit medicine logo' src={editMedicine} />
+                    </div>
+                </Link>
             </div>
         </article>
     )
@@ -92,7 +103,7 @@ function MedicineDescArticle({ medicineData, isAuthorized }) {
 function MedicineDescLog(props) {
     return (
         <div className='mb-[17px]'>
-            <div className="font-body font-bold text-[20px] w-44 h-7 leading-[30px] text-center rounded-t-[20px] border-2 border-biru-sedang border-b-0 ">{props.date}</div>
+            <div className="h-8 leading-8 font-body font-bold text-[20px] w-44 h-7 leading-[30px] text-center rounded-t-[20px] border-2 border-biru-sedang border-b-0 ">{props.date}</div>
             <div className="rounded-tr-[20px] rounded-b-[20px] bg-putih relative pb-[35px] border-2 border-biru-sedang">
                 <p className="italic py-[15px] px-[20px]">{props.desc}</p>
                 <p className="absolute bottom-[10px] font-semibold left-[20px]">{props.time}</p>

@@ -1,11 +1,14 @@
-import { Link, useSearchParams } from "react-router-dom";
 import React from "react";
+
+import { Link, useSearchParams } from "react-router-dom";
+
 import DefaultBtn from "../components/DefaultBtn";
 import DefaultTxtArea from "../components/DefaultTxtArea";
 import Navbar from "../components/Navbar";
 import SetDate from "../components/SetDate";
 import SetTime from "../components/SetTime";
 import DefaultInput from "../components/DefaultInput";
+import Modal from "../components/Modal";
 
 const AddTransaction = () => {
 
@@ -14,7 +17,7 @@ const AddTransaction = () => {
 
   const [medicine, setMedicine] = React.useState({
     name: '',
-    stock: 0
+    stock: ''
   })
   React.useEffect(() => {
     fetch(`http://localhost:9000/${medicineId}`)
@@ -27,7 +30,7 @@ const AddTransaction = () => {
 
   const [formData, setFormData] = React.useState({
     description: '',
-    stock: 0
+    stock: ''
   })
   // state untuk time picker
   const now = new Date()
@@ -46,54 +49,73 @@ const AddTransaction = () => {
   }
 
   function handleSubmit(event) {
-    // cek apakah stock menjadi negatif
-    if (medicine.stock + parseInt(formData.stock) < 0) {
-      // to do: tambahkan modal/fungsi yg akan dijalankan
-      // fungsi sementara:
-      alert('stok obat yang tersisa tidak boleh negatif')
-      return
-    } else {
-      const transactionTime = ( date == null ? now.toLocaleDateString() : date.toLocaleDateString() ) + ', ' + time
-      fetch(`http://localhost:9000/${medicineId}/log`, {
-        method: "PUT",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          description: formData.description,
-          stock: parseInt(formData.stock),
-          date: transactionTime
-        })
+    const transactionTime = ( date == null ? now.toLocaleDateString() : date.toLocaleDateString() ) + ', ' + time
+    console.log(JSON.stringify({
+      description: formData.description,
+      stock: parseInt(formData.stock),
+      date: transactionTime
+    }))
+    fetch(`http://localhost:9000/${medicineId}/log`, {
+      method: "PUT",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        description: formData.description,
+        stock: parseInt(formData.stock),
+        date: transactionTime
       })
-        .then(res => res.json())
-        .then(data => {
-          /*
-          NOTE:
-          'data' akan berisi object { message:  }
-          apabila sukses, 'message' akan berisi:
-            "Transaction log added for medicine with id ${id}"
-          apabila gagal, 'message' dapat berisi:
-            "Medicine stock cannot be less than zero." (400)
-            "Medicine with id ${id} not found" (404)
-            "Cannot add empty transaction log" (400)
-
-          TO DO:
-          tampilkan komponen modal tergantung dgn response yg diterima
-          dari API
-          */
-
-          // fungsi sementara, delete soon
-          alert(data.message)
-          if(data.message.startsWith("Transaction"))
-            window.location.href = '/desc?id=' + medicineId
-        })
-    }
-      
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message.startsWith("Transaction log added for medicine with id"))
+          setModalState({
+            isOpen: true,
+            desc: "Transaksi obat berhasil ditambahkan.",
+            onClose() {
+              window.location.href = "../desc/?id=" + medicineId
+            }
+          })
+        else
+          setModalState(prev => ({
+            ...prev,
+            isOpen: true,
+            desc: data.message
+          }))
+        /*
+        'data' akan berisi object { message:  }
+        apabila sukses, 'message' akan berisi:
+          "Transaction log added for medicine with id ${id}"
+        apabila gagal, 'message' dapat berisi:
+          "Medicine stock cannot be less than zero." (400)
+          "Medicine with id ${id} not found" (404)
+          "Cannot add empty transaction log" (400)
+        */
+      })
   }
 
-  // Data dummy
-  // const medicine = {"_id":{"$oid":"633167d72a825657dc598ad2"},"name":"Sanmol Paracetamol","manufacturer":"PT Sanbe Farma","description":"Digunakan untuk meringankan rasa sakit pada kepala dan menurunkan demam, mengandung paracetamol 500 mg. Obat ini bekerja di pusat pengatur panas tubuh secara antipiretik dan analgesik. Dosis dewasa 3x1 tablet per hari, anak-anak <12 tahun 2x1 tablet per hari, sesudah ataupun sebelum makan. Efek samping dapat menyebabkan kantuk.","stock":10,"log":[["25","Data obat ditambahkan ke database","9/26/2022, 15:50:31"], ["-3","Obat terjual ke Bpk. Nurhadi","9/27/2022, 12:03:11"], ["-2","Obat terjual ke Ibu Nahida","9/29/2022, 19:13:52"], ["-16","Obat expired","9/30/2022, 23:59:59"], ["20","Stok bulanan dari pusat","10/2/2022, 09:15:32"], ["-4","Obat terjual ke Bpk. Joko","10/3/2022, 19:13:52"], ["-1","Obat terjual ke Bpk. Budi","10/3/2022, 20:47:39"], ["-5","Obat terjual ke Ibu Siti","10/5/2022, 10:28:19"]],"__v":{"$numberInt":"0"}}
+  console.log(formData)
+
+  const [modalState, setModalState] = React.useState({
+    isOpen: false,
+    desc: '',
+    onClose() {
+      setModalState(prev => ({
+        ...prev,
+        isOpen: false
+      }))
+    }
+  })
 
   return (
     <div className="bg-putih md:h-screen">
+      <Modal
+        show={modalState.isOpen}
+        onClose={modalState.onClose}
+        onClick={modalState.onClose}
+        className="bg-[#FF0000]"
+        desc={modalState.desc}
+        title="Message Box"
+        button="OK"
+      />
       <Navbar/>
       <div className="font-body mx-[150px] my-[30px] text-xl">
         <div>
@@ -105,19 +127,16 @@ const AddTransaction = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-[300px_300px]">
+        <div className="grid grid-cols-2">
           <div>
             <p>Tanggal Transaksi</p>
             <SetDate onChange={newDate => setDate(newDate)} value={date} />
           </div>
           <div>
-            <p>Waktu Transaksi</p>
-            <SetTime onChange={newTime => setTime(newTime)} value={time} />
-          </div>
-        </div>
-
-        <div>
-            <p>Stok masuk (stok saat ini: {medicine.stock})</p>
+            <div className="flex gap-3">
+              <p>Transaksi Stok </p>
+              <p className="text-[15px] italic text-gray-400">(Stok saat ini: {medicine.stock})</p>
+            </div>
             <DefaultInput
               type="number"
               placeholder="-10"
@@ -125,8 +144,14 @@ const AddTransaction = () => {
               name="stock"
               onChange={handleChange}
               value={formData.stock}
+              min={"-"+medicine.stock}
             />
-        </div>             
+          </div>
+          <div>
+            <p>Waktu Transaksi</p>
+            <SetTime onChange={newTime => setTime(newTime)} value={time} />
+          </div>
+        </div>           
         
         <div>
           <p>Keterangan</p>

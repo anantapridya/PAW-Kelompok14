@@ -3,7 +3,7 @@ import DefaultInput from "../components/DefaultInput";
 import DefaultTxtArea from "../components/DefaultTxtArea";
 import Navbar from "../components/Navbar";
 import React from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 
 const EditMedicine = () => {
 
@@ -120,10 +120,13 @@ const EditMedicine = () => {
           value={medicine.description}
           onChange={handleChange}
         />
-
-        <button
-        onClick={() => {window.location.href = '/list'}}
-        >Batal</button>
+        <Link to={
+          searchParams.get('todesc')
+          ? {pathname: '../desc/', search: '?id=' + medicineId}
+          : '../list'
+        }>
+          <button>Batal</button>
+        </Link>
 
         <DefaultBtn
           onClick={handleSubmit}

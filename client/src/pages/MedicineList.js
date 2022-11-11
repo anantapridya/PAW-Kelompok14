@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import Modal from "../components/Modal";
@@ -8,19 +8,32 @@ import DefaultBtn from "../components/DefaultBtn";
 const MedicineList = () => {
 
   const [token, setToken] = useState()
-  
+
   const [medicineData, setMedicineData] = useState([])
   const dropdownValue = [
     {id:1, value:"A - Z"},{id:2, value:"Z - A"},{id:3, value:"Harga Terendah"},{id:4, value:"Harga Tertinggi"}
   ]
+
   const SortMedicine = {
     A_to_Z() {
       setMedicineData(prev => [...prev].sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)))
     },
     Z_to_A() {
       setMedicineData(prev => [...prev].sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() < a.name.toLowerCase()) ? -1 : 0)))
+    },
+    hargaTerendah() {
+      setMedicineData(prev => [...prev].sort((a, b) => a.price - b.price))
+    },
+    hargaTertinggi() {
+      setMedicineData(prev => [...prev].sort((b, a) => a.price - b.price))
     }
   }
+  const dropdownValue = [
+    {id:1, value:"A - Z", onClick: SortMedicine.A_to_Z},
+    {id:2, value:"Z - A", onClick: SortMedicine.Z_to_A},
+    {id:3, value:"Harga Terendah", onClick: SortMedicine.hargaTerendah},
+    {id:4, value:"Harga Tertinggi", onClick: SortMedicine.hargaTertinggi}
+  ]
 
   function getMedicine(query='') {
 
@@ -59,7 +72,7 @@ const MedicineList = () => {
       <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mb-[50px]">
         <h2 className="text-3xl xl:text-[58px] font-body font-semibold">Daftar Obat</h2>
         <div className="flex">
-          <Dropdown Sort={SortMedicine} items={dropdownValue} judul="Sort" className="border-2 border-biru-tua" />
+          <Dropdown items={dropdownValue} judul="Sort" className="border-2 border-biru-tua" />
           <input
             className="ml-[40px] rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black"
             type="text"
@@ -88,7 +101,7 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
     })
       .then(response => response.json())
       .then(data => {
-        alert(data.message)
+        // alert(data.message)
         /*
         data.message dapat berisi 
         "Cannot delete medicine with id=${id}"
@@ -98,7 +111,7 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
       })
   }
 
-  const [modalState, setModalState] = useState({
+  const [modalState, setModalState] = React.useState({
     isOpen: false,
     medicineId: "dummyMedicineID"
   })

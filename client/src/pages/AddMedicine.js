@@ -1,8 +1,12 @@
+import React from "react";
+
+import { Link, useSearchParams } from "react-router-dom";
+
 import DefaultBtn from "../components/DefaultBtn";
 import DefaultInput from "../components/DefaultInput";
 import DefaultTxtArea from "../components/DefaultTxtArea";
 import Navbar from "../components/Navbar";
-import React from "react";
+import Modal from '../components/Modal';
 
 const AddMedicine = () => {
 
@@ -10,7 +14,8 @@ const AddMedicine = () => {
     name: '',
     manufacturer: '',
     stock: '',
-    description: ''
+    description: '',
+    price:''
   })
 
   console.log(formData)
@@ -32,7 +37,8 @@ const AddMedicine = () => {
   function handleSubmit(event) {
     const submittedForm = {
       ...formData,
-      stock: parseInt(formData.stock)
+      stock: parseInt(formData.stock),
+      // price: parseInt(formData.price)
     }
     fetch('http://localhost:9000/add', {
       method: 'POST',
@@ -41,91 +47,144 @@ const AddMedicine = () => {
     },)
     .then(res => res.json())
     .then(data => {
+
       /*
-        NOTE:
         apabila berhasil, 'data' berisi object obat yg ditambahkan ke database,
         apabila gagal, 'data' dapat berisi:
         {message: "request's body must contain 'name', 'manufacturer', 'description', and 'stock' field"}
         {message: "Error creating medicine."}
         {message: errorException}
-      
-        todo:
-        buat agar elemen modal keluar tergantung output dari API
       */
+      if (data.message) {
+        let modalMessage = ''
+        switch (data.message) {
+          case "request's body must contain 'name', 'manufacturer', 'description', 'stock', and 'price' field":
+            modalMessage = "Data obat untuk ditambahkan belum lengkap."
+            break
+          default:
+            modalMessage = "Terjadi kesalahan saat menambah data obat"
+        }
+        setModalState(prev => ({
+          ...prev,
+          isOpen: true,
+          desc: modalMessage
+        }))
+      } else {
+        setModalState(prev => ({
+          ...prev,
+          isOpen: true,
+          desc: "Data obat berhasil ditambahkan!",
+          onClose() {
+            window.location.href = '../list'
+          }
+        }))
+      }
 
-      // fungsi sementara, delete soon vvv
-      if (data.message)
-        alert(data.message)
-      else alert('data berhasil ditambahkan')
-      window.location.href = '/list'
     })
   }
 
+  const [modalState, setModalState] = React.useState({
+    isOpen: false,
+    desc: '',
+    onClose() {
+      setModalState(prev => ({...prev, isOpen:false}))
+    }
+  })
+
   return (
     <div className="bg-putih md:h-screen">
+      <Modal
+        show={modalState.isOpen}
+        onClose={modalState.onClose}
+        onClick={modalState.onClose}
+        className="bg-[#FF0000]"
+        desc={modalState.desc}
+        title="Message Box"
+        button="OK"
+      />
       <Navbar/>
       <div className="font-body mx-[150px] my-[30px] text-xl">
-        <h1 className="text-biru-sedang font-heading font-bold text-4xl">
+        <h1 className="text-biru-sedang font-heading font-bold text-4xl pb-10">
           Tambah Obat
         </h1>
 
-        <p>Nama Obat :</p>
-        {/* TODO: Buat sejajar */}
-        <div className="inline-block">
-          <DefaultInput
-            placeholder="Paracetamol"
-            className="w-[330px] h-[50px]"
-            name="name"
+        <div className="w-full grid grid-cols-2">
+          <div>
+            <p>Nama Obat :</p>
+            <div className="inline-block">
+              <DefaultInput
+                placeholder="Paracetamol"
+                className="w-[450px] h-[50px]"
+                name="name"
+                onChange={handleChange}
+                value={formData.name}
+              />
+            </div>
+          </div>
+          <div>
+            <p>Stok Obat :</p>
+            <DefaultInput
+              type="number"
+              placeholder="1000"
+              className="w-[200px] h-[50px]"
+              name="stock"
+              onChange={handleChange}
+              value={formData.stock}
+              min="0"
+            />
+          </div>
+          <div>
+            <p>Manufacturer Obat :</p>
+            <div className="inline-block">
+              <DefaultInput
+                placeholder="PT Sindo Farma"
+                className="w-[450px] h-[50px]"
+                name="manufacturer"
+                onChange={handleChange}
+                value={formData.manufacturer}
+              />
+            </div>
+          </div>        
+          <div>
+            <p>Harga Obat :</p>
+            <p className="text-[15px] italic text-gray-400"></p>
+            <DefaultInput
+              type="number"
+              placeholder="10000"
+              className="w-[200px] h-[50px]"
+              name="price"
+              onChange={handleChange}
+              value={formData.price}
+            />
+          </div>
+        </div>
+    
+        <div>
+          <p>Deskripsi Obat :</p>
+          <DefaultTxtArea
+            placeholder="Tambahkan deskripsi mengenai obat"
+            name="description"
             onChange={handleChange}
-            value={formData.name}
+            value={formData.description}
           />
         </div>
 
-        <p>Manufacturer Obat :</p>
-        {/* TODO: Buat sejajar */}
-        <div className="inline-block">
-          <DefaultInput
-            placeholder="PT Sindo Farma"
-            className="w-[330px] h-[50px]"
-            name="manufacturer"
-            onChange={handleChange}
-            value={formData.manufacturer}
+        <div className="flex justify-between w-full grid grid-cols-[100px_173px]">
+          <Link to="/list">
+            <DefaultBtn
+              type="button"
+              judulButton="Batal"
+              className="bg-white text-gray-400 outline outline-2 outline-gray-300 hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+            />
+          </Link>
+          <DefaultBtn
+            type="button"
+            judulButton="Tambah Obat"
+            className="hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+            onClick={handleSubmit}
           />
         </div>
 
-        <p>Stok Obat :</p>
-        {/* TODO: Buat sejajar */}
-        <div className="inline-block">
-          <DefaultInput
-            placeholder="1000"
-            className="w-[330px] h-[50px]"
-            name="stock"
-            onChange={handleChange}
-            value={formData.stock}
-          />
-          <button type="button" name="stock--increment" onClick={handleChange}>+</button>
-          <button type="button" name="stock--decrement" onClick={handleChange}>-</button>
-        </div>
-
-        {/* TODO: Buat jadi paragraf multiline */}
-        <p>Deskripsi Obat :</p>
-        <DefaultTxtArea
-          placeholder="Tambahkan deskripsi mengenai obat"
-          name="description"
-          onChange={handleChange}
-          value={formData.description}
-        />
-
-        {/* TODO: Buat ke tengah */}
-        {/* Ket: Button "Batal" bisa dibuat pake "DefaultBtn", buat style kayak warna, outline bisa disesuaiin di className */}
-        <button>Batal</button>
-
-        <DefaultBtn
-          type="button"
-          judulButton="Tambah Obat"
-          className=""
-          onClick={handleSubmit}
-        />
       </div>
     </div>
   )
