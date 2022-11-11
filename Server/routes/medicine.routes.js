@@ -7,7 +7,7 @@ module.exports = app => {
     
     router.post("/add", /*[authJwt.verifyToken, authJwt.isAdmin],*/ medicine.create); 
   
-    router.get("/", /*[authJwt.verifyToken],*/ medicine.findAll);
+    router.get("/", [authJwt.verifyToken], medicine.findAll);
   
     router.get("/:id", /*[authJwt.verifyToken],*/ medicine.findOne);
 

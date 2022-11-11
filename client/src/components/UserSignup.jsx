@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Pattern from "../img/bg-login.svg";
 import DefaultBtn from "./DefaultBtn";
 import DefaultInput from "./DefaultInput";
 
 export default function SignupPage() {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     username: "",
     password: "",
     email: "",

@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Pattern from "../img/bg-login.svg";
 import DefaultBtn from "./DefaultBtn";
 import DefaultInput from "./DefaultInput";
 
 export default function UserLogin() {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
@@ -19,7 +19,7 @@ export default function UserLogin() {
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
+    // event.preventDefault();
     /*
     NOTE:
       untuk sementara, fitur sign in tidak berfungsi karena
@@ -31,10 +31,14 @@ export default function UserLogin() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.setItem("user", JSON.stringify(data));
-
+      // .then((response) => {
+      //   return response.data;
+      // })
+      .then(async (response) => {
+        const data = await response.json();
+        // console.log(data);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", JSON.stringify(data.token));
         /*
         jika berhasil, 'data' akan berisi:
         {
@@ -62,7 +66,7 @@ export default function UserLogin() {
       style={{ backgroundImage: `url(${Pattern})` }}
     >
       <div className="w-[240px] sm:w-[500px] lg:w-[780px] bg-biru-muda/[.1] rounded-3xl backdrop-blur-sm shadow-3xl m-auto">
-        <div className="flex flex-col items-center justify-center w-3/4 mx-auto my-[100px]">
+        <form className="flex flex-col items-center justify-center w-3/4 mx-auto my-[100px]">
           <DefaultInput
             placeholder="Username"
             className="w-full text-sm md:text-xl"
@@ -87,7 +91,7 @@ export default function UserLogin() {
                 className="text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
               />
             </Link>
-            <Link to="/loginusert">
+            <Link to="/">
               <DefaultBtn
                 type="submit"
                 judulButton="Masuk"
@@ -96,7 +100,7 @@ export default function UserLogin() {
               />
             </Link>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
