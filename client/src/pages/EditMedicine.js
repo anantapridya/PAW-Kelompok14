@@ -1,17 +1,20 @@
+import React from "react";
+
+import { useSearchParams, Link } from "react-router-dom";
+
 import DefaultBtn from "../components/DefaultBtn";
 import DefaultInput from "../components/DefaultInput";
 import DefaultTxtArea from "../components/DefaultTxtArea";
 import Navbar from "../components/Navbar";
-import React from "react";
-import { useSearchParams, Link } from "react-router-dom";
 
 const EditMedicine = () => {
 
   const [ medicine, setMedicine ] = React.useState({
     name: '',
     description: '',
-    stock: 0,
-    manufacturer: ''
+    stock: '',
+    manufacturer: '',
+    price:''
   })
 
   console.log(medicine)
@@ -26,7 +29,8 @@ const EditMedicine = () => {
         name: data.name,
         description: data.description,
         stock: data.stock,
-        manufacturer: data.manufacturer // data.log tdk dibutuhkan
+        manufacturer: data.manufacturer, // data.log tdk dibutuhkan
+        price: data.price
       }))
   }, [])
 
@@ -77,63 +81,85 @@ const EditMedicine = () => {
     <div className="bg-putih md:h-screen">
       <Navbar/>
       <div className="font-body mx-[150px] my-[30px] text-xl">
-        <h1 className="text-biru-sedang font-heading font-bold text-4xl">
+        <h1 className="text-biru-sedang font-heading font-bold text-4xl pb-10">
           Edit Obat
         </h1>
 
-        <p>Nama Obat :</p>
-        <div className="inline-block">
-          <DefaultInput
-            className="w-[330px] h-[50px]"
-            name="name"
-            value={medicine.name}
+        <div className="w-full grid grid-cols-2">
+          <div>
+            <p>Nama Obat :</p>
+            <div className="inline-block">
+              <DefaultInput
+                className="w-[450px] h-[50px]"
+                name="name"
+                onChange={handleChange}
+                value={medicine.name}
+              />
+            </div>
+          </div>
+          <div>
+            <p>Stok Obat :</p>
+            <DefaultInput
+              type="number"
+              className="w-[200px] h-[50px]"
+              name="stock"
+              onChange={handleChange}
+              value={medicine.stock}
+            />
+          </div>
+          <div>
+            <p>Manufacturer Obat :</p>
+            <div className="inline-block">
+              <DefaultInput
+                className="w-[450px] h-[50px]"
+                name="manufacturer"
+                onChange={handleChange}
+                value={medicine.manufacturer}
+              />
+            </div>
+          </div>        
+          <div>
+            <p>Harga Obat :</p>
+            <p className="text-[15px] italic text-gray-400"></p>
+            <DefaultInput
+              type="number"
+              className="w-[200px] h-[50px]"
+              name="price"
+              onChange={handleChange}
+              value={medicine.price}
+            />
+          </div>
+        </div>
+
+        <div>
+          <p>Deskripsi Obat :</p>
+          <DefaultTxtArea
+            name="description"
+            value={medicine.description}
             onChange={handleChange}
           />
         </div>
 
-        <p>Manufacturer Obat :</p>
-        <div className="inline-block">
-          <DefaultInput
-            className="w-[330px] h-[50px]"
-            name="manufacturer"
-            value={medicine.manufacturer}
-            onChange={handleChange}
-          />
-        </div>
-
-        <p>Stok Obat :</p>
-        <div className="inline-block">
-          <DefaultInput
-            type="number"
-            className="w-[330px] h-[50px]"
-            name="stock"
-            value={medicine.stock}
-            onChange={handleChange}
-          />
-          <button type="button" name="stock--increment" onClick={handleChange}>+</button>
-          <button type="button" name="stock--decrement" onClick={handleChange}>-</button>
-        </div>
-
-        <p>Deskripsi Obat :</p>
-        <DefaultTxtArea
-          name="description"
-          value={medicine.description}
-          onChange={handleChange}
-        />
-        <Link to={
+        <div className="flex justify-between w-full grid grid-cols-[100px_125px]">
+          <Link to={
           searchParams.get('todesc')
           ? {pathname: '../desc/', search: '?id=' + medicineId}
           : '../list'
-        }>
-          <button>Batal</button>
-        </Link>
+          }>
+            <DefaultBtn
+              type="button"
+              judulButton="Batal"
+              className="bg-white text-gray-400 outline outline-2 outline-gray-300 hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+            />
+          </Link>
+          <DefaultBtn
+            type="button"
+            judulButton="Edit Obat"
+            className="hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+            onClick={handleSubmit}
+          />
+        </div>
 
-        <DefaultBtn
-          onClick={handleSubmit}
-          type="button"
-          judulButton="Edit Obat"
-          className=""
-        />
       </div>
     </div>
   )
