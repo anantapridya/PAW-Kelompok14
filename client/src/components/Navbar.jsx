@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import logo from '../img/websitelogo.png'
-import React, {useState} from 'react'
+import React from 'react'
 import Dropdown from './Dropdown'
 // import '../css/Navbar.css'
 
-export default function Navbar({isLogin}) {
+export default function Navbar({ isLogin, isAdmin }) {
     const profile =[{id:1, value:"Profile"},{id:2, value:"Sign Out"}]
     return (
     <nav role="navigation" className="h-[60px] w-full px-[60px] box-border bg-putih font-body font-medium text-[20px] text-biru-tua xl:h-16 xl:text-[22px]">
@@ -16,9 +16,9 @@ export default function Navbar({isLogin}) {
                 </Link>
             </li>
             <li className={`mx-[50px] xl:mx-[30px] hover:drop-shadow-3xl ${isLogin ? "hidden": "inline"}`}><Link to="/list">List</Link></li>
-            <li className={`mx-[50px] xl:mx-[30px] hover:drop-shadow-3xl ${isLogin ? "hidden": "inline"}`}><Link to="/add">Add</Link></li>
-            <li className={`mx-[50px] ml-auto hover:drop-shadow-3xl ${isLogin ? "inline": "hidden"}`}><Link to="/welcome">Sign in/Sign out</Link></li>
-            <li className={`mx-[50px] ml-auto hover:drop-shadow-3xl ${isLogin ? "hidden": "inline"} `}><Dropdown items={profile} judul="Profile" className="text-biru-tua text-[22px] bg-transparent" /></li>
+            <li className={`mx-[50px] xl:mx-[30px] hover:drop-shadow-3xl ${isAdmin ? "hidden": "inline"}`}><Link to="/add">Add</Link></li>
+            <li className={`mx-[50px] ml-auto hover:drop-shadow-3xl ${isLogin ? "hidden": "inline"}`}><Link to="/welcome">Sign in/Sign out</Link></li>
+            <li className={`mx-[50px] ml-auto hover:drop-shadow-3xl ${isLogin ? "inline": "hidden"} `}><Dropdown items={profile} judul="Profile" className="text-biru-tua text-[22px] bg-transparent" /></li>
         </ul>
     </nav>
     )
