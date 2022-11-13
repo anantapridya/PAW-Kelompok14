@@ -81,7 +81,7 @@ const EditMedicine = () => {
     <div className="bg-putih md:h-screen">
       <Navbar/>
       <div className="font-body mx-[150px] my-[30px] text-xl">
-        <h1 className="text-biru-sedang font-heading font-bold text-4xl pb-10">
+        <h1 className="text-biru-sedang font-heading font-bold text-5xl pb-10">
           Edit Obat
         </h1>
 
@@ -140,22 +140,22 @@ const EditMedicine = () => {
           />
         </div>
 
-        <div className="flex justify-between w-full grid grid-cols-[100px_125px]">
+        <div className="flex flex-col-reverse sm:flex-row items-center sm:justify-between w-full mt-2 sm:mt-12 gap-2 sm:gap-0">
           <Link to={
-          searchParams.get('todesc')
-          ? {pathname: '../desc/', search: '?id=' + medicineId}
-          : '../list'
-          }>
+                searchParams.get('todesc')
+                ? {pathname: '../desc/', search: '?id=' + medicineId}
+                : '../list'
+                }>
             <DefaultBtn
               type="button"
               judulButton="Batal"
-              className="bg-white text-gray-400 outline outline-2 outline-gray-300 hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+              className="text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 bg-white text-gray-400 outline outline-2 outline-gray-300 hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
             />
           </Link>
           <DefaultBtn
-            type="button"
+            type="submit"
             judulButton="Edit Obat"
-            className="hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+            className="text-sm lg:text-xl lg:w-[250px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
             onClick={handleSubmit}
           />
         </div>
