@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 
-import Dropdown from "../components/Dropdown";
-import Modal from "../components/Modal";
+import Dropdown from "../components/common/Dropdown";
+import Modal from "../components/common/Modal";
 import Navbar from "../components/Navbar";
-import DefaultBtn from "../components/DefaultBtn";
+import DefaultBtn from "../components/common/DefaultBtn";
 
 const MedicineList = () => {
 

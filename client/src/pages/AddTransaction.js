@@ -2,13 +2,13 @@ import React from "react";
 
 import { Link, useSearchParams } from "react-router-dom";
 
-import DefaultBtn from "../components/DefaultBtn";
-import DefaultTxtArea from "../components/DefaultTxtArea";
+import DefaultBtn from "../components/common/DefaultBtn";
+import DefaultTxtArea from "../components/common/DefaultTxtArea";
 import Navbar from "../components/Navbar";
 import SetDate from "../components/SetDate";
 import SetTime from "../components/SetTime";
-import DefaultInput from "../components/DefaultInput";
-import Modal from "../components/Modal";
+import DefaultInput from "../components/common/DefaultInput";
+import Modal from "../components/common/Modal";
 
 const AddTransaction = () => {
 

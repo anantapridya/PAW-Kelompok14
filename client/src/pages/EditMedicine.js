@@ -2,9 +2,9 @@ import React from "react";
 
 import { useSearchParams, Link } from "react-router-dom";
 
-import DefaultBtn from "../components/DefaultBtn";
-import DefaultInput from "../components/DefaultInput";
-import DefaultTxtArea from "../components/DefaultTxtArea";
+import DefaultBtn from "../components/common/DefaultBtn";
+import DefaultInput from "../components/common/DefaultInput";
+import DefaultTxtArea from "../components/common/DefaultTxtArea";
 import Navbar from "../components/Navbar";
 
 const EditMedicine = () => {

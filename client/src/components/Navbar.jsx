@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 import logo from '../img/websitelogo.png'
 import React from 'react'
-import Dropdown from './Dropdown'
-// import '../css/Navbar.css'
+import Dropdown from './common/Dropdown'
 
 export default function Navbar({ isLogin, isAdmin }) {
     const profile =[{id:1, value:"Profile"},{id:2, value:"Sign Out"}]

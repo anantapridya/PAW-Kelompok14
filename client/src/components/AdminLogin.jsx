@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Pattern from "../img/bg-login.svg";
-import DefaultBtn from "./DefaultBtn";
-import DefaultInput from "./DefaultInput";
+import DefaultBtn from "./common/DefaultBtn";
+import DefaultInput from "./common/DefaultInput";
 
 export default function UserLogin() {
   return (

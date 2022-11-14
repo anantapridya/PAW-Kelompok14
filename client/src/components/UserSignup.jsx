@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Pattern from "../img/bg-login.svg";
-import DefaultBtn from "./DefaultBtn";
-import DefaultInput from "./DefaultInput";
+import DefaultBtn from "./common/DefaultBtn";
+import DefaultInput from "./common/DefaultInput";
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
