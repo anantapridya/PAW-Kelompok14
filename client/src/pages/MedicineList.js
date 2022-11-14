@@ -1,7 +1,4 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 
 import Dropdown from "../components/Dropdown";
@@ -67,25 +64,25 @@ const MedicineList = () => {
 
 
   return (
-    <div className="bg-putih md:h-screen">
-      <Navbar />
-      <div className="mx-[120px] my-[30px] flex flex-col">
-        <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mb-[50px]">
-          <h2 className="text-3xl xl:text-[58px] font-body font-semibold">Daftar Obat</h2>
-          <div className="flex">
-            <Dropdown items={dropdownValue} judul="Sort" className="border-2 border-biru-tua" />
-            <input
-              className="ml-[40px] rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black"
-              type="text"
-              placeholder="Search"
-              onChange={e => getMedicine(e.target.value)}
-            >
-            </input>
-          </div>
+    <>
+    {/* <Navbar /> */}
+    <div className="mx-9 my-4 md:mx-[120px] md:my-[30px] flex flex-col">
+      <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mb-[50px]">
+        <h2 className="text-3xl xl:text-[58px] font-body font-semibold">Daftar Obat</h2>
+        <div className="flex">
+          <Dropdown items={dropdownValue} judul="Sort" className="border-2 border-biru-tua max-md:text-xs" />
+          <input
+            className="ml-4 md:ml-[40px] rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black max-md:text-xs"
+            type="text"
+            placeholder="Search"
+            onChange={e => getMedicine(e.target.value)}
+          >
+          </input>
         </div>
         <MedicineConfig items={medicineData} refreshMedicineData={getMedicine} />
       </div>
     </div>
+    </>
   );
 };
 
@@ -146,24 +143,24 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
         const {_id, name, price} = data;
         return(
           <div key={index}>
-            <div className="flex justify-between py-2 px-4 md:py-[30px] md:px-[50px] bg-[#B2FCFF] mb-[20px] rounded-[16px] hover:drop-shadow-xl transition">
+            <div className="flex justify-between py-2 px-4 lg:py-[30px] lg:px-[50px] bg-[#B2FCFF] mb-[20px] rounded-[16px] hover:drop-shadow-xl transition">
               <Link to={{
                 pathname: "/desc",
                 search: "?id=" + _id
               }}>
-                <div className="hover:font-bold transition-all flex flex-col md:flex-row md:w-[500px] justify-between border-black border-b-2 border-solid items-start md:items-end pb-1" >
-                  <p className="font-body text-xl md:text-[25px]">{name}</p>
-                  <p className="font-body text-sm md:text-base">Rp{price}</p>
+                <div className="hover:font-bold transition-all flex flex-col lg:flex-row lg:w-[500px] justify-between lg:border-black lg:border-b-2 lg:border-solid items-start lg:items-end pb-1" >
+                  <p className="font-body text-xs lg:text-[25px]">{name}</p>
+                  <p className="font-body text-2xs lg:text-base">Rp{price}</p>
                 </div>
               </Link>
-              <div className="items-center fitur flex">
+              <div className="items-center flex">
               <Link to={{
                 pathname: "/edit",
                 search: "?id=" + _id
               }} >
-                <DefaultBtn judulButton="Edit" className="border-biru-sedang bg-white text-black border-2 mr-4 md:mr-[30px] md:px-[25px]" />
+                <DefaultBtn judulButton="Edit" className="border-biru-sedang bg-white text-black border-2 mr-4 lg:mr-[30px] lg:px-[25px] max-lg:text-xs max-lg:px-2 max-lg:py-1 " />
               </Link>
-                <DefaultBtn onClick={()=>{openModal(_id)}} className="bg-[#FF0000] border-2 border-[#FF0000]" judulButton="Delete"/>              
+                <DefaultBtn onClick={()=>{openModal(_id)}} className="bg-[#FF0000] border-2 border-[#FF0000] max-lg:text-xs max-lg:px-2 max-lg:py-1 " judulButton="Delete"/>              
               </div>
             </div>
           </div>

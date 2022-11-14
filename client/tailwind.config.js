@@ -9,6 +9,9 @@ module.exports = {
         'body': ['Poppins', 'sans-serif'],
         'heading': ['Poppins'],
       },
+      fontSize: {
+        '2xs': '9px'
+      },
       colors: {
         'biru-tua': '#3F65FF',
         'biru-sedang': '#5FDFFF',
