@@ -9,7 +9,7 @@ import DefaultBtn from "../components/common/DefaultBtn";
 const MedicineList = () => {
 
   const [token, setToken] = useState()
-
+  const [isAdmin, setIsAdmin] = useState(false)
   const [medicineData, setMedicineData] = useState([])
 
   const SortMedicine = {
@@ -158,7 +158,7 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
                 pathname: "/edit",
                 search: "?id=" + _id
               }} >
-                <DefaultBtn judulButton="Edit" className="border-biru-sedang bg-white text-black border-2 mr-4 lg:mr-[30px] lg:px-[25px] max-lg:text-xs max-lg:px-2 max-lg:py-1 " />
+                <DefaultBtn judulButton="Edit" className="border-biru-sedang bg-white border-2 mr-4 lg:mr-[30px] lg:px-[25px] max-lg:text-xs max-lg:px-2 max-lg:py-1 text-[#000000]" />
               </Link>
                 <DefaultBtn onClick={()=>{openModal(_id)}} className="bg-[#FF0000] border-2 border-[#FF0000] max-lg:text-xs max-lg:px-2 max-lg:py-1 " judulButton="Delete"/>              
               </div>

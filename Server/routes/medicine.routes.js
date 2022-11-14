@@ -9,7 +9,7 @@ module.exports = app => {
   
     router.get("/", [authJwt.verifyToken], medicine.findAll);
   
-    router.get("/:id", /*[authJwt.verifyToken],*/ medicine.findOne);
+    router.get("/:id", [authJwt.verifyToken], medicine.findOne);
 
     router.put("/:id", /*[authJwt.verifyToken,  authJwt.isAdmin],*/ medicine.update);
     router.delete("/:id", /*[authJwt.verifyToken,  authJwt.isAdmin],*/ medicine.delete);
