@@ -79,9 +79,9 @@ const MedicineList = () => {
           >
           </input>
         </div>
+      </div>
         <MedicineConfig items={medicineData} refreshMedicineData={getMedicine} />
       </div>
-    </div>
     </>
   );
 };
