@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import Navbar from "./Navbar";
 import Pharmaweb1 from "../img/Pharmaweb1.png";
 import { useState } from "react";
@@ -5,6 +6,7 @@ import { useState } from "react";
 export default function Welcome() {
   return (
     <>
+      <ToastContainer />
       <div className="bg-putih xl:h-screen">
         <Navbar />
         <div className="grid grid-cols-3 w-3/4 mx-auto md:gap-4 lg:gap-8 pt-24 2xl:pt-48 pb-12">

@@ -16,11 +16,15 @@ export const isAuth = () => {
 
 export const isAdmin = () => {
     if (window !== 'undefined') {
-        const role = JSON.parse(localStorage.getItem('user')).roles[0].name;
-        if (role === "admin") {
-           return true
-        }
-        else {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const role = JSON.parse(localStorage.getItem('user')).roles[0].name;
+            if (role === "admin") {
+            return true
+            } else {
+                return false
+            }
+        } else {
             return false
         }
     }

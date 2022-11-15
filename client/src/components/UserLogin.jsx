@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useNavigate } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Pattern from "../img/bg-login.svg";
 import DefaultBtn from "./common/DefaultBtn";
 import DefaultInput from "./common/DefaultInput";
@@ -9,6 +11,8 @@ export default function UserLogin() {
     username: "",
     password: "",
   });
+
+  // const navigate = useNavigate;
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -20,43 +24,25 @@ export default function UserLogin() {
 
   function handleSubmit(event) {
     // event.preventDefault();
-    /*
-    NOTE:
-      untuk sementara, fitur sign in tidak berfungsi karena
-      JWT token belum disimpan ke session & belum dikirimkan
-      ke API setiap fetch()
-    */
     fetch("http://localhost:9000/api/auth/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     })
-      // .then((response) => {
-      //   return response.data;
-      // })
       .then(async (response) => {
         const data = await response.json();
-        // console.log(data);
+        if (!response.ok) {
+          const error = (data && data.message) || response.status;
+          return Promise.reject(error);
+        }
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", JSON.stringify(data.token));
-        /*
-        jika berhasil, 'data' akan berisi:
-        {
-          user: {
-            id: user._id,
-            username: user.username,
-            email: user.email,
-            roles: user.roles,
-          },
-          token
-        }
-        jika gagal, 'data' dapat berisi:
-        { message: "User Not found." } (404)
-        { message: "Invalid Password!" } (401)
-
-        NOTE:
-        to do: penyimpanan JWT token ke session/cookie
-        */
+        // navigate("/list");
+        toast.success("Welcome!");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error);
       });
   }
 
@@ -66,6 +52,7 @@ export default function UserLogin() {
       style={{ backgroundImage: `url(${Pattern})` }}
     >
       <div className="w-[240px] sm:w-[500px] lg:w-[780px] bg-biru-muda/[.1] rounded-3xl backdrop-blur-sm shadow-3xl m-auto">
+        <ToastContainer />
         <form className="flex flex-col items-center justify-center w-3/4 mx-auto my-[100px]">
           <DefaultInput
             placeholder="Username"
@@ -91,6 +78,7 @@ export default function UserLogin() {
                 className="text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
               />
             </Link>
+
             <Link to="/">
               <DefaultBtn
                 type="submit"

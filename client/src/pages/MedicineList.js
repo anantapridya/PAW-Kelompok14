@@ -6,10 +6,12 @@ import Modal from "../components/common/Modal";
 import Navbar from "../components/Navbar";
 import DefaultBtn from "../components/common/DefaultBtn";
 
+import { isAdmin, isAuth } from "../helpers/auth";
+
 const MedicineList = () => {
 
   const [token, setToken] = useState()
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [id, setId] = useState()
   const [medicineData, setMedicineData] = useState([])
 
   const SortMedicine = {
@@ -59,13 +61,15 @@ const MedicineList = () => {
   }
 
   useEffect(() => {
+    const userId = JSON.parse(localStorage.getItem("user")).id
+    setId(userId)
     getMedicine()
   }, [])
 
 
   return (
     <>
-    {/* <Navbar /> */}
+    <Navbar />
     <div className="mx-9 my-4 md:mx-[120px] md:my-[30px] flex flex-col">
       <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mb-[50px]">
         <h2 className="text-3xl xl:text-[58px] font-body font-semibold">Daftar Obat</h2>
@@ -148,20 +152,20 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
                 pathname: "/desc",
                 search: "?id=" + _id
               }}>
-                <div className="hover:font-bold transition-all flex flex-col lg:flex-row lg:w-[500px] justify-between lg:border-black lg:border-b-2 lg:border-solid items-start lg:items-end pb-1" >
+                <div className="hover:font-bold transition-all flex flex-col lg:flex-row lg:w-[500px] justify-between lg:border-black lg:border-b-2 lg:border-solid items-start lg:items-end pb-1 " >
                   <p className="font-body text-xs lg:text-[25px]">{name}</p>
                   <p className="font-body text-2xs lg:text-base">Rp{price}</p>
                 </div>
               </Link>
-              <div className="items-center flex">
-              <Link to={{
+              {isAdmin() && <div className="items-center flex">
+                <Link to={{
                 pathname: "/edit",
                 search: "?id=" + _id
               }} >
                 <DefaultBtn judulButton="Edit" className="border-biru-sedang bg-white border-2 mr-4 lg:mr-[30px] lg:px-[25px] max-lg:text-xs max-lg:px-2 max-lg:py-1 text-[#000000]" />
               </Link>
                 <DefaultBtn onClick={()=>{openModal(_id)}} className="bg-[#FF0000] border-2 border-[#FF0000] max-lg:text-xs max-lg:px-2 max-lg:py-1 " judulButton="Delete"/>              
-              </div>
+              </div>}
             </div>
           </div>
         )
