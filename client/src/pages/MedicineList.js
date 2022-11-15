@@ -164,7 +164,7 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
               }} >
                 <DefaultBtn judulButton="Edit" className="border-biru-sedang bg-white border-2 mr-4 lg:mr-[30px] lg:px-[25px] max-lg:text-xs max-lg:px-2 max-lg:py-1 text-[#000000]" />
               </Link>
-                <DefaultBtn onClick={()=>{openModal(_id)}} className="bg-[#FF0000] border-2 border-[#FF0000] max-lg:text-xs max-lg:px-2 max-lg:py-1 " judulButton="Delete"/>              
+                <DefaultBtn onClick={()=>{openModal(_id)}} className="text-putih bg-[#FF0000] border-2 border-[#FF0000] max-lg:text-xs max-lg:px-2 max-lg:py-1 " judulButton="Delete"/>              
               </div>}
             </div>
           </div>

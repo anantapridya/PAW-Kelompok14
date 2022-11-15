@@ -7,11 +7,10 @@ export default function DefaultBtn(props) {
       <button
         type={props.type}
         className={
-          "text-putih bg-biru-tua h-fit w-fit p-3 rounded-md font-body " +
-          props.className
+          "bg-biru-tua h-fit w-fit p-3 rounded-md font-body " + props.className
         }
         onClick={props.onClick}
-        name={props.name || ''}
+        name={props.name || ""}
       >
         {props.judulButton}
       </button>

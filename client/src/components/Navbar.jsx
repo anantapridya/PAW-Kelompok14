@@ -10,11 +10,6 @@ export default function Navbar() {
   const handleClick = () => {
     localStorage.clear();
     toast.success("You've been signed out");
-    // fetch("http://localhost:9000/api/auth/signout", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(formData),
-    // });
   };
   return (
     <nav

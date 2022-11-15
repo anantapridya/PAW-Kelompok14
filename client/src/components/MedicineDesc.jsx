@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import backArrow from "../img/back-arrow.png";
 import editMedicine from "../img/edit-medicine.png";
 import Navbar from "./Navbar.jsx";
+import { isAdmin } from "../helpers/auth";
 
 export default function MedicineDesc() {
   const [medicine, setMedicine] = useState({
@@ -13,8 +14,8 @@ export default function MedicineDesc() {
     price: 0,
     log: [],
   });
-  // set value awal isAuthorized menjadi false, lalu update berdasar token
-  const [isAuthorized, setIsAuthorized] = useState(true);
+
+  const [isAuthorized, setIsAuthorized] = useState(false);
   const [token, setToken] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
   const medicineId = searchParams.get("id"); // id di pass dari URL
@@ -26,7 +27,9 @@ export default function MedicineDesc() {
     const token = JSON.parse(localStorage.getItem("token"));
     if (token) {
       setToken(token);
+      setIsAuthorized(true);
     }
+
     fetch(`http://localhost:9000/${medicineId}`, {
       headers: {
         Authorization: "Bearer " + `${token}`,
@@ -68,6 +71,9 @@ export default function MedicineDesc() {
 // sub components:
 
 function MedicineDescAside({ medicineLog, medId }) {
+  useEffect(() => {
+    const userId = JSON.parse(localStorage.getItem("user")).id;
+  }, []);
   const transactions = medicineLog.map((log) => (
     <MedicineDescLog
       date={log[2].split(", ")[0]}
@@ -84,19 +90,21 @@ function MedicineDescAside({ medicineLog, medId }) {
       <div className="px-[5px] rounded-[20px] absolute top-[100px] left-[50px] right-[50px] bottom-[50px] overflow-y-scroll scroll-smooth no-scrollbar mt-[20px] text-[20px]">
         {transactions}
       </div>
-      <Link
-        to={{
-          pathname: "/log",
-          search: "?id=" + medId,
-        }}
-      >
-        <div className="absolute bg-biru-tua overflow-hidden shadow-5xl h-[100px] w-[100px] rounded-full text-white flex items-center justify-center bottom-[50px] right-[50px] font-body text-[100px] z-[1] transition ease-out duration-150 hover:-rotate-90 hover:scale-105 peer">
-          +
-        </div>
-        <div className="absolute bg-biru-tua text-white overflow-hidden shadow-5xl h-[60px] bottom-[70px] right-[80px] w-[60px] rounded-[30px] text-[20px] leading-[60px] indent-[20px] duration-200 ease-in-out delay-100 peer-hover:right-[120px] peer-hover:w-[290px] ">
-          Buat Catatan Transaksi
-        </div>
-      </Link>
+      {isAdmin() && (
+        <Link
+          to={{
+            pathname: "/log",
+            search: "?id=" + medId,
+          }}
+        >
+          <div className="absolute bg-biru-tua overflow-hidden shadow-5xl h-[100px] w-[100px] rounded-full text-white flex items-center justify-center bottom-[50px] right-[50px] font-body text-[100px] z-[1] transition ease-out duration-150 hover:-rotate-90 hover:scale-105 peer">
+            +
+          </div>
+          <div className="absolute bg-biru-tua text-white overflow-hidden shadow-5xl h-[60px] bottom-[70px] right-[80px] w-[60px] rounded-[30px] text-[20px] leading-[60px] indent-[20px] duration-200 ease-in-out delay-100 peer-hover:right-[120px] peer-hover:w-[290px] ">
+            Buat Catatan Transaksi
+          </div>
+        </Link>
+      )}
     </aside>
   );
 }
@@ -124,20 +132,22 @@ function MedicineDescArticle({ medicineData, isAuthorized }) {
         <p className="font-body text-[27px] absolute bottom-[40px] right-[120px]">
           Harga: Rp{medicineData.price.toLocaleString("id-ID")},00
         </p>
-        <Link
-          to={{
-            pathname: "../edit",
-            search: "?id=" + medicineData._id + "&todesc=true",
-          }}
-        >
-          <div className="rounded-[20px] w-24 h-24 absolute flex items-center justify-center bg-biru-tua right-[-20px] bottom-[50px] shadow-5xl hover:scale-105 ease-out duration-100">
-            <img
-              className="h-[60%]"
-              lt="edit medicine logo"
-              src={editMedicine}
-            />
-          </div>
-        </Link>
+        {isAdmin() && (
+          <Link
+            to={{
+              pathname: "../edit",
+              search: "?id=" + medicineData._id + "&todesc=true",
+            }}
+          >
+            <div className="rounded-[20px] w-24 h-24 absolute flex items-center justify-center bg-biru-tua right-[-20px] bottom-[50px] shadow-5xl hover:scale-105 ease-out duration-100">
+              <img
+                className="h-[60%]"
+                lt="edit medicine logo"
+                src={editMedicine}
+              />
+            </div>
+          </Link>
+        )}
       </div>
     </article>
   );
