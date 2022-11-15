@@ -37,11 +37,10 @@ export default function UserLogin() {
         }
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", JSON.stringify(data.token));
-        // navigate("/list");
+        window.location.href = "../list";
         toast.success("Welcome!");
       })
       .catch((error) => {
-        console.log(error);
         toast.error(error);
       });
   }
@@ -53,7 +52,10 @@ export default function UserLogin() {
     >
       <div className="w-[240px] sm:w-[500px] lg:w-[780px] bg-biru-muda/[.1] rounded-3xl backdrop-blur-sm shadow-3xl m-auto">
         <ToastContainer />
-        <form className="flex flex-col items-center justify-center w-3/4 mx-auto my-[100px]">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center justify-center w-3/4 mx-auto my-[100px]"
+        >
           <DefaultInput
             placeholder="Username"
             className="w-full text-sm md:text-xl"
@@ -75,18 +77,18 @@ export default function UserLogin() {
               <DefaultBtn
                 type="button"
                 judulButton="Kembali"
-                className="text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+                className="text-putih text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
               />
             </Link>
 
-            <Link to="/">
-              <DefaultBtn
-                type="submit"
-                judulButton="Masuk"
-                className="text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
-                onClick={handleSubmit}
-              />
-            </Link>
+            {/* <Link to="/"> */}
+            <DefaultBtn
+              type="submit"
+              judulButton="Masuk"
+              className="text-putih text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+              onClick={handleSubmit}
+            />
+            {/* </Link> */}
           </div>
         </form>
       </div>

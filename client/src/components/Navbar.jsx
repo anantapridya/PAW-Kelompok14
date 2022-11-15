@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom";
 import logo from "../img/websitelogo.png";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Dropdown from "./common/Dropdown";
 import { isAdmin, isAuth } from "../helpers/auth";
 import { toast } from "react-toastify";
 
 export default function Navbar() {
-  // const profile =[{id:1, value:"Profile"},{id:2, value:"Sign Out"}]
+  const [isLogged, setIsLogged] = useState();
+
   const handleClick = () => {
     localStorage.clear();
     toast.success("You've been signed out");
+    setIsLogged(false);
+    window.location.href = "/";
   };
+
   return (
     <nav
       role="navigation"
