@@ -23,7 +23,7 @@ export default function UserLogin() {
   }
 
   function handleSubmit(event) {
-    // event.preventDefault();
+    event.preventDefault();
     fetch("http://localhost:9000/api/auth/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
