@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import DefaultBtn from "../components/common/DefaultBtn";
 
 import { isAdmin, isAuth } from "../helpers/auth";
+import { toast, ToastContainer } from "react-toastify";
 
 const MedicineList = () => {
 
@@ -66,6 +67,7 @@ const MedicineList = () => {
   return (
     <>
       <div className="bg-putih">
+        <ToastContainer/>
         <Navbar />
         <div className="mx-9 my-4 md:mx-[120px] md:my-[30px] flex flex-col">
           <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mb-[50px]">
@@ -102,7 +104,7 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
     })
       .then(response => response.json())
       .then(data => {
-        // alert(data.message)
+        toast.success(data.message)
         /*
         data.message dapat berisi 
         "Cannot delete medicine with id=${id}"

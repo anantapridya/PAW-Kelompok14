@@ -1,7 +1,8 @@
 import React from "react";
 
 import { useSearchParams, Link } from "react-router-dom";
-
+import {toast, ToastContainer} from "react-toastify"
+import "react-toastify/dist/ReactToastify.css";
 import DefaultBtn from "../components/common/DefaultBtn";
 import DefaultInput from "../components/common/DefaultInput";
 import DefaultTxtArea from "../components/common/DefaultTxtArea";
@@ -61,9 +62,7 @@ const EditMedicine = () => {
   function handleSubmit(event) {
     // cek medicine.stock
     if (medicine.stock < 0) {
-      // to do: beri notif modal (?)
-      // fungsi sementara:
-      alert('stok obat tidak boleh negatif')
+      toast.error("Stok obat tidak boleh negatif")
     } else {
       fetch(`http://localhost:9000/${medicineId}`, {
         method: 'PUT',
@@ -81,14 +80,17 @@ const EditMedicine = () => {
         TO DO:
         tampilkan komponen modal tergantung isi respon dari API
         */
-        alert(data.message) // kode sementara, delete soon
-        window.location.href = '/desc?id=' + medicineId
+        toast.success(data.message)
+        setTimeout(() => {
+          window.location.href = "/desc?id=" + medicineId;
+        }, 2000);
       })
     }
   }
   
   return (
     <div className="bg-putih md:h-screen">
+      <ToastContainer/>
       <Navbar/>
       <div className="font-body mx-9 my-4 md:mx-[120px] md:my-[30px] text-[15px] md:text-xl">
         <h1 className="text-biru-sedang font-heading font-bold text-5xl pb-10">
@@ -165,7 +167,7 @@ const EditMedicine = () => {
           <DefaultBtn
             type="submit"
             judulButton="Edit Obat"
-            className="text-sm lg:text-xl lg:w-[250px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+            className="text-putih text-sm lg:text-xl lg:w-[250px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
             onClick={handleSubmit}
           />
         </div>

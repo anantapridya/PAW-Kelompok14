@@ -25,11 +25,11 @@ export default function Register() {
               className="text-putih w-[100px] sm:w-[300px] sm:h-[60px] lg:w-[474px] lg:h-[84px] text-md lg:text-2xl py-1 lg:py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all "
             />
           </Link>
-          <Link to="/loginadmin" className="mt-2 lg:mt-4">
+          {/* <Link to="/loginadmin" className="mt-2 lg:mt-4">
             <p className="font-body text-sm lg:text-xl hover:underline">
               Masuk sebagai Admin
             </p>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

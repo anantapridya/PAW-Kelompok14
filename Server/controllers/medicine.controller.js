@@ -13,7 +13,7 @@ module.exports = {
             && req.body.stock
             && req.body.price)) {
             res.status(400).send({
-                message: "request's body must contain 'name', 'manufacturer', 'description', and 'stock' field"
+                message: "Semua kolom harus diisi"
             })
         } else {
         const medicine = new Medicine({
@@ -24,7 +24,7 @@ module.exports = {
             price: req.body.price,
             log: [medicineLog(
                 req.body.stock,
-                'data obat ditambahkan'
+                'Data obat ditambahkan'
             )]
         })
         medicine.save()
@@ -34,7 +34,7 @@ module.exports = {
             .catch(err => {
                 res.status(500).send({
                     message:
-                    err.message || 'Error creating medicine.'
+                    err.message || 'Gagal menambah obat'
                 })
             })
         }
@@ -63,7 +63,7 @@ module.exports = {
             .catch(err => {
                 res.status(500).send({
                     message:
-                    err.message || "Some error occured while retreiving medicines"
+                    err.message || "Terjadi kesalahan saat mengambil data obat"
                 })
             })
 
@@ -77,13 +77,13 @@ module.exports = {
             .then(data => {
                 if (!data) {
                     res.status(404).send({
-                        message: `Medicine with id ${id} not found`
+                        message: `Obat dengan id ${id} tidak ditemukan`
                     })
                 } else res.send(data)
             })
             .catch(err => {
                 res.status(500).send({
-                    message: `Error retreiving medicine with id ${id}`
+                    message: `Gagal mengambil obat dengan id ${id}`
                 })
             })
     },
@@ -92,7 +92,7 @@ module.exports = {
     update(req, res) {
         if (Object.keys(req.body).length === 0) {
             return res.status(400).send({
-                message: "Data to update can not be empty!"
+                message: "Data untuk update tidak boleh kosong"
             })
         }
         const id = req.params.id
@@ -104,7 +104,7 @@ module.exports = {
             .then(data => {
                 if (!data) {
                     res.status(404).send({
-                        message: `Medicine with id ${id} not found`
+                        message: `Obat dengan id ${id} tidak ditemukan`
                     })
                 } else {
                     const stockIncrement = req.body.stock - parseInt(data.stock)
@@ -123,17 +123,17 @@ module.exports = {
                         .then(data => {
                             if (!data)
                                 res.status(404).send({
-                                    message: `Medicine with id ${id} not found`
+                                    message: `Obat dengan id ${id} tidak ditemukan`
                                 })
                             else {
                                 // updating transaction log if "stock" was also updated
-                                res.send({ message: "medicine was updated successfully" })
+                                res.send({ message: "Obat berhasil diupdate" })
                             }
                         })
                         .catch(err => {
                             res.status(500).send({
                                 message:
-                                    err.message || `Error updating medicine with id ${id}`
+                                    err.message || `Terjadi kesalahan saat mengupdate obat dengan id ${id}`
                             })
                         })
                     } else updateMedicine()
@@ -142,7 +142,7 @@ module.exports = {
             })
             .catch(err => {
                 res.status(500).send({
-                    message: err.message || `Error updating medicine with id ${id}`
+                    message: err.message || `Terjadi kesalahan saat mengupdate obat dengan id ${id}`
                 })
             })
         } else updateMedicine()
@@ -152,17 +152,17 @@ module.exports = {
                 .then(data => {
                     if (!data)
                         res.status(404).send({
-                            message: `Medicine with id ${id} not found`
+                            message: `Obat dengan id ${id} tidak ditemukan`
                         })
                     else {
                         // updating transaction log if "stock" was also updated
-                        res.send({ message: "medicine was updated successfully" })
+                        res.send({ message: "Obat berhasil diupdate" })
                     }
                 })
                 .catch(err => {
                     res.status(500).send({
                         message:
-                            err.message || `Error updating medicine with id ${id}`
+                            err.message || `Terjadi kesalahan saat mengupdate obat dengan ${id}`
                     })
                 })
         }
@@ -193,7 +193,7 @@ module.exports = {
                 const updatedStock = data.stock + req.body.stock
                 if (updatedStock < 0) 
                     return res.status(400).send({
-                        message: 'medicine stock cannot be less than zero.'
+                        message: 'Stok tidak dapat kurang dari 0'
                     })
                 log.push(newLog)
 
@@ -201,19 +201,19 @@ module.exports = {
                 .then(data => {
                     if (!data)
                         res.status(404).send({
-                            message: `Medicine with id ${id} not found`
+                            message: `Obat dengan id ${id} tidak ditemukan`
                         })
-                    else res.send({ message: `Transaction log added for medicine with id ${id}` })
+                    else res.send({ message: `Transaction log added for Obat dengan id ${id}` })
                 })
 
             }).catch(() => {
                 res.status(404).send({
-                    message: `Medicine with id ${id} not found`
+                    message: `Obat dengan id ${id} tidak ditemukan`
                 })
             })
 
         } else return res.status(400).send({
-            message: "cannot add empty transaction log"
+            message: "Tidak dapat menambahkan transaksi kosong"
         })
 
     },
@@ -226,13 +226,13 @@ module.exports = {
             .then(data => {
                 if (!data) {
                     res.status(404).send({
-                        message: `Medicine with id ${id} not found`
+                        message: `Obat dengan ${id} tidak ditemukan`
                     })
                 } else res.send(data.log)
             })
             .catch(err => {
                 res.status(500).send({
-                    message: `Error retreiving medicine log with id ${id}`
+                    message: `Gagal mengambil obat dengan id ${id}`
                 })
             })
     },
@@ -245,24 +245,24 @@ module.exports = {
             .then(data => {
                 if (!data) {
                     res.status(404).send({
-                        message: `Medicine with id ${id} not found`
+                        message: `Obat dengan id ${id} tidak ditemukan`
                     })
                 } else res.send(data.stock)
             })
             .catch(err => {
                 res.status(500).send({
-                    message: `Error retreiving medicine stock with id ${id}`
+                    message: `Gagal mengambil obat dengan id ${id}`
                 })
             })
     },
 
     deleteAll(req,res){
         Medicine.deleteMany({}).then(data =>{
-            res.send({message: "All Medicine Data has been Successfully Delete"})
+            res.send({message: "Semua obat telah dihapus"})
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Delete Failed"
+                message: err.message || "Hapus gagal"
             })
         })
     },
@@ -275,17 +275,17 @@ module.exports = {
             .then(data => {
                 if (!data) {
                     res.status(404).send({
-                    message: `Cannot delete medicine with id=${id}`
+                    message: `Tidak dapat menghapus obat dengan id=${id}`
                     })
                 } else {
                     res.send({
-                    message: `Medicine with id ${id} was deleted successfully!`
+                    message: `Obat dengan id ${id} berhasil dihapus!`
                     })
                 }
             })
             .catch(err => {
                 res.status(500).send({
-                    message: `Cannot delete medicine with id ${id}`
+                    message: `Tidak dapat menghapus obat dengan id ${id}`
                 })
             })
     }

@@ -37,8 +37,10 @@ export default function UserLogin() {
         }
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", JSON.stringify(data.token));
-        window.location.href = "../list";
-        toast.success("Welcome!");
+        toast.success("Selamat datang!");
+        setTimeout(() => {
+          window.location.href = "/list";
+        }, 2000);
       })
       .catch((error) => {
         toast.error(error);
@@ -50,8 +52,8 @@ export default function UserLogin() {
       className="w-full h-screen bg-putih bg-repeat bg-auto flex"
       style={{ backgroundImage: `url(${Pattern})` }}
     >
+      <ToastContainer />
       <div className="w-[240px] sm:w-[500px] lg:w-[780px] bg-biru-muda/[.1] rounded-3xl backdrop-blur-sm shadow-3xl m-auto">
-        <ToastContainer />
         <form
           onSubmit={handleSubmit}
           className="flex flex-col items-center justify-center w-3/4 mx-auto my-[100px]"

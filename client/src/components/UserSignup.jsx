@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Pattern from "../img/bg-login.svg";
 import DefaultBtn from "./common/DefaultBtn";
 import DefaultInput from "./common/DefaultInput";
@@ -20,17 +22,26 @@ export default function SignupPage() {
   }
 
   function handleSubmit(event) {
-    // event.preventDefault()
+    event.preventDefault();
     fetch("http://localhost:9000/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.message === "User was registered successfully!") {
+      .then(async (response) => {
+        const data = await response.json();
+        const message = data.message;
+        if (!response.ok) {
+          const error = (data && data.message) || response.status;
+          return Promise.reject(error);
         }
+        toast.success(message + ". Silahkan Login");
+        setTimeout(() => {
+          window.location.href = "/loginuser";
+        }, 2000);
+      })
+      .catch((error) => {
+        toast.error(error);
       });
     /* NOTE:
     data yg didapat dari fetch() adalah object dgn atribut "message".
@@ -48,6 +59,7 @@ export default function SignupPage() {
       className="w-full h-screen bg-putih bg-repeat bg-auto flex"
       style={{ backgroundImage: `url(${Pattern})` }}
     >
+      <ToastContainer />
       <div className="w-[240px] sm:w-[500px] lg:w-[780px] bg-biru-muda/[.1] rounded-3xl backdrop-blur-sm shadow-3xl m-auto">
         <form className="flex flex-col items-center justify-center w-3/4 mx-auto my-[100px]">
           <DefaultInput
