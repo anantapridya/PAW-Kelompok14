@@ -2,6 +2,8 @@ import React from "react";
 
 import { Link, useSearchParams } from "react-router-dom";
 
+import { isAdmin } from "../helpers/auth"
+
 import DefaultBtn from "../components/common/DefaultBtn";
 import DefaultTxtArea from "../components/common/DefaultTxtArea";
 import Navbar from "../components/Navbar";
@@ -20,7 +22,16 @@ const AddTransaction = () => {
     stock: ''
   })
   React.useEffect(() => {
-    fetch(`http://localhost:9000/${medicineId}`)
+    const token = JSON.parse(localStorage.getItem("token"))
+    if (!( isAdmin() && token ))
+      window.location.href = '/'
+    fetch(`http://localhost:9000/${medicineId}`, {
+      headers: {
+        "Authorization": "Bearer " + `${token}`,
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+    })
       .then(res => res.json())
       .then(data => setMedicine({
         name: data.name,
