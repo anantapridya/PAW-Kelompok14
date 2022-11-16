@@ -128,25 +128,29 @@ const AddTransaction = () => {
         button="OK"
       />
       <Navbar/>
-      <div className="font-body mx-[150px] my-[30px] text-xl">
+      <div className="font-body mx-9 my-4 md:mx-[120px] md:my-[30px] text-[15px] md:text-xl">
         <div>
-          <h1 className="text-biru-sedang font-heading font-bold text-5xl pb-3">
+          <h1 className="text-biru-sedang font-heading font-bold text-3xl md:text-5xl pb-3">
             Tambah Transaksi Log
           </h1>
-          <p className="text-gray-400 italic text-2xl pb-10">
+          <p className="text-gray-400 italic text-xl md:text-2xl pb-10">
             {medicine.name}
           </p>
         </div>
         
-        <div className="grid grid-cols-2">
+        <div className="md:grid grid-cols-2">
           <div>
             <p>Tanggal Transaksi</p>
             <SetDate onChange={newDate => setDate(newDate)} value={date} />
           </div>
           <div>
-            <div className="flex gap-3">
+            <p>Waktu Transaksi</p>
+            <SetTime onChange={newTime => setTime(newTime)} value={time} />
+          </div>
+          <div>
+            <div>
               <p>Transaksi Stok </p>
-              <p className="text-[15px] italic text-gray-400">(Stok saat ini: {medicine.stock})</p>
+              <p className="text-[10px] md:text-[15px] italic text-gray-400">(Stok saat ini: {medicine.stock})</p>
             </div>
             <DefaultInput
               type="number"
@@ -157,10 +161,6 @@ const AddTransaction = () => {
               value={formData.stock}
               min={"-"+medicine.stock}
             />
-          </div>
-          <div>
-            <p>Waktu Transaksi</p>
-            <SetTime onChange={newTime => setTime(newTime)} value={time} />
           </div>
         </div>           
         
