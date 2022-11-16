@@ -90,7 +90,7 @@ const EditMedicine = () => {
   return (
     <div className="bg-putih md:h-screen">
       <Navbar/>
-      <div className="font-body mx-[150px] my-[30px] text-xl">
+      <div className="font-body mx-9 my-4 md:mx-[120px] md:my-[30px] text-[15px] md:text-xl">
         <h1 className="text-biru-sedang font-heading font-bold text-5xl pb-10">
           Edit Obat
         </h1>
