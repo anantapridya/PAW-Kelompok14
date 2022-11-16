@@ -66,7 +66,7 @@ const MedicineList = () => {
 
   return (
     <>
-      <div className="bg-putih">
+      <div className="bg-putih md:h-screen">
         <ToastContainer/>
         <Navbar />
         <div className="mx-9 my-4 md:mx-[120px] md:my-[30px] flex flex-col">
