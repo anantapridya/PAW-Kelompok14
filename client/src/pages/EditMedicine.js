@@ -6,6 +6,7 @@ import DefaultBtn from "../components/common/DefaultBtn";
 import DefaultInput from "../components/common/DefaultInput";
 import DefaultTxtArea from "../components/common/DefaultTxtArea";
 import Navbar from "../components/Navbar";
+import { isAdmin } from "../helpers/auth"
 
 const EditMedicine = () => {
 
@@ -23,7 +24,16 @@ const EditMedicine = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const medicineId = searchParams.get('id')
   React.useEffect(() => {
-    fetch(`http://localhost:9000/${medicineId}`)
+    const token = JSON.parse(localStorage.getItem("token"))
+    if (!( isAdmin() && token ))
+      window.location.href = '/'
+    fetch(`http://localhost:9000/${medicineId}`, {
+      headers: {
+        "Authorization": "Bearer " + `${token}`,
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+    })
       .then(res => res.json())
       .then(data => setMedicine({
         name: data.name,
