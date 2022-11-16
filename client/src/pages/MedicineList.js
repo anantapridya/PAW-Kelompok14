@@ -54,10 +54,6 @@ const MedicineList = () => {
       const data = await response.json()
       setMedicineData(data)
     })
-    /*
-      TO DO:
-      - data untuk harga obat tidak ada di database
-    */
   }
 
   useEffect(() => {
@@ -69,24 +65,27 @@ const MedicineList = () => {
 
   return (
     <>
-    <Navbar />
-    <div className="mx-9 my-4 md:mx-[120px] md:my-[30px] flex flex-col">
-      <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mb-[50px]">
-        <h2 className="text-3xl xl:text-[58px] font-body font-semibold">Daftar Obat</h2>
-        <div className="flex">
-          <Dropdown items={dropdownValue} judul="Sort" className="border-2 border-biru-tua max-md:text-xs" />
-          <input
-            className="ml-4 md:ml-[40px] rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black max-md:text-xs"
-            type="text"
-            placeholder="Search"
-            onChange={e => getMedicine(e.target.value)}
-          >
-          </input>
+      <div className="bg-putih">
+        <Navbar />
+        <div className="mx-9 my-4 md:mx-[120px] md:my-[30px] flex flex-col">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mb-[50px]">
+            <h2 className="text-3xl xl:text-[58px] font-body font-semibold">Daftar Obat</h2>
+            <div className="flex">
+              <Dropdown items={dropdownValue} judul="Sort" className="border-2 border-biru-tua max-md:text-xs" />
+              <input
+                className="ml-4 md:ml-[40px] rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black max-md:text-xs"
+                type="text"
+                placeholder="Search"
+                onChange={e => getMedicine(e.target.value)}
+              >
+              </input>
+            </div>
+          </div>
+          <MedicineConfig items={medicineData} refreshMedicineData={getMedicine} />
         </div>
       </div>
-        <MedicineConfig items={medicineData} refreshMedicineData={getMedicine} />
-      </div>
     </>
+    
   );
 };
 
