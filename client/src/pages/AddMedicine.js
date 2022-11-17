@@ -107,17 +107,17 @@ const AddMedicine = () => {
       />
       <Navbar/>
       <div className="font-body mx-9 my-4 md:mx-[120px] md:my-[30px] text-[15px] md:text-xl">
-        <h1 className="text-biru-sedang font-heading font-bold text-5xl pb-10">
+        <h1 className="text-biru-sedang font-heading font-bold text-3xl md:text-5xl pb-3">
           Tambah Obat
         </h1>
 
-        <div className="w-full grid grid-cols-2">
+        <div className="md:grid grid grid-cols-2">
           <div>
             <p>Nama Obat :</p>
             <div className="inline-block">
               <DefaultInput
                 placeholder="Paracetamol"
-                className="w-[450px] h-[50px]"
+                className="w-[200px] md:w-[350px] h-[50px]"
                 name="name"
                 onChange={handleChange}
                 value={formData.name}
@@ -141,7 +141,7 @@ const AddMedicine = () => {
             <div className="inline-block">
               <DefaultInput
                 placeholder="PT Sindo Farma"
-                className="w-[450px] h-[50px]"
+                className="w-[200px] md:w-[350px] h-[50px]"
                 name="manufacturer"
                 onChange={handleChange}
                 value={formData.manufacturer}

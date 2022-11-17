@@ -101,7 +101,7 @@ const EditMedicine = () => {
       <ToastContainer/>
       <Navbar/>
       <div className="font-body mx-9 my-4 md:mx-[120px] md:my-[30px] text-[15px] md:text-xl">
-        <h1 className="text-biru-sedang font-heading font-bold text-5xl pb-10">
+        <h1 className="text-biru-sedang font-heading font-bold text-3xl md:text-5xl pb-3">
           Edit Obat
         </h1>
 
@@ -110,7 +110,7 @@ const EditMedicine = () => {
             <p>Nama Obat :</p>
             <div className="inline-block">
               <DefaultInput
-                className="w-[450px] h-[50px]"
+                className="w-[200px] md:w-[350px] h-[50px]"
                 name="name"
                 onChange={handleChange}
                 value={medicine.name}
@@ -131,7 +131,7 @@ const EditMedicine = () => {
             <p>Manufacturer Obat :</p>
             <div className="inline-block">
               <DefaultInput
-                className="w-[450px] h-[50px]"
+                className="w-[200px] md:w-[350px] h-[50px]"
                 name="manufacturer"
                 onChange={handleChange}
                 value={medicine.manufacturer}
