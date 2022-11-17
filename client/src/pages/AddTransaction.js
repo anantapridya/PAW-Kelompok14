@@ -77,7 +77,7 @@ const AddTransaction = () => {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.message.startsWith("Transaction log added for medicine with id"))
+        if (data.message.startsWith("Transaksi ditambahkan untuk obat dengan id"))
           setModalState({
             isOpen: true,
             desc: "Transaksi obat berhasil ditambahkan.",
@@ -188,7 +188,7 @@ const AddTransaction = () => {
           <DefaultBtn
             type="submit"
             judulButton="Tambah Transaksi"
-            className="text-sm lg:text-xl lg:w-[250px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+            className="text-putih text-sm lg:text-xl lg:w-[250px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
             onClick={handleSubmit}
           />
         </div>

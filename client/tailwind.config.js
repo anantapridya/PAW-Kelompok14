@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        'fold': '280px'
+      },
       fontFamily: {
         'body': ['Poppins', 'sans-serif'],
         'heading': ['Poppins'],

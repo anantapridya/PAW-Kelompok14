@@ -203,7 +203,7 @@ module.exports = {
                         res.status(404).send({
                             message: `Obat dengan id ${id} tidak ditemukan`
                         })
-                    else res.send({ message: `Transaction log added for Obat dengan id ${id}` })
+                    else res.send({ message: `Transaksi ditambahkan untuk obat dengan id ${id}` })
                 })
 
             }).catch(() => {
