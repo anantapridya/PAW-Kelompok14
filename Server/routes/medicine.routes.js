@@ -5,7 +5,7 @@ module.exports = app => {
     
     const router = require("express").Router();
     
-    router.post("/add", /*[authJwt.verifyToken, authJwt.isAdmin],*/ medicine.create); 
+    router.post("/add", [authJwt.verifyToken, authJwt.isAdmin], medicine.create); 
   
     router.get("/", [authJwt.verifyToken], medicine.findAll);
   

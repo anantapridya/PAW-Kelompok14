@@ -35,14 +35,20 @@ const AddMedicine = () => {
   }
 
   function handleSubmit(event) {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const id = JSON.parse(localStorage.getItem("user")).id;
     const submittedForm = {
       ...formData,
       stock: parseInt(formData.stock),
+      userId: id
       // price: parseInt(formData.price)
     }
     fetch('http://localhost:9000/add', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        "Authorization": "Bearer " + `${token}`,
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(submittedForm)
     },)
     .then(res => res.json())

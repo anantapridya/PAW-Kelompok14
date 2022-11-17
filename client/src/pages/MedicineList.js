@@ -98,8 +98,13 @@ export default MedicineList;
 const MedicineConfig = ({ items, refreshMedicineData }) =>{
 
   function deleteMedicine(id) {
+    const token = JSON.parse(localStorage.getItem("token"));
     fetch("http://localhost:9000/"+id, {
       method: 'DELETE',
+      headers: {
+        "Authorization": "Bearer " + `${token}`,
+        "Content-Type": "application/json"
+      },
       credentials: "include"
     })
       .then(response => response.json())
