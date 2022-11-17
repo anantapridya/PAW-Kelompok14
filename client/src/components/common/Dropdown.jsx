@@ -5,7 +5,7 @@ export default function Dropdown(props) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className={"inline-flex w-full justify-center rounded-md bg-white px-4 h-[36px] items-center text-[16px] font-medium font-body text-black hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 " + props.className}>
+        <Menu.Button className={"inline-flex w-full justify-center rounded-md bg-putih px-4 h-[36px] items-center text-[16px] font-medium font-body  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 " + props.className}>
           {props.judul}
         </Menu.Button>
       </div>

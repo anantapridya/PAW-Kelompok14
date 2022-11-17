@@ -75,7 +75,7 @@ const MedicineList = () => {
             <div className="flex">
               <Dropdown items={dropdownValue} judul="Sort" className="border-2 border-biru-tua max-md:text-xs" />
               <input
-                className="ml-4 md:ml-[40px] rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black max-md:text-xs"
+                className="ml-4 md:ml-[40px] rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black max-md:text-xs bg-putih"
                 type="text"
                 placeholder="Search"
                 onChange={e => getMedicine(e.target.value)}
