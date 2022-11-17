@@ -28,7 +28,8 @@ export default function MedicineDesc() {
     if (token) {
       setToken(token);
       setIsAuthorized(true);
-    }
+    } else
+      window.location.href = '/'
 
     fetch(`http://localhost:9000/${medicineId}`, {
       headers: {

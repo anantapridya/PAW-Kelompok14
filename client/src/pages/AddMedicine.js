@@ -7,8 +7,14 @@ import DefaultInput from "../components/common/DefaultInput";
 import DefaultTxtArea from "../components/common/DefaultTxtArea";
 import Navbar from "../components/Navbar";
 import Modal from '../components/common/Modal';
+import { isAdmin, getUser } from "../helpers/auth";
 
 const AddMedicine = () => {
+
+  React.useEffect(() => {
+    if (!isAdmin())
+      window.location.href = '/'
+  }, [])
 
   const [formData, setFormData] = React.useState({
     name: '',
@@ -35,18 +41,17 @@ const AddMedicine = () => {
   }
 
   function handleSubmit(event) {
-    const token = JSON.parse(localStorage.getItem("token"));
-    const id = JSON.parse(localStorage.getItem("user")).id;
+    const { __token, __id } = getUser()
     const submittedForm = {
       ...formData,
       stock: parseInt(formData.stock),
-      userId: id
-      // price: parseInt(formData.price)
+      price: parseInt(formData.price),
+      userId: __id
     }
     fetch('http://localhost:9000/add', {
       method: 'POST',
       headers: {
-        "Authorization": "Bearer " + `${token}`,
+        "Authorization": "Bearer " + __token,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(submittedForm)

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link, useSearchParams } from "react-router-dom";
 
-import { isAdmin } from "../helpers/auth"
+import { isAdmin, getUser } from "../helpers/auth"
 
 import DefaultBtn from "../components/common/DefaultBtn";
 import DefaultTxtArea from "../components/common/DefaultTxtArea";
@@ -22,12 +22,12 @@ const AddTransaction = () => {
     stock: ''
   })
   React.useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token"))
-    if (!( isAdmin() && token ))
+    const { __token } = getUser()
+    if (!( isAdmin() && __token ))
       window.location.href = '/'
     fetch(`http://localhost:9000/${medicineId}`, {
       headers: {
-        "Authorization": "Bearer " + `${token}`,
+        "Authorization": "Bearer " + __token,
         "Content-Type": "application/json"
       },
       credentials: "include",
@@ -60,6 +60,7 @@ const AddTransaction = () => {
   }
 
   function handleSubmit(event) {
+    const { __token, __id } = getUser()
     const transactionTime = ( date == null ? now.toLocaleDateString() : date.toLocaleDateString() ) + ', ' + time
     console.log(JSON.stringify({
       description: formData.description,
@@ -68,11 +69,15 @@ const AddTransaction = () => {
     }))
     fetch(`http://localhost:9000/${medicineId}/log`, {
       method: "PUT",
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        "Authorization": "Bearer " + __token,
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         description: formData.description,
         stock: parseInt(formData.stock),
-        date: transactionTime
+        date: transactionTime,
+        userId: __id
       })
     })
       .then(res => res.json())

@@ -6,7 +6,7 @@ import Modal from "../components/common/Modal";
 import Navbar from "../components/Navbar";
 import DefaultBtn from "../components/common/DefaultBtn";
 
-import { isAdmin, isAuth } from "../helpers/auth";
+import { isAdmin, getUser } from "../helpers/auth";
 import { toast, ToastContainer } from "react-toastify";
 
 const MedicineList = () => {
@@ -46,7 +46,7 @@ const MedicineList = () => {
     if (query) query = '?name=' + query
     fetch("http://localhost:9000/" + query, {
       headers: {
-        "Authorization": "Bearer " + `${token}`,
+        "Authorization": "Bearer " + token,
         "Content-Type": "application/json"
       },
       credentials: "include",
@@ -98,14 +98,15 @@ export default MedicineList;
 const MedicineConfig = ({ items, refreshMedicineData }) =>{
 
   function deleteMedicine(id) {
-    const token = JSON.parse(localStorage.getItem("token"));
+    const { __token, __id } = getUser()
     fetch("http://localhost:9000/"+id, {
       method: 'DELETE',
       headers: {
-        "Authorization": "Bearer " + `${token}`,
+        "Authorization": "Bearer " + __token,
         "Content-Type": "application/json"
       },
-      credentials: "include"
+      credentials: "include",
+      body: JSON.stringify({ userId: __id })
     })
       .then(response => response.json())
       .then(data => {

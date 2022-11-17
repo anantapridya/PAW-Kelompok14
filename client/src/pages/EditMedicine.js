@@ -7,7 +7,7 @@ import DefaultBtn from "../components/common/DefaultBtn";
 import DefaultInput from "../components/common/DefaultInput";
 import DefaultTxtArea from "../components/common/DefaultTxtArea";
 import Navbar from "../components/Navbar";
-import { isAdmin } from "../helpers/auth"
+import { isAdmin, getUser } from "../helpers/auth"
 
 const EditMedicine = () => {
 
@@ -24,13 +24,14 @@ const EditMedicine = () => {
   // ambil value awal dari 'medicine'
   const [searchParams, setSearchParams] = useSearchParams()
   const medicineId = searchParams.get('id')
+
   React.useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token"))
-    if (!( isAdmin() && token ))
+    const { __token } = getUser()
+    if (!( isAdmin() && __token ))
       window.location.href = '/'
     fetch(`http://localhost:9000/${medicineId}`, {
       headers: {
-        "Authorization": "Bearer " + `${token}`,
+        "Authorization": "Bearer " + __token,
         "Content-Type": "application/json"
       },
       credentials: "include",
@@ -60,14 +61,21 @@ const EditMedicine = () => {
   }
 
   function handleSubmit(event) {
+    const { __token, __id } = getUser()
     // cek medicine.stock
     if (medicine.stock < 0) {
       toast.error("Stok obat tidak boleh negatif")
     } else {
       fetch(`http://localhost:9000/${medicineId}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(medicine)
+        headers: {
+          "Authorization": "Bearer " + __token,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          ...medicine,
+          userId: __id
+        })
       })
       .then(res => res.json())
       .then(data => {

@@ -29,3 +29,11 @@ export const isAdmin = () => {
         }
     }
 }
+
+export const getUser = () => {
+    // contoh cara pakai: const { token, id } = getUser()
+    return {
+        __token: JSON.parse(localStorage.getItem("token")),
+        __id: JSON.parse(localStorage.getItem("user")).id
+    }
+}
