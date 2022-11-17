@@ -56,18 +56,10 @@ const AddMedicine = () => {
         {message: errorException}
       */
       if (data.message) {
-        let modalMessage = ''
-        switch (data.message) {
-          case "request's body must contain 'name', 'manufacturer', 'description', 'stock', and 'price' field":
-            modalMessage = "Data obat untuk ditambahkan belum lengkap."
-            break
-          default:
-            modalMessage = "Terjadi kesalahan saat menambah data obat"
-        }
         setModalState(prev => ({
           ...prev,
           isOpen: true,
-          desc: modalMessage
+          desc: data.message
         }))
       } else {
         setModalState(prev => ({
