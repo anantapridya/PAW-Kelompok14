@@ -24,7 +24,7 @@ export default function UserLogin() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    fetch("http://localhost:9000/api/auth/signin", {
+    fetch("https://pharmaweb14.herokuapp.com/api/auth/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

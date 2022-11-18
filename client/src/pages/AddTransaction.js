@@ -25,7 +25,7 @@ const AddTransaction = () => {
     const { __token } = getUser()
     if (!( isAdmin() && __token ))
       window.location.href = '/'
-    fetch(`http://localhost:9000/${medicineId}`, {
+    fetch(`https://pharmaweb14.herokuapp.com/${medicineId}`, {
       headers: {
         "Authorization": "Bearer " + __token,
         "Content-Type": "application/json"
@@ -67,7 +67,7 @@ const AddTransaction = () => {
       stock: parseInt(formData.stock),
       date: transactionTime
     }))
-    fetch(`http://localhost:9000/${medicineId}/log`, {
+    fetch(`https://pharmaweb14.herokuapp.com/${medicineId}/log`, {
       method: "PUT",
       headers: {
         "Authorization": "Bearer " + __token,
