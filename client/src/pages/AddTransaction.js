@@ -122,7 +122,7 @@ const AddTransaction = () => {
   })
 
   return (
-    <div className="bg-putih md:h-screen">
+    <div className="bg-putih h-screen">
       <Modal
         show={modalState.isOpen}
         onClose={modalState.onClose}
