@@ -72,15 +72,15 @@ const MedicineList = () => {
         <div className="mx-9 my-4 md:mx-[120px] md:my-[30px] flex flex-col">
           <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mb-[50px]">
             <h2 className="text-3xl xl:text-[58px] font-body font-semibold">Daftar Obat</h2>
-            <div className="flex">
-              <Dropdown items={dropdownValue} judul="Sort" className="border-2 border-biru-tua max-md:text-xs" />
+            <div className="flex gap-5">
               <input
-                className="ml-4 md:ml-[40px] rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black max-md:text-xs bg-putih"
+                className="rounded-[0.375rem] text-center h-[36px] border-[#3F65FF] border-2 placeholder:text-center placeholder:text-black max-md:text-xs bg-putih"
                 type="text"
                 placeholder="Search"
                 onChange={e => getMedicine(e.target.value)}
               >
               </input>
+              <Dropdown items={dropdownValue} judul="Sort" className="border-2 border-biru-tua max-md:text-xs" />
             </div>
           </div>
           <MedicineConfig items={medicineData} refreshMedicineData={getMedicine} />
