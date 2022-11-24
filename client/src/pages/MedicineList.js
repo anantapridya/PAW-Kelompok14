@@ -44,12 +44,11 @@ const MedicineList = () => {
     }
     
     if (query) query = '?name=' + query
-    fetch("https://pharmaweb14.herokuapp.com/" + query, {
+    fetch("https://pharmaweb-backend.herokuapp.com/" + query, {
       headers: {
         "Authorization": "Bearer " + token,
         "Content-Type": "application/json"
-      },
-      credentials: "include",
+      }
     })
     .then (async (response) => {
       const data = await response.json()
@@ -99,7 +98,7 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
 
   function deleteMedicine(id) {
     const { __token, __id } = getUser()
-    fetch("https://pharmaweb14.herokuapp.com/"+id, {
+    fetch("https://pharmaweb-backend.herokuapp.com/"+id, {
       method: 'DELETE',
       headers: {
         "Authorization": "Bearer " + __token,

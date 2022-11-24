@@ -48,7 +48,7 @@ const AddMedicine = () => {
       price: parseInt(formData.price),
       userId: __id
     }
-    fetch('https://pharmaweb14.herokuapp.com/add', {
+    fetch('https://pharmaweb-backend.herokuapp.com/add', {
       method: 'POST',
       headers: {
         "Authorization": "Bearer " + __token,
