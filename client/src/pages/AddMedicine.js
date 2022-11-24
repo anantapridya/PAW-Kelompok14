@@ -95,7 +95,7 @@ const AddMedicine = () => {
   })
 
   return (
-    <div className="bg-putih md:h-screen">
+    <div className="bg-putih h-screen">
       <Modal
         show={modalState.isOpen}
         onClose={modalState.onClose}
@@ -111,10 +111,10 @@ const AddMedicine = () => {
           Tambah Obat
         </h1>
 
-        <div className="md:grid grid grid-cols-2">
-          <div>
+        <div className="md:grid grid-cols-2">
+          <div className="w-fit">
             <p>Nama Obat :</p>
-            <div className="inline-block">
+            <div>
               <DefaultInput
                 placeholder="Paracetamol"
                 className="w-[200px] md:w-[350px] h-[50px]"
@@ -124,7 +124,19 @@ const AddMedicine = () => {
               />
             </div>
           </div>
-          <div>
+          <div className="w-fit order-1">
+            <p>Manufacturer Obat :</p>
+            <div>
+              <DefaultInput
+                placeholder="PT Sindo Farma"
+                className="w-[200px] md:w-[350px] h-[50px]"
+                name="manufacturer"
+                onChange={handleChange}
+                value={formData.manufacturer}
+              />
+            </div>
+          </div>
+          <div className="w-fit order-1">
             <p>Stok Obat :</p>
             <DefaultInput
               type="number"
@@ -135,20 +147,8 @@ const AddMedicine = () => {
               value={formData.stock}
               min="0"
             />
-          </div>
-          <div>
-            <p>Manufacturer Obat :</p>
-            <div className="inline-block">
-              <DefaultInput
-                placeholder="PT Sindo Farma"
-                className="w-[200px] md:w-[350px] h-[50px]"
-                name="manufacturer"
-                onChange={handleChange}
-                value={formData.manufacturer}
-              />
-            </div>
           </div>        
-          <div>
+          <div className="w-fit">
             <p>Harga Obat :</p>
             <p className="text-[15px] italic text-gray-400"></p>
             <DefaultInput

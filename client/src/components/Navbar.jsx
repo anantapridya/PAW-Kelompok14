@@ -43,7 +43,7 @@ export default function Navbar() {
         className="h-[60px] w-full px-[10px] md:px-[60px] box-border bg-putih font-body font-medium text-[20px] text-biru-tua xl:h-16 xl:text-[22px]"
       >
         <ul className="h-full w-full flex items-center box-border list-none">
-          <li className="mr-[50px] md:mx-[30px] xl:mx-[50px]">
+          <li className="mr-[50px] mx-5 md:mx-[30px] xl:mx-[50px]">
             <Link to="/" className="flex items-center hover:drop-shadow-3xl">
               <img
                 src={logo}

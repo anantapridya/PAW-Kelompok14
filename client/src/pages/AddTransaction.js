@@ -136,9 +136,9 @@ const AddTransaction = () => {
       <div className="font-body mx-9 my-4 md:mx-[120px] md:my-[30px] text-[15px] md:text-xl">
         <div>
           <h1 className="text-biru-sedang font-heading font-bold text-3xl md:text-5xl pb-3">
-            Tambah Transaksi Log
+            Tambah Transaksi
           </h1>
-          <p className="text-gray-400 italic text-xl md:text-2xl pb-10">
+          <p className="text-gray-400 italic text-xl md:text-2xl pb-5 md:pb-10">
             {medicine.name}
           </p>
         </div>
