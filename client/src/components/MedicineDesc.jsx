@@ -31,7 +31,7 @@ export default function MedicineDesc() {
     } else
       window.location.href = '/'
 
-    fetch(`https://pharmaweb14.herokuapp.com/${medicineId}`, {
+    fetch(`http://localhost:9000/${medicineId}`, {
       headers: {
         Authorization: "Bearer " + `${token}`,
         "Content-Type": "application/json",

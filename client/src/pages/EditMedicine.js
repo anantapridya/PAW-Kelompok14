@@ -29,7 +29,7 @@ const EditMedicine = () => {
     const { __token } = getUser()
     if (!( isAdmin() && __token ))
       window.location.href = '/'
-    fetch(`https://pharmaweb14.herokuapp.com/${medicineId}`, {
+    fetch(`http://localhost:9000/${medicineId}`, {
       headers: {
         "Authorization": "Bearer " + __token,
         "Content-Type": "application/json"
@@ -66,7 +66,7 @@ const EditMedicine = () => {
     if (medicine.stock < 0) {
       toast.error("Stok obat tidak boleh negatif")
     } else {
-      fetch(`https://pharmaweb14.herokuapp.com/${medicineId}`, {
+      fetch(`http://localhost:9000/${medicineId}`, {
         method: 'PUT',
         headers: {
           "Authorization": "Bearer " + __token,
