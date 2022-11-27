@@ -100,7 +100,7 @@ function MedicineDescAside({ medicineLog, medId }) {
           <div className="absolute bg-biru-tua overflow-hidden shadow-5xl h-[50px] w-[50px] md:h-[100px] md:w-[100px] rounded-full text-white flex items-center justify-center bottom-[50px] right-[50px] font-body text-[50px] md:text-[100px] z-[1] transition ease-out duration-150 hover:-rotate-90 hover:scale-105 peer">
             +
           </div>
-          <div className="hidden md:block md:absolute bg-biru-tua text-white overflow-hidden shadow-5xl h-[25px] md:h-[60px] bottom-[70px] right-[80px] md:w-[60px] rounded-[30px] text-xs md:text-[20px] leading-[60px] indent-[10px] md:indent-[20px] duration-200 ease-in-out delay-100 peer-hover:right-[120px] peer-hover:w-[290px] ">
+          <div className="hidden md:block md:absolute bg-biru-tua text-white overflow-hidden shadow-5xl h-[25px] md:h-[60px] bottom-[130px] right-[80px] md:w-[60px] rounded-[30px] text-xs md:text-[20px] leading-[60px] indent-[10px] md:indent-[20px] duration-200 ease-in-out delay-100 peer-hover:right-[120px] peer-hover:w-[290px] ">
             Buat Catatan Transaksi
           </div>
         </Link>
