@@ -38,7 +38,9 @@ export default function UserLogin() {
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", JSON.stringify(data.token));
         toast.success("Selamat datang!");
-        setIsLoged(true);
+        setTimeout(() => {
+          setIsLoged(true);
+        }, 1000);
       })
       .catch((error) => {
         toast.error(error);
@@ -81,7 +83,7 @@ export default function UserLogin() {
               <DefaultBtn
                 type="button"
                 judulButton="Kembali"
-                className="text-putih text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+                className="text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 bg-white text-gray-400 outline outline-2 outline-gray-300 hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
               />
             </Link>
 

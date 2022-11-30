@@ -106,7 +106,7 @@ const AddMedicine = () => {
   }
 
   return (
-    <div className="bg-putih h-screen">
+    <div className="bg-putih h-full md:h-screen pb-8">
       <Modal
         show={modalState.isOpen}
         onClose={modalState.onClose}
@@ -183,7 +183,7 @@ const AddMedicine = () => {
           />
         </div>
 
-        <div className="flex flex-col-reverse sm:flex-row items-center sm:justify-between w-full mt-2 sm:mt-12 gap-2 sm:gap-0">
+        <div className="flex flex-row items-center justify-between w-full mt-2 sm:mt-12 gap-2 sm:gap-0 mb-4">
         <Link to="/list">
             <DefaultBtn
               type="button"

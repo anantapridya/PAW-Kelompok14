@@ -9,7 +9,7 @@ export default function Welcome() {
       <ToastContainer />
       <div className="bg-putih xl:h-screen">
         <Navbar />
-        <div className="grid grid-cols-3 w-3/4 mx-auto md:gap-4 lg:gap-8 pt-24 2xl:pt-48 pb-12">
+        <div className="grid grid-cols-3 w-3/4 max-w-[1152px] mx-auto md:gap-4 lg:gap-8 pt-24 2xl:pt-40 pb-12">
           <div className="col-span-3 md:col-span-2 flex flex-col items-center md:items-start gap-2">
             <h1 className="text-biru-tua font-heading font-bold text-xl md:text-3xl 2xl:text-5xl my-0.5 md:my-2">
               Selamat Datang di
@@ -35,7 +35,7 @@ export default function Welcome() {
         </div>
       </div>
       <footer className="w-full md:h-16 flex md:absolute md:bottom-0 pb-8 bg-putih">
-        <p className="font-body text-biru-tua text-center text-xs md:text-[20px] mx-auto">
+        <p className="font-body text-biru-tua text-center text-xs md:text-[20px] mx-auto max-w-[462px] ">
           &copy; Kelompok 14 - Pengembangan Aplikasi Web
         </p>
       </footer>

@@ -19,8 +19,10 @@ export default function Navbar() {
   const handleClick = () => {
     localStorage.clear();
     setIsLogged(false);
-    toast.success("Anda keluar");
-    navigate("/");
+    toast.success("Anda akan keluar");
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
   const dropddownnavbaradmin = [
     { id: 1, value: "List", onClick: listClick },
@@ -74,7 +76,7 @@ export default function Navbar() {
               isAuth() ? "hidden" : "inline"
             }`}
           >
-            <Link to="/welcome">Sign In</Link>
+            <Link to="/welcome">Start</Link>
           </li>
           <li
             className={`mx-[20px] ml-auto hover:drop-shadow-3xl ${

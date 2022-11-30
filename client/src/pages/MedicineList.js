@@ -65,7 +65,7 @@ const MedicineList = () => {
 
   return (
     <>
-      <div className="bg-putih h-screen">
+      <div className="bg-putih h-full md:h-screen pb-8">
         <ToastContainer/>
         <Navbar />
         <div className="mx-9 my-4 md:mx-[120px] md:my-[30px] flex flex-col">
@@ -79,7 +79,7 @@ const MedicineList = () => {
                 onChange={e => getMedicine(e.target.value)}
               >
               </input>
-              <Dropdown items={dropdownValue} judul="Sort" className="border-2 border-biru-tua max-md:text-xs" />
+              <Dropdown items={dropdownValue} judul="Sort" className="border-2 border-biru-tua max-md:text-xs hover:font-bold px-4 w-16" />
             </div>
           </div>
           <MedicineConfig items={medicineData} refreshMedicineData={getMedicine} />
@@ -157,8 +157,8 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
               <Link to={{
                 pathname: "/desc",
                 search: "?id=" + _id
-              }}>
-                <div className="hover:font-bold transition-all flex flex-col lg:flex-row lg:w-[500px] justify-between lg:border-black lg:border-b-2 lg:border-solid items-start lg:items-end pb-1 " >
+              }} className="lg:w-3/4 lg:mr-4">
+                <div className="hover:font-bold transition-all flex flex-col lg:flex-row justify-between lg:border-black lg:border-b-2 lg:border-solid items-start lg:items-end pb-1 " >
                   <p className="font-body text-xs lg:text-[25px]">{name}</p>
                   <p className="font-body text-2xs lg:text-base">Rp{price}</p>
                 </div>
@@ -168,9 +168,9 @@ const MedicineConfig = ({ items, refreshMedicineData }) =>{
                 pathname: "/edit",
                 search: "?id=" + _id
               }} >
-                <DefaultBtn judulButton="Edit" className="border-biru-sedang bg-white border-2 mr-4 lg:mr-[30px] lg:px-[25px] max-lg:text-xs max-lg:px-2 max-lg:py-1 text-[#000000]" />
+                <DefaultBtn judulButton="Edit" className="border-biru-sedang bg-white border-2 mr-4 lg:mr-[30px] lg:px-[25px] max-lg:text-xs max-lg:px-2 max-lg:py-1 text-[#000000] hover:font-bold lg:w-32" />
               </Link>
-                <DefaultBtn onClick={()=>{openModal(_id)}} className="text-putih bg-[#FF0000] border-2 border-[#FF0000] max-lg:text-xs max-lg:px-2 max-lg:py-1 " judulButton="Delete"/>              
+                <DefaultBtn onClick={()=>{openModal(_id)}} className="text-putih bg-[#FF0000] border-2 border-[#FF0000] max-lg:text-xs max-lg:px-2 max-lg:py-1 hover:font-bold lg:w-32" judulButton="Delete"/>              
               </div>}
             </div>
           </div>

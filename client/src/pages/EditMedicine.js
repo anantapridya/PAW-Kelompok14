@@ -19,8 +19,6 @@ const EditMedicine = () => {
     price:''
   })
 
-  console.log(medicine)
-
   // ambil value awal dari 'medicine'
   const [searchParams, setSearchParams] = useSearchParams()
   const medicineId = searchParams.get('id')
@@ -107,7 +105,7 @@ const EditMedicine = () => {
   }
   
   return (
-    <div className="bg-putih h-screen">
+    <div className="bg-putih h-full md:h-screen pb-8">
       <ToastContainer/>
       <Navbar/>
       <div className="font-body mx-9 my-4 md:mx-[120px] md:my-[30px] text-[15px] md:text-xl">
@@ -170,7 +168,7 @@ const EditMedicine = () => {
           />
         </div>
 
-        <div className="flex flex-col-reverse sm:flex-row items-center sm:justify-between w-full mt-2 sm:mt-12 gap-2 sm:gap-0">
+        <div className="flex flex-row items-center justify-between w-full mt-2 sm:mt-12 gap-2 sm:gap-0 mb-4">
           <Link to={
                 searchParams.get('todesc')
                 ? {pathname: '../desc/', search: '?id=' + medicineId}

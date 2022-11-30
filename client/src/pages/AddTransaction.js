@@ -110,8 +110,6 @@ const AddTransaction = () => {
       })
   }
 
-  console.log(formData)
-
   const [modalState, setModalState] = React.useState({
     isOpen: false,
     desc: '',
@@ -134,7 +132,7 @@ const AddTransaction = () => {
 
 
   return (
-    <div className="bg-putih h-screen">
+    <div className="bg-putih h-full md:h-screen pb-8">
       <Modal
         show={modalState.isOpen}
         onClose={modalState.onClose}
