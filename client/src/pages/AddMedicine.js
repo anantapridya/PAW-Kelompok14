@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, Navigate } from "react-router-dom";
 
 import DefaultBtn from "../components/common/DefaultBtn";
 import DefaultInput from "../components/common/DefaultInput";
@@ -11,11 +11,12 @@ import { isAdmin, getUser } from "../helpers/auth";
 
 const AddMedicine = () => {
 
-  React.useEffect(() => {
-    if (!isAdmin())
-      window.location.href = '/'
-  }, [])
+  // React.useEffect(() => {
+  //   if (!isAdmin())
+  //     window.location.href = '/'
+  // }, [])
 
+  const [isDone, setIsDone] = useState();
   const [formData, setFormData] = React.useState({
     name: '',
     manufacturer: '',
@@ -48,7 +49,7 @@ const AddMedicine = () => {
       price: parseInt(formData.price),
       userId: __id
     }
-    fetch('https://pharmaweb-backend.herokuapp.com/add', {
+    fetch('https://pharmaweb14.herokuapp.com/add', {
       method: 'POST',
       headers: {
         "Authorization": "Bearer " + __token,
@@ -78,7 +79,8 @@ const AddMedicine = () => {
           isOpen: true,
           desc: "Data obat berhasil ditambahkan!",
           onClose() {
-            window.location.href = '../list'
+            setIsDone(true)
+            //window.location.href = '../list'
           }
         }))
       }
@@ -93,6 +95,15 @@ const AddMedicine = () => {
       setModalState(prev => ({...prev, isOpen:false}))
     }
   })
+
+  if (!isAdmin())
+  {
+    return <Navigate replace to="/" />;
+  } 
+  else if (isDone)
+  {
+    return <Navigate replace to="/list"/>;
+  }
 
   return (
     <div className="bg-putih h-screen">
@@ -183,7 +194,7 @@ const AddMedicine = () => {
           <DefaultBtn
             type="submit"
             judulButton="Tambah Obat"
-            className="text-sm lg:text-xl lg:w-[250px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+            className="text-putih text-sm lg:text-xl lg:w-[250px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
             onClick={handleSubmit}
           />
         </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, Navigate } from "react-router-dom";
 import backArrow from "../img/back-arrow.png";
 import editMedicine from "../img/edit-medicine.png";
 import Navbar from "./Navbar.jsx";
@@ -28,14 +28,17 @@ export default function MedicineDesc() {
     if (token) {
       setToken(token);
       setIsAuthorized(true);
-    } else window.location.href = "/";
+    } else {
+      return <Navigate replace to="/" />;
+    }
 
-    fetch(`https://pharmaweb-backend.herokuapp.com/${medicineId}`, {
+    fetch(`https://pharmaweb14.herokuapp.com/${medicineId}`, {
       headers: {
         Authorization: "Bearer " + `${token}`,
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      // ,
+      // credentials: "include",
     }).then(async (res) => {
       const data = await res.json();
       setMedicine(data);
@@ -45,7 +48,11 @@ export default function MedicineDesc() {
   return (
     <>
       <Navbar />
-      <main className="bg-biru-sedang relative w-full grid h-full md:h-[calc(100vh_-_64px)] overflow-y-hidden md:grid-cols-desc-page md:grid-rows-desc-page">
+      <main
+        className={`bg-putih relative w-full grid h-full md:h-[calc(100vh_-_64px)] overflow-y-hidden ${
+          isAdmin() ? "md:grid-cols-desc-page md:grid-rows-desc-page" : ""
+        }`}
+      >
         <Link
           to="/list"
           className="absolute h-[20px] md:h-[40px] top-[15px] md:top-[20px] left-[25px] md:left-[50px] z-[1] hover:-translate-y-1  transition-all"
@@ -97,7 +104,7 @@ function MedicineDescAside({ medicineLog, medId }) {
             search: "?id=" + medId,
           }}
         >
-          <div className="absolute bg-biru-tua overflow-hidden shadow-5xl h-[50px] w-[50px] md:h-[100px] md:w-[100px] rounded-full text-white flex items-center justify-center bottom-[50px] right-[50px] font-body text-[50px] md:text-[100px] z-[1] transition ease-out duration-150 hover:-rotate-90 hover:scale-105 peer">
+          <div className="fixed bg-biru-tua overflow-hidden shadow-5xl h-[50px] w-[50px] md:h-[100px] md:w-[100px] rounded-full text-white flex items-center justify-center bottom-[50px] right-[50px] font-body text-[50px] md:text-[100px] z-[1] transition ease-out duration-150 hover:-rotate-90 hover:scale-105 peer">
             +
           </div>
           <div className="hidden md:block md:absolute bg-biru-tua text-white overflow-hidden shadow-5xl h-[25px] md:h-[60px] bottom-[130px] right-[80px] md:w-[60px] rounded-[30px] text-xs md:text-[20px] leading-[60px] indent-[10px] md:indent-[20px] duration-200 ease-in-out delay-100 peer-hover:right-[120px] peer-hover:w-[290px] ">

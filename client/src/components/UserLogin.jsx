@@ -1,18 +1,18 @@
-import React, { useState, useNavigate } from "react";
+import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Pattern from "../img/bg-login.svg";
 import DefaultBtn from "./common/DefaultBtn";
 import DefaultInput from "./common/DefaultInput";
+import { isAuth } from "../helpers/auth";
 
 export default function UserLogin() {
+  const [isLoged, setIsLoged] = useState(isAuth());
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-
-  // const navigate = useNavigate;
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -24,7 +24,7 @@ export default function UserLogin() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    fetch("https://pharmaweb-backend.herokuapp.com/api/auth/signin", {
+    fetch("https://pharmaweb14.herokuapp.com/api/auth/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -38,13 +38,15 @@ export default function UserLogin() {
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", JSON.stringify(data.token));
         toast.success("Selamat datang!");
-        setTimeout(() => {
-          window.location.href = "/list";
-        }, 2000);
+        setIsLoged(true);
       })
       .catch((error) => {
         toast.error(error);
       });
+  }
+
+  if (isLoged) {
+    return <Navigate replace to="/list" />;
   }
 
   return (

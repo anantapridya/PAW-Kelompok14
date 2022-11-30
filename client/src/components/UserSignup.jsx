@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Pattern from "../img/bg-login.svg";
@@ -7,6 +7,7 @@ import DefaultBtn from "./common/DefaultBtn";
 import DefaultInput from "./common/DefaultInput";
 
 export default function SignupPage() {
+  const [isDone, setIsDone] = useState();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -23,7 +24,7 @@ export default function SignupPage() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    fetch("https://pharmaweb-backend.herokuapp.com/api/auth/signup", {
+    fetch("https://pharmaweb14.herokuapp.com/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -36,9 +37,10 @@ export default function SignupPage() {
           return Promise.reject(error);
         }
         toast.success(message + ". Silahkan Login");
-        setTimeout(() => {
-          window.location.href = "/loginuser";
-        }, 2000);
+        setIsDone(true);
+        // setTimeout(() => {
+        //   window.location.href = "/loginuser";
+        // }, 2000);
       })
       .catch((error) => {
         toast.error(error);
@@ -54,6 +56,9 @@ export default function SignupPage() {
     */
   }
 
+  if (isDone) {
+    return <Navigate replace to="/loginuser" />;
+  }
   return (
     <div
       className="w-full h-screen bg-putih bg-repeat bg-auto flex"
@@ -90,17 +95,17 @@ export default function SignupPage() {
               <DefaultBtn
                 type="button"
                 judulButton="Kembali"
-                className="text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+                className="text-putih text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
               />
             </Link>
-            <Link to="/loginuser">
-              <DefaultBtn
-                type="submit"
-                onClick={handleSubmit}
-                judulButton="Daftar"
-                className="text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
-              />
-            </Link>
+            {/* <Link to="/loginuser"> */}
+            <DefaultBtn
+              type="submit"
+              onClick={handleSubmit}
+              judulButton="Daftar"
+              className="text-putih text-sm lg:text-xl lg:w-[150px] lg:h-[52px] py-2 hover:bg-putih hover:text-biru-tua hover:border-4 hover:border-biru-tua hover:transition-all"
+            />
+            {/* </Link> */}
           </div>
         </form>
       </div>
