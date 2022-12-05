@@ -76,7 +76,7 @@ export default function Navbar() {
               isAuth() ? "hidden" : "inline"
             }`}
           >
-            <Link to="/welcome">Start</Link>
+            <Link to="/loginuser">Login</Link>
           </li>
           <li
             className={`mx-[20px] ml-auto hover:drop-shadow-3xl ${

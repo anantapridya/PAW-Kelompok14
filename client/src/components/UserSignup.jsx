@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import validator from "validator";
+
 import Pattern from "../img/bg-login.svg";
 import DefaultBtn from "./common/DefaultBtn";
 import DefaultInput from "./common/DefaultInput";
 
 export default function SignupPage() {
-  const [isDone, setIsDone] = useState();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -24,7 +26,25 @@ export default function SignupPage() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    fetch("https://pharmaweb14.herokuapp.com/api/auth/signup", {
+
+    if (!validator.isEmail(formData.email)) {
+      toast.error("Masukkan email yang valid");
+      return;
+    }
+
+    if (
+      !validator.isStrongPassword(formData.password, {
+        minLength: 6,
+        minSymbols: 0,
+      })
+    ) {
+      toast.error(
+        "Password minimal 6 karakter, mengandung huruf kapital dan angka"
+      );
+      return;
+    }
+
+    fetch("http://localhost:9000/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -37,7 +57,9 @@ export default function SignupPage() {
           return Promise.reject(error);
         }
         toast.success(message + ". Silahkan Login");
-        setIsDone(true);
+        setTimeout(() => {
+          navigate("/loginuser");
+        }, 2000);
       })
       .catch((error) => {
         toast.error(error);
@@ -53,9 +75,6 @@ export default function SignupPage() {
     */
   }
 
-  if (isDone) {
-    return <Navigate replace to="/loginuser" />;
-  }
   return (
     <div
       className="w-full h-screen bg-putih bg-repeat bg-auto flex"
@@ -72,6 +91,7 @@ export default function SignupPage() {
             onChange={handleChange}
           />
           <DefaultInput
+            type="email"
             placeholder="Email"
             className="w-full text-sm md:text-xl"
             name="email"
@@ -88,7 +108,7 @@ export default function SignupPage() {
           />
 
           <div className="flex flex-col-reverse sm:flex-row items-center sm:justify-between w-full mt-4 sm:mt-12 gap-2 sm:gap-0">
-            <Link to="/welcome">
+            <Link to="/">
               <DefaultBtn
                 type="button"
                 judulButton="Kembali"

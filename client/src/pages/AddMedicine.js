@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Link, useSearchParams, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import DefaultBtn from "../components/common/DefaultBtn";
 import DefaultInput from "../components/common/DefaultInput";
@@ -16,7 +16,7 @@ const AddMedicine = () => {
   //     window.location.href = '/'
   // }, [])
 
-  const [isDone, setIsDone] = useState();
+  const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     name: '',
     manufacturer: '',
@@ -25,7 +25,7 @@ const AddMedicine = () => {
     price:''
   })
 
-  console.log(formData)
+  //console.log(formData)
 
   function handleChange(event) {
     const { type, name, value } = event.target
@@ -49,7 +49,7 @@ const AddMedicine = () => {
       price: parseInt(formData.price),
       userId: __id
     }
-    fetch('https://pharmaweb14.herokuapp.com/add', {
+    fetch('http://localhost:9000/add', {
       method: 'POST',
       headers: {
         "Authorization": "Bearer " + __token,
@@ -79,8 +79,7 @@ const AddMedicine = () => {
           isOpen: true,
           desc: "Data obat berhasil ditambahkan!",
           onClose() {
-            setIsDone(true)
-            //window.location.href = '../list'
+            navigate("/list")
           }
         }))
       }
@@ -99,10 +98,6 @@ const AddMedicine = () => {
   if (!isAdmin())
   {
     return <Navigate replace to="/" />;
-  } 
-  else if (isDone)
-  {
-    return <Navigate replace to="/list"/>;
   }
 
   return (
