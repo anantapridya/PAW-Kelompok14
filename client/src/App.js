@@ -10,6 +10,7 @@ import MedicineList from './pages/MedicineList';
 import AddMedicine from './pages/AddMedicine';
 import EditMedicine from './pages/EditMedicine';
 import AddTransaction from './pages/AddTransaction';
+import Page404 from './pages/Page404';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/desc" element={<DescPage/>}/>
         <Route path="/edit" element={<EditMedicine/>}/>
         <Route path="/log" element={<AddTransaction/>}/>
+        <Route path="/*" element={<Page404 />} />
       </Routes>
     </Router>
   );
