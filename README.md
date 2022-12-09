@@ -13,6 +13,16 @@
 | Ananta Pridya Yudha      | 20/463592/TK/51584 |
 | Muhammad Azka Adhisetama | 21/477807/TK/52628 |
 
+### Link Deployment Web App
+
+<a href='https://pharma-web-front-end.vercel.app'>Pharma-Web</a>
+
+
+### File Presentasi 
+
+<a href='https://docs.google.com/presentation/d/1f-OSRcQRsA96ba44pwoI7VQwJeO-mhkw/edit?usp=sharing&ouid=114844380046633974028&rtpof=true&sd=true'>Slide</a>
+
+
 ### How to Run the Application
 
 - [Download](https://nodejs.org/en/download/) and install **Node.js** version `16.15` or higher.
